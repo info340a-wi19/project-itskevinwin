@@ -326,6 +326,10 @@ hr.red{
     .col-lg-4{
         padding-left: 3rem;
     }
+
+    .text-center .btn-outline-dark{
+        margin-top: 3rem;
+    }
 }
 
 @media(min-width: 992px){
@@ -368,5 +372,9 @@ hr.red{
         height: 315px;
         width: 560px;
         margin-top: 1rem;
+    }
+
+    .text-center .btn-outline-dark{
+        margin-top: 1.5rem;
     }
 }
