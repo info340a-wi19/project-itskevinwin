@@ -132,18 +132,6 @@ header{
     margin: 1;
 }
 
-.icon-text {
-    font-family:arial;
-    font-size:.8em;
-    text-align:center;
-    line-height:1em;
-}
-
-.icon-text small {
-    font-size:.5em;
-    margin-top:0px;
-}
-
 .col-md-3 img{
     margin-top: 0.2rem;
     width:56px;
