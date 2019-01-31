@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="author" content="Kevin Nguyen">
+    <meta name="description" content="MoviePicks selects movies for you">
+    <meta name="keywords" content="Movies, MoviePicks,">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
+        crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Work+Sans" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bitter" rel="stylesheet">
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="./index.html">MoviePicks</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+                aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="./index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Watch Later</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">My Profile</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header>
+        <div class="header-content">
+            <div class="header-content-inner">
+                <h1 class="text-center text-uppercase display-2">Can't Decide?</h1>
+                <h2 class="text-center text-uppercase display-2 d-none">We Got it.</h2>
+                <div class="inputs">
+                    <div class="dropdown-labels ml-3 text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">Genre
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" aria-label="Action">Action</a>
+                                <a class="dropdown-item" href="#" aria-label="Adventure">Adventure</a>
+                                <a class="dropdown-item" href="#" aria-label="Animation">Animation</a>
+                                <a class="dropdown-item" href="#" aria-label="Biography">Biography</a>
+                                <a class="dropdown-item" href="#" aria-label="Comedy">Comedy</a>
+                                <a class="dropdown-item" href="#" aria-label="Crime">Crime</a>
+                                <a class="dropdown-item" href="#" aria-label="Documentry">Documentry</a>
+                                <a class="dropdown-item" href="#" aria-label="Drama">Drama</a>
+                                <a class="dropdown-item" href="#" aria-label="Family">Family</a>
+                                <a class="dropdown-item" href="#" aria-label="Fantasy">Fantasy</a>
+                                <a class="dropdown-item" href="#" aria-label="History">History</a>
+                                <a class="dropdown-item" href="#" aria-label="Horror">Horror</a>
+                                <a class="dropdown-item" href="#" aria-label="Musical">Musical</a>
+                                <a class="dropdown-item" href="#" aria-label="Mystery">Mystery</a>
+                                <a class="dropdown-item" href="#" aria-label="Romance">Romance</a>
+                                <a class="dropdown-item" href="#" aria-label="Sci-Fi">Sci-Fi</a>
+                                <a class="dropdown-item" href="#" aria-label="Sport">Sport</a>
+                                <a class="dropdown-item" href="#" aria-label="Thriller">Thriller</a>
+                                <a class="dropdown-item" href="#" aria-label="War">War</a>
+                                <a class="dropdown-item" href="#" aria-label="Western">Western</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="dropdown-labels mt-3 text-center">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown"
+                                aria-haspopup="true" aria-expanded="false">
+                                Film Rating
+                            </button>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" href="#" aria-label="Rated G">G</a>
+                                <a class="dropdown-item" href="#" aria-label="Rated PG">PG</a>
+                                <a class="dropdown-item" href="#" aria-label="Rated PG-13">PG-13</a>
+                                <a class="dropdown-item" href="#" aria-label="Rated R">R</a>
+                                <a class="dropdown-item" href="#" aria-label="Rated NC-17">NC-17</a>
+                            </div>
+                        </div>
+                    </div>
+                    <br>
+                    <div class="input-group input-group-sm mb-3 ml-3 mx-auto">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">IMDB Score Higher Than: </span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+
+                    <div class="input-group input-group-sm mb-3 ml-3 mx-auto">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text">Year Released: </span>
+                        </div>
+                        <input type="text" class="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm">
+                    </div>
+
+                    <div class="text-center">
+                        <a href="./interacted.html" class="btn btn-secondary btn-lg ml-3" role="button" aria-pressed="true"
+                            alt="">GO!</a>
+                    </div>
+                </div>
+                <hr>
+                <p class="dark-head text-center">Leave everything blank if you want a random movie!</p>
+            </div>
+        </div>
+    </header>
+    <div class="parallax">
+        <!-- Jumbotron -->
+        <div class="container-fluid">
+            <div class="row jumbotron gradient">
+                <div class="col-sm-12 col-md-9 col-lg-9">
+                    <p class="text-center lead">Have you ever sat down with your friends, ready to watch a movie, but
+                        can't
+                        ever decide which one to watch? Well, this website will help you with that!
+                        Rather than spending up to an hour searching for the perfect movie to watch, we'll take your
+                        preferences and find one for you!
+                    </p>
+                </div>
+                <div class="col-sm-12 col-md-3 col-lg-3">
+                    <div class="text-center">
+                        <a href="#"><button type="button" class="btn btn-outline-dark btn-lg">View Profile</button></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Description and pictures -->
+    <div class="container-fluid done mt-5">
+        <div class="row">
+            <div class="col-lg-6 done">
+                <h2 class="center">If Done Correctly...</h2>
+                <hr class="light">
+                <p>This site should reduce the time you spend searching for the right movie, so you can spend that time
+                    watching it!</p>
+                <p>If we don't display a movie that interests you at first, just try again! We promise that you will
+                    find one in a matter of seconds.</p>
+                <p>And if you see a movie that you don't want to watch now, save it in your "Watch Later" so you can
+                    remember to watch it another time!</p>
+                <p>If you don't want us to generate a movie for you, and instead you want to look through a bunch of
+                    the movies and filter through them yourself, then click here!</p>
+                <div class="text-center">
+                    <a href="#" class="btn btn-info" type="search" placeholder="Search" aria-label="Search">Search</a>
+                </div>
+                <br>
+            </div>
+            <div class="col-lg-6">
+                <img src="img/action.jpg" class="img-thumbnail" alt="Film and popcorn">
+            </div>
+        </div>
+    </div>
+
+    <hr class="light">
+
+    <!-- How it works -->
+    <div class="dark-back">
+        <div class="container-fluid padding">
+            <div class="row title text-center">
+                <div class="col-12">
+                    <h1 class="display-4 dark-head">What Goes Into It</h1>
+                </div>
+                <hr>
+                <div class="col-12">
+                    <p class="lead text-white">Welcome to MoviePicks! MoviePicks is an easy-to-use tool to help you and
+                        your friends with your movie selection process. We find a movie that best
+                        fits your likes, using four things:
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid padding">
+            <div class="row text-center padding">
+                <div class="col-sm-6 col-md-3">
+                    <i class="fas fa-film"></i>
+                    <h3 class="dark-head">Movie Genre</h3>
+                    <p class="text-white">Select from a wide variety of movie genres!</p>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <img src="img/r.png" alt="Rated R">
+                    <h3 class="dark-head">Movie Rating</h3>
+                    <p class="text-white">Preference your picks by the MPAA Movie Ratings!</p>
+
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h3 class="dark-head">Release Year</h3>
+                    <p class="text-white">If you only like old movies, you can input a range of years that best suits
+                        you!</p>
+                </div>
+
+                <div class="col-sm-6 col-md-3">
+                    <i class="fab fa-imdb"></i>
+                    <h3 class="dark-head">IMDB Rating</h3>
+                    <p class="text-white">Using IMDB ratings, you can display movies that are only well rated by
+                        critics!</p>
+                </div>
+            </div>
+            <hr class="my-4">
+        </div>
+    </div>
+    <!-- Cards for random movies -->
+    <div class="container-fluid padding cushion">
+        <div class="row title text-center">
+            <div class="col-12">
+                <h1 class="display-4 dark-head">Your Watch Later for the Week!</h1>
+                <hr>
+            </div>
+        </div>
+
+        <div class="container-fluid padding d-flex justify-content-center">
+            <div class="row padding">
+                <div class="col-md-6 col-lg-4 d-flex justify-content-center padding">
+                    <div class="card shadow">
+                        <img class="card-img-top" src="img/avengers.jpg" alt="Avengers movie">
+                        <div class="card-body">
+                            <h4 class="card-title">Avengers: Infinity War</h4>
+                            <p class="card-text">The Avengers and their allies must be willing to sacrifice all in
+                                an attempt to defeat the powerful Thanos before his blitz
+                                of devastation and ruin puts an end to the universe.</p>
+                            <a href="#" class="btn btn-outline-secondary">See More</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-6 col-lg-4 d-flex justify-content-center padding">
+                    <div class="card shadow">
+                        <img class="card-img-top" src="img/split.jpg" alt="Split movie">
+                        <div class="card-body">
+                            <h4 class="card-title">Split</h4>
+                            <p class="card-text">Three girls are kidnapped by a man with a diagnosed 23 distinct
+                                personalities. They must try to escape before the apparent
+                                emergence of a frightful new 24th.</p>
+                            <a href="#" class="btn btn-outline-secondary">See More</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-md-12 col-lg-4 d-flex justify-content-center padding">
+                    <div class="card shadow">
+                        <img class="card-img-top" src="img/disaster.jpg" alt="Disaster Artist movie">
+                        <div class="card-body">
+                            <h4 class="card-title">Disaster Artist</h4>
+                            <p class="card-text">When Greg Sestero, an aspiring film actor, meets the weird and
+                                mysterious Tommy Wiseau in an acting class, they form a
+                                unique friendship and travel to Hollywood to make their dreams come true.</p>
+                            <a href="./interacted.html" class="btn btn-outline-secondary">See More</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer>
+            <div class="container-fluid padding">
+                <div class="row text-center">
+                    <div class="col-md-4">
+                        <hr class="red">
+                        <h5>MoviePicks</h5>
+                        <hr class="red">
+                        <p>206-432-6542</p>
+                        <p>moviepicks@gmail.com</p>
+                        <p>4820 15th Ave NE</p>
+                        <p>Seattle, WA 98105</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <hr class="red">
+                        <h5>Our Hours</h5>
+                        <hr class="red">
+                        <p>Monday-Friday: 12:00pm-6:30pm</p>
+                        <p>Weekends: Closed</p>
+                    </div>
+
+                    <div class="col-md-4">
+                        <hr class="red">
+                        <h5>Follow us</h5>
+                        <hr class="red">
+                        <div class="col-12 padding">
+                            <a href="https://www.facebook.com/"><i class="fab fa-facebook fa-3x"></i></a>
+                            <a href="https://www.twitter.com/"><i class="fab fa-twitter fa-3x"></i></a>
+                            <a href="https://www.instagram.com/"><i class="fab fa-instagram fa-3x"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>
