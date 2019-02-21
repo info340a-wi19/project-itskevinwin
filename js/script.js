@@ -27,9 +27,8 @@ window.onclick = function (event) {
 
 // Add current movie to watch list
 let watchImg = $('.watchImg');
-let moviePic = $('<img src="" alt="" />');
 
-let url = fetch('https://api.themoviedb.org/3/find/tt3521126?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&external_source=imdb_id')
+fetch('https://api.themoviedb.org/3/find/tt3521126?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&external_source=imdb_id')
 .then(function (response) {
     let dataPromise = response.json();
     return dataPromise;
