@@ -11,12 +11,6 @@
     <title>Document</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous">
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-        crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-        crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-        crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.0/normalize.min.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/"
@@ -149,7 +143,7 @@
                     </p>
                 </div>
                 <div class="col-sm-12 col-md-3 col-lg-3 text-center">
-                        <a href="#"><button type="button" class="btn btn-outline-dark btn-lg">View Profile</button></a>
+                    <a href="#" role="button"><button type="button" class="btn btn-outline-dark btn-lg">View Profile</button></a>
                 </div>
             </div>
         </div>
@@ -170,7 +164,7 @@
                 <p>If you don't want us to generate a movie for you, and instead you want to look through a bunch of
                     the movies and filter through them yourself, then click here!</p>
                 <div class="text-center">
-                    <a href="#" class="btn btn-info" type="search" placeholder="Search" aria-label="Search">Search</a>
+                    <a href="#" class="btn btn-info" type="search" placeholder="Search" role="button">Search</a>
                 </div>
                 <br>
             </div>
@@ -208,7 +202,7 @@
                 </div>
 
                 <div class="col-sm-6 col-md-3">
-                    <img src="img/r.png" alt="Rated R">
+                    <img src="img/r.png" alt="Rated R" id="rated">
                     <h3 class="dark-head">Movie Rating</h3>
                     <p class="text-white">Preference your picks by the MPAA Movie Ratings!</p>
 
@@ -250,7 +244,7 @@
                             <p class="card-text">The Avengers and their allies must be willing to sacrifice all in
                                 an attempt to defeat the powerful Thanos before his blitz
                                 of devastation and ruin puts an end to the universe.</p>
-                            <a href="#" class="btn btn-outline-secondary">See More</a>
+                            <a href="#" class="btn btn-outline-secondary" role="button">See More</a>
                         </div>
                     </div>
                 </div>
@@ -263,7 +257,7 @@
                             <p class="card-text">Three girls are kidnapped by a man with a diagnosed 23 distinct
                                 personalities. They must try to escape before the apparent
                                 emergence of a frightful new 24th.</p>
-                            <a href="#" class="btn btn-outline-secondary">See More</a>
+                            <a href="#" class="btn btn-outline-secondary" role="button">See More</a>
                         </div>
                     </div>
                 </div>
@@ -271,13 +265,12 @@
 
                 <div class="col-md-12 col-lg-4 d-flex justify-content-center padding">
                     <div class="card shadow">
-                        <img class="card-img-top" src="img/disaster.jpg" alt="Disaster Artist movie">
+                        <img class="card-img-top" src="img/crazy.png" alt="Crazy Rich Asians movie">
                         <div class="card-body">
-                            <h4 class="card-title">Disaster Artist</h4>
-                            <p class="card-text">When Greg Sestero, an aspiring film actor, meets the weird and
-                                mysterious Tommy Wiseau in an acting class, they form a
-                                unique friendship and travel to Hollywood to make their dreams come true.</p>
-                            <a href="./interacted.html" class="btn btn-outline-secondary">See More</a>
+                            <h4 class="card-title">Crazy Rich Asians</h4>
+                            <p class="card-text">This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu 
+                                to Singapore to meet her boyfriend's family.</p>
+                            <a href="./interacted.html" class="btn btn-outline-secondary" role="button">See More</a>
                         </div>
                     </div>
                 </div>
@@ -311,15 +304,22 @@
                         <h5>Follow us</h5>
                         <hr class="red">
                         <div class="col-12 padding">
-                            <a href="https://www.facebook.com/"><i class="fab fa-facebook fa-3x"></i></a>
-                            <a href="https://www.twitter.com/"><i class="fab fa-twitter fa-3x"></i></a>
-                            <a href="https://www.instagram.com/"><i class="fab fa-instagram fa-3x"></i></a>
+                            <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fab fa-facebook fa-3x"></i></a>
+                            <a href="https://www.twitter.com/" aria-label="Twitter"><i class="fab fa-twitter fa-3x"></i></a>
+                            <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fab fa-instagram fa-3x"></i></a>
                         </div>
                     </div>
                 </div>
             </div>
         </footer>
     </div>
+
+    <script src="http://code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+    <script src="js/script.js"></script>
 </body>
 
 </html>

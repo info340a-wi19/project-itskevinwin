@@ -132,7 +132,7 @@ header{
     margin: 1;
 }
 
-.col-md-3 img{
+#rated{
     margin-top: 0.2rem;
     width:56px;
     height:64px;
@@ -202,6 +202,10 @@ hr.red{
     width: 75%;
 }
 
+hr.dark{
+    border-top: 1px solid #3f3f3f;
+    width: 75%;
+}
 
 .carousel{
     width: 80%; 
@@ -231,35 +235,155 @@ hr.red{
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
   }
   
-  /* Modal Content */
-  .modal-content {
+/* Modal Content */
+.modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
     width: 50%;
-  }
+}
   
-  #inputDate{
+#inputDate{
     margin-left: auto;
     margin-right: auto;
     width: 75%;
-  }
-  /* The Close Button */
-  .close {
+}
+/* The Close Button */
+.close {
     color: #aaaaaa;
     float: right;
     font-size: 28px;
     font-weight: bold;
-  }
-  
-  .close:hover,
-  .close:focus {
+}
+
+.close:hover,
+.close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
+}
+
+#watchContent{
+    width: 100%;
+    height: 330%;
+}
+
+.modal-content .row {
+    margin: 8px -16px;
+}
+
+/* Create four equal columns that floats next to each other */
+.modal-content .column {
+    float: left;
+    width: 25%;
+    padding: 8px;
+}
+
+/* Clear floats after rows */ 
+.modal-content .row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.modal-content img{
+    width: 100%;
+}
+
+/* Hover elements */
+.img_wrap {
+    position: relative;
+    height: 200px;
+    width: 257px;
   }
   
+.img_description_layer {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    background: rgba(36, 62, 206, 0.6);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 380px;
+    width: 257px;
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+}
+
+.new_description_layer{
+    min-height: 100%;
+    min-width: 100%;
+}
+
+.img_wrap:hover .img_description_layer {
+    visibility: visible;
+    opacity: 1;
+}
+
+.img_description, .img_rating {
+    transition: .2s;
+    transform: translateY(1em);
+}
+
+.img_wrap:hover .img_description,
+.img_wrap:hover .img_rating{
+    transform: translateY(0);
+}
+
+.mt-12{
+    margin-top: 12rem;
+}
+
+#similarTitle{
+    padding-top: 12rem;
+}
+
+.wrapper{
+    width: 500px; 
+    overflow-x:scroll;     
+    white-space: nowrap;
+}
+
+/* slider attributes */
+.slide{
+    background: #ccc;
+    height: 492px;
+    display: inline-block;
+    width: 380px;
+}
+
+#slider .img_description_layer {
+    position: absolute;
+    height: 492px;
+    width: 380px;
+}
+
+.resize{
+    height: 492px;
+    width: 380px;
+}
+
+/* Break the word in the hover element so that it doesn't go across the slide */
+.wrapword {
+    white-space: -moz-pre-wrap !important;  /* Mozilla, since 1999 */
+    white-space: -pre-wrap;      /* Opera 4-6 */
+    white-space: -o-pre-wrap;    /* Opera 7 */
+    white-space: pre-wrap;       /* css-3 */
+    word-wrap: break-word;       /* Internet Explorer 5.5+ */
+    white-space: -webkit-pre-wrap; /* Newer versions of Chrome/Safari*/
+    word-break: break-all;
+    white-space: normal;
+}
+
+.mt-new{
+    margin-top: 11rem;
+}
+
 @media(min-width: 598px)
 {
     .cover{
@@ -281,6 +405,17 @@ hr.red{
         background: #FC5C7D;  /* fallback for old browsers */
         background: linear-gradient(to right, #6A82FB, #FC5C7D); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
     }
+
+    .wrapper{
+        padding-left: 2.5rem;
+    }
+
+    #watchContent{
+        width: 100%;
+        height: 320%;
+    }
+
+
 }
 
 @media(min-width: 768px)
@@ -330,6 +465,23 @@ hr.red{
     .text-center .btn-outline-dark{
         margin-top: 3rem;
     }
+
+    .mt-12{
+        margin-top: 11rem;
+    }
+
+    .md-mt-0{
+        margin-top: 0;
+    }
+
+    .wrapper{
+        margin-left: 5rem;
+    }
+
+    #watchContent{
+        width: 100%;
+        height: 200%;
+    }
 }
 
 @media(min-width: 992px){
@@ -355,6 +507,31 @@ hr.red{
     .about{
         padding-right: 5rem;
     }
+
+    .mt-12{
+        margin-top: 0;
+    }
+
+    .wrapper{
+        margin-left: 12rem;
+    }
+
+    #watchContent{
+        width: 100%;
+        height: 175%;
+    }
+}
+
+@media(min-width: 1120px){
+    #watchContent{
+        width: 100%;
+        height: 135%;
+    }
+
+    .wrapper{
+        padding-left: 0;
+        margin-left: 18rem;
+    }
 }
 
 @media(min-width: 1200px){
@@ -376,5 +553,23 @@ hr.red{
 
     .text-center .btn-outline-dark{
         margin-top: 1.5rem;
+    }
+
+    .mt-12{
+        margin-top: 0;
+    }
+
+    .wrapper{
+        padding-left: 0;
+        margin-left: 20rem;
+    }
+
+    #watchContent{
+        width: 100%;
+        height: 135%;
+    }
+
+    .mt-new{
+        margin-top: 11rem;
     }
 }
