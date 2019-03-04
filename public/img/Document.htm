@@ -1,0 +1,390 @@
+<!DOCTYPE html>
+<!-- saved from url=(0080)file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html# -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="author" content="Kevin Nguyen">
+    <meta name="description" content="MoviePicks selects movies for you">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="./Document_files/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="./Document_files/normalize.min.css">
+    <link rel="stylesheet" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/css/style.css">
+    <link rel="stylesheet" href="./Document_files/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="./Document_files/css" rel="stylesheet">
+    <link href="./Document_files/css(1)" rel="stylesheet">
+    <link rel="icon" type="image/png" sizes="16x16" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/favicon-16x16.png">
+
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/index.html">MoviePicks</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/index.html">Home <span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#">Watch Later</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#">My Profile</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0" role="form">
+                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+    </nav>
+
+
+    <div class="container-fluid padding pt-3">
+        <div class="row padding">
+            <div class="text-center col-lg-6 about">
+                <h2 class="dark-head display-2">Disaster Artist</h2>
+                <hr class="red">
+                <p class="text-white">Genre: Biography, Comedy, Drama</p>
+                <p class="text-white">IMDB Rating: 7.4/10</p>
+                <p class="text-white">Release Year: 2017</p>
+                <p class="text-white">Length: 1h 44min</p>
+                <p class="text-white">Film Rating: <img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/r.png" alt="Rated R"></p>
+            </div>
+
+            <div class="col-lg-6 text-center">
+                <iframe src="./Document_files/cMKX2tE5Luk.html" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen=""></iframe>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid padding pt-2 h-lg">
+        <div class="row padding">
+            <div class="flex-md">
+                <div class="col-lg-6">
+                    <img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/disaster.jpg" alt="The Disaster Artist" class="img-fluid cover">
+                </div>
+
+                <div class="text-center col-lg-6 about">
+                    <h2 class="display-4">Movie Description</h2>
+                    <p>With 'The Disaster Artist,' James Franco transforms the tragicomic true-story of aspiring
+                        filmmaker
+                        and infamous Hollywood outsider Tommy Wiseau—an
+                        artist whose passion was as sincere as his methods were questionable—into a celebration of
+                        friendship, artistic expression, and dreams pursued against
+                        insurmountable odds. Based on Greg Sestero best-selling tell-all about the making of
+                        Tommy's
+                        cult-classic disasterpiece 'The Room' (“The Greatest Bad Movie Ever Made”),
+                        'The Disaster Artist' is a hilarious and welcome reminder that there is more than one way
+                        to
+                        become
+                        a legend—and no limit to what you can achieve when you have absolutely
+                        no idea what you're doing</p>
+
+                    <!-- Trigger/Open The Modal -->
+                    <button id="myBtn" class="btn btn-outline-secondary btn-lg" role="button">Add to 'Watch Later'</button>
+                    <!-- The Modal -->
+                    <div id="watchModal" class="modal" style="display: block;">
+                        <!-- Modal content -->
+                        <div class="modal-content" id="watchContent" style="height: 215%;">
+                            <span class="close">×</span>
+                            <h2 id="watchTitle">Your Current Watch List</h2>
+                            <hr class="dark">
+                            <div class="container-fluid padding">
+                                <div class="row" id="watchList">
+                                    <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                                        <div class="img_wrap">
+                                            <div class="content">
+                                                <img class="watchImg" src="./Document_files/jj84nF5vYRD0HUTowBKcrKk8hZP.jpg" alt="">
+                                                <div class="container">
+                                                    <div class="img_description_layer row mt-0">
+                                                        <p class="new_img_description col-sm-12">An aspiring actor in Hollywood meets an enigmatic stranger by the name of Tommy Wiseau, the meeting leads the actor down a path nobody could have predicted; creating the worst movie ever made.</p>
+                                                        <button type="submit" class="btn btn-danger col-sm-6 rmvBtn" role="button" id="00">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12 md-mt-0">
+                                        <div class="img_wrap">
+                                            <div class="content">
+                                                <img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/avengers.jpg" alt="Avengers Movie">
+                                                <div class="container">
+                                                    <div class="img_description_layer row mt-0">
+                                                        <p class="img_description col-sm-12">The Avengers and their
+                                                            allies must be
+                                                            willing to sacrifice all in
+                                                            an attempt to defeat the powerful Thanos before his blitz
+                                                            of devastation and ruin puts an end to the universe.</p>
+                                                        <button type="submit" class="btn btn-danger col-sm-6 rmvBtn" role="button" id="01">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12">
+                                        <div class="img_wrap">
+                                            <div class="content">
+                                                <img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/split.jpg" alt="Split movie">
+                                                <div class="container">
+                                                    <div class="img_description_layer row mt-0">
+                                                        <p class="img_description col-sm-12">Three girls are kidnapped
+                                                            by a man with
+                                                            a diagnosed 23 distinct
+                                                            personalities. They must try to escape before the apparent
+                                                            emergence of a frightful new 24th.</p>
+                                                        <button type="submit" class="btn btn-danger col-sm-6 rmvBtn" role="button" id="02">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12">
+                                        <div class="img_wrap">
+                                            <div class="content">
+                                                <img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/crazy.png" alt="Crazy Rich Asians movie">
+                                                <div class="container">
+                                                    <div class="img_description_layer row mt-0">
+                                                        <p class="img_description col-sm-12">This contemporary romantic
+                                                            comedy, based on a global bestseller,
+                                                            follows native New Yorker Rachel Chu to Singapore to meet
+                                                            her
+                                                            boyfriend's family.</p>
+                                                        <button type="submit" class="btn btn-danger col-sm-6 rmvBtn" role="button" id="03">Remove</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row text-center" id="addRow"><div class="column col-12 col-sm-12 col-md-12 col-lg-12 d-flex justify-content-center mt-new text-center newMovie"><div class="img_wrap"><div class="content"><img src="./Document_files/ylXCdC106IKiarftHkcacasaAcb.jpg" alt="La La Land movie"><div class="container" src="http://image.tmdb.org/t/p/w185/ylXCdC106IKiarftHkcacasaAcb.jpg" alt="La La Land movie"><div class="img_description_layer row mt-0" style="height: 386px;"><p class="img_description col-sm-12">Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten t...</p><button type="submit" class="btn btn-danger col-sm-6 removeBtn" role="button" id="0">Remove</button></div></div></div></div></div></div>
+
+                                <h2 id="similarTitle">Similar Movies</h2>
+                                <hr class="dark">
+                                <div class="wrapper text-center">
+                                    <div id="slider" class="text-center">
+                                        <div class="slide img_wrap" id="sim1">
+                                            <img class="d-block w-100 resize" src="./Document_files/ylXCdC106IKiarftHkcacasaAcb.jpg" alt="La La Land movie">
+                                            <div class="container">
+                                                <div class="img_description_layer row mt-0">
+                                                    <p class="img_description col-sm-12 wrapword">Mia, an aspiring actress, serves lattes to movie stars in between auditions and Sebastian, a jazz musician, scrapes by playing cocktail party gigs in dingy bars, but as success mounts they are faced with decisions that begin to fray the fragile fabric of their love affair, and the dreams they worked so hard to maintain in each other threaten to rip them apart.</p><p class="img_rating col-sm-12">IMDB Score: 7.9/10</p><p class="img_rating col-sm-12">Genres: Comedy,Drama,Romance</p><p class="img_rating col-sm-12">Release Date: 11/28/2016</p>
+                                                    <button type="submit" class="btn btn-primary col-sm-6 addBtn" role="button">Watch
+                                                        Later</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="slide img_wrap" id="sim2">
+                                            <img class="d-block w-100 resize" src="./Document_files/uLHorVHuWQZ1HugTp0bbD19jef7.jpg" alt="The Lost City of Z movie">
+                                            <div class="container">
+                                                <div class="img_description_layer row mt-0">
+                                                    <p class="img_description col-sm-12 wrapword">A true-life drama in the 1920s, centering on British explorer Col. Percy Fawcett, who discovered evidence of a previously unknown, advanced civilazation in the Amazon and disappeared whilst searching for it.</p><p class="img_rating col-sm-12">IMDB Score: 6.2/10</p><p class="img_rating col-sm-12">Genres: Adventure,Drama,History</p><p class="img_rating col-sm-12">Release Date: 3/14/2017</p>
+                                                    <button type="submit" class="btn btn-primary col-sm-6 addBtn" role="button">Watch
+                                                        Later</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="slide img_wrap" id="sim3">
+                                            <img class="d-block w-100 resize" src="./Document_files/ahF5c6vyP8HWMqIwlhecbRALkjq.jpg" alt="Papillon movie">
+                                            <div class="container">
+                                                <div class="img_description_layer row mt-0">
+                                                    <p class="img_description col-sm-12 wrapword">Henri “Papillon” Charrière, a safecracker from the Parisian underworld, is wrongfully convicted and sentenced to life imprisonment in the penal colony of French Guiana, where he forges a strong friendship with Louis Dega, a counterfeiter who needs his protection.</p><p class="img_rating col-sm-12">IMDB Score: 7.4/10</p><p class="img_rating col-sm-12">Genres: Drama,History</p><p class="img_rating col-sm-12">Release Date: 9/6/2017</p>
+                                                    <button type="submit" class="btn btn-primary col-sm-6 addBtn" role="button">Watch
+                                                        Later</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="slide img_wrap" id="sim4">
+                                            <img class="d-block w-100 resize" src="./Document_files/55W6mUVv4CXMMQHHhV2zXtLSpXQ.jpg" alt="BlacKkKlansman movie">
+                                            <div class="container">
+                                                <div class="img_description_layer row mt-0">
+                                                    <p class="img_description col-sm-12 wrapword">Colorado Springs, late 1970s. Ron Stallworth, an African American police officer, and Flip Zimmerman, his Jewish colleague, run an undercover operation to infiltrate the Ku Klux Klan.</p><p class="img_rating col-sm-12">IMDB Score: 7.5/10</p><p class="img_rating col-sm-12">Genres: Crime,Drama</p><p class="img_rating col-sm-12">Release Date: 11/28/2016</p>
+                                                    <button type="submit" class="btn btn-primary col-sm-6 addBtn" role="button">Watch
+                                                        Later</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid padding pt-3">
+        <div class="row title text-center">
+
+            <div class="col-12">
+                <h1 class="display-4 dark-head">Cast</h1>
+                <hr class="red">
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid padding d-flex justify-content-center dark-back">
+        <div class="row padding">
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center padding">
+                <div class="card">
+                    <img class="card-img-top" src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/dave.jpg" alt="Dave Franco">
+                    <div class="card-body">
+                        <h4 class="card-title dark-head">Dave Franco</h4>
+                        <a href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#" class="btn btn-outline-dark dark-head" role="button">See More</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center padding">
+                <div class="card">
+                    <img class="card-img-top" src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/james.jpg" alt="James Franco">
+                    <div class="card-body">
+                        <h4 class="card-title dark-head">James Franco</h4>
+                        <a href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#" class="btn btn-outline-dark dark-head" role="button">See More</a>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center padding">
+                <div class="card">
+                    <img class="card-img-top" src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/seth.jpg" alt="Seth Rogen">
+                    <div class="card-body">
+                        <h4 class="card-title dark-head">Seth Rogen</h4>
+                        <a href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#" class="btn btn-outline-dark dark-head" role="button">See More</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 col-lg-3 d-flex justify-content-center padding">
+
+                <div class="card">
+                    <img class="card-img-top" src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/ari.jpg" alt="Ari Graynor">
+                    <div class="card-body">
+                        <h4 class="card-title dark-head">Ari Graynor</h4>
+                        <a href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#" class="btn btn-outline-dark dark-head" role="button">See More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container-fluid padding pt-3 text-center">
+        <h2 class="text-center dark-head display-4">Related Movies</h2>
+        <hr class="red">
+        <div id="carouselExampleIndicators" class="carousel slide mb-3" data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item">
+                    <div class="carousel-caption d-md-block">
+                        <a href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#" class="btn btn-secondary btn-lg" role="button">See More</a>
+                    </div>
+                    <img class="d-block w-100" src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/room.jpg" alt="The Room">
+                </div>
+                <div class="carousel-item">
+                    <div class="carousel-caption d-md-block">
+                        <a href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#" class="btn btn-secondary btn-lg" role="button">See More</a>
+                    </div>
+                    <img class="d-block w-100" src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/lady.jpg" alt="Lady Bird">
+                </div>
+                <div class="carousel-item active">
+                    <div class="carousel-caption d-md-block">
+                        <a href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#" class="btn btn-secondary btn-lg" role="button">See More</a>
+                    </div>
+                    <img class="d-block w-100" src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/sick.jpg" alt="The Big Sick">
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#carouselExampleIndicators" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/interacted.html#carouselExampleIndicators" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+    </div>
+    <div class="container-fluid padding cushion">
+        <div class="row title text-center">
+            <div class="col-12">
+                <h1 class="display-4 dark-head">Watch It Here!</h1>
+            </div>
+            <hr>
+        </div>
+    </div>
+
+    <div class="container-fluid padding cushion">
+        <div class="row text-center">
+            <div class="col-sm-12 col-md-4">
+                <a href="https://www.netflix.com/"><img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/netflix.png" alt="Netflix" class="watch"></a>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+                <a href="https://www.hulu.com/"><img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/hulu.png" alt="Hulu" class="watch"></a>
+            </div>
+
+            <div class="col-sm-12 col-md-4">
+                <a href="https://www.amazon.com/Prime-Video/"><img src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/img/prime.png" alt="Amazon Prime Video" class="watch"></a>
+            </div>
+        </div>
+        <hr class="my-4">
+    </div>
+
+    <footer>
+        <div class="container-fluid padding">
+            <div class="row text-center">
+                <div class="col-md-4">
+                    <hr class="red">
+                    <h5>MoviePicks</h5>
+                    <hr class="red">
+                    <p>206-432-6542</p>
+                    <p>moviepicks@gmail.com</p>
+                    <p>4820 15th Ave NE</p>
+                    <p>Seattle, WA 98105</p>
+                </div>
+
+                <div class="col-md-4">
+                    <hr class="red">
+                    <h5>Our Hours</h5>
+                    <hr class="red">
+                    <p>Monday-Friday: 12:00pm-6:30pm</p>
+                    <p>Weekends: Closed</p>
+                </div>
+
+                <div class="col-md-4">
+                    <hr class="red">
+                    <h5>Follow us</h5>
+                    <hr class="red">
+                    <div class="col-12 padding">
+                        <a href="https://www.facebook.com/" aria-label="Facebook"><i class="fab fa-facebook fa-3x"></i></a>
+                        <a href="https://www.twitter.com/" aria-label="Twitter"><i class="fab fa-twitter fa-3x"></i></a>
+                        <a href="https://www.instagram.com/" aria-label="Instagram"><i class="fab fa-instagram fa-3x"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="./Document_files/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="./Document_files/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="./Document_files/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="file:///Users/itskevinwin/Documents/INFO340/project-itskevinwin/js/script.js"></script>
+
+
+</body></html>
