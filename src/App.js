@@ -26,11 +26,37 @@ library.add(faInstagram);
 
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      genre : '',
+      rating : '',
+      score : '',
+      year : ''
+    }
+  }
+
+  updateState = (genre, rating, score, year) => {
+    console.log(this.state);
+    console.log(genre);
+    this.setState({
+      genre : genre,
+      rating : rating,
+      score : score,
+      year : year
+    });
+    console.log(this.state);
+  }
+
+  getState = () => {
+    return this.state;
+  }
+
   render() {
     return (
       <div>
         <Nav />
-        <Header />
+        <Header selections={this.updateState} getState={this.getState}/>
         <Parallax />
         <Description />
         <Tools />
