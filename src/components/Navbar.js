@@ -8,7 +8,7 @@ export class Nav extends Component {
         return(
             <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
                 <div className="container-fluid">
-                    <a className="navbar-brand" href="./index.html">MoviePicks</a>
+                    <a className="navbar-brand" href="./">MoviePicks</a>
                         <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                             aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
                             <span className="navbar-toggler-icon"></span>
@@ -16,7 +16,7 @@ export class Nav extends Component {
                     <div className="collapse navbar-collapse" id="navbarResponsive">
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item active">
-                            <a className="nav-link" href="./index.html">Home <span className="sr-only">(current)</span></a>
+                            <a className="nav-link" href="./">Home <span className="sr-only">(current)</span></a>
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">About</a>

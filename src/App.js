@@ -7,6 +7,12 @@ import { Tools } from './components/Tools'
 import { WatchHome } from './components/WatchHome'
 import { Footer } from './components/Footer'
 
+import { ContentTop } from './components/ContentTop'
+import { ContentDesc } from './components/ContentDesc'
+import { ContentWatch } from './components/ContentWatch'
+import { ContentSim } from './components/ContentSim'
+
+
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
@@ -71,12 +77,6 @@ class App extends Component {
         </Switch>
       </Router>
     );
-
-    // <Switch>
-    //   <Route exact path='/' render={this.renderBlogForm} />
-    //   <Route path='/about' component={AboutPage} />
-    //   <Route path='/info' component={MoreInfoPage} />
-    // </Switch>
   }
 }
 
@@ -103,7 +103,11 @@ class Content extends Component {
       <div>
         <Route path="/interacted" />
         <Nav />
-
+        <ContentTop />
+        <ContentDesc />
+        <ContentWatch />
+        <ContentSim />
+        <Footer />
       </div>
     );
   }

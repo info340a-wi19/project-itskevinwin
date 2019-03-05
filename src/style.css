@@ -297,7 +297,7 @@ hr.dark{
     width: 257px;
   }
   
-.img_description_layer {
+.img_description_layer{
     position: absolute;
     top: 0;
     bottom: 0;
@@ -312,6 +312,15 @@ hr.dark{
     width: 257px;
     /* transition effect. not necessary */
     transition: opacity .2s, visibility .2s;
+}
+
+.container-fluid{
+    overflow: -webkit-paged-x;
+}
+
+.watchImg{
+    height: 380px;
+    width: 257px;
 }
 
 .new_description_layer{
@@ -339,7 +348,7 @@ hr.dark{
 }
 
 #similarTitle{
-    padding-top: 12rem;
+    padding-top: 3rem;
 }
 
 .wrapper{
@@ -504,7 +513,7 @@ hr.dark{
     }
 
     .about{
-        padding-right: 5rem;
+        padding-right: 5rem !important;
     }
 
     .mt-12{
