@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 
+import {Link} from 'react-router-dom';
+
 export class Header extends Component {
     render() {
         return (
@@ -11,13 +13,13 @@ export class Header extends Component {
                         <div className="inputs">
                             <Filters options={genres} purpose="Genre" selections={this.props.selections} getState={this.props.getState}/>
                             <Filters options={[{ name: "Film Rating" }, { name: "G" }, { name: "PG" }, { name: "PG-13" }, { name: "R" }, { name: "NC-17" }]} purpose="Film Rating" selections={this.props.selections} getState={this.props.getState}/>
-                            <br />
-                            <Inputs text="IMDB Score Higher Than: " selections={this.props.selections} getState={this.props.getState}/>
-                            <Inputs text="Year Realeased: " selections={this.props.selections} getState={this.props.getState}/>
-
+                            <Filters options={[{ name: "IMDB Score" }, { name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }, { name: "5" }, { name: "6" },
+                        { name: "7" }, { name: "8" }, { name: "9" }, { name: "10" }]} purpose="IMDB Score" selections={this.props.selections} getState={this.props.getState}/>
+                            <Filters options={[{ name: "Year" }, { name: "1920" }, { name: "1930" }, { name: "1940" }, { name: "1950" }, { name: "1960" }, { name: "1970" },
+                        { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState}/>
                             <div className="text-center">
-                                <a href="./interacted" className="btn btn-secondary btn-lg ml-3" role="button" aria-pressed="true"
-                                    alt="" onClick={this.handleClick}>GO!</a>
+                                <Link to="./interacted" className="btn btn-secondary btn-lg ml-3" role="button" aria-pressed="true"
+                                    alt="" onClick={this.handleClick}>GO!</Link>
                             </div>
                         </div>
                         <hr />
@@ -45,10 +47,15 @@ class Filters extends Component {
         if(type === "Genre") {
             console.log(event.target.value);
             this.props.selections(event.target.value, prevState.rating, prevState.score, prevState.year);
-        } else {
+        } else if (type === "Film Rating") {
             console.log(prevState.genre);
             this.props.selections(prevState.genre, event.target.value, prevState.score, prevState.year);
+        } else if (type === "IMDB Score") {
+            this.props.selections(prevState.genre, prevState.rating, event.target.value, prevState.year);
+        } else {
+            this.props.selections(prevState.genre, prevState.rating, prevState.score, event.target.value);
         }
+        console.log(this.props.getState());
     }
 
     render() {

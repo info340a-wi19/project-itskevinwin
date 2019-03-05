@@ -9,7 +9,7 @@ export class ContentWatch extends Component {
                 <p class="text-center">Hover or click on the movie image to see more information!</p>
                 <div class="container-fluid padding">
                     <div class="row" id="watchList">
-                        <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12 md-mt-0">
+                        <div class="column col-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12 md-mt-0">
                             <div class="img_wrap">
                                 <div class="content">
                                     <img src="img/avengers.jpg" alt="Avengers Movie" class="watchImg" />
@@ -65,7 +65,7 @@ export class ContentWatch extends Component {
                                 </div>
                             </div>
                         </div>
-                        <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center">
+                        <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12">
                             <div class="img_wrap">
                                 <div class="content">
                                     <img class="watchImg" src="" alt="" />
