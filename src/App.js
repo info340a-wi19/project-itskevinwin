@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import {Nav} from './components/Navbar'
-import {Header} from './components/Header'
-import {Parallax} from './components/Parallax'
-import {Description} from './components/Description'
-import {Tools} from './components/Tools'
-import {WatchHome} from './components/WatchHome'
-import {Footer} from './components/Footer'
+import { Nav } from './components/Navbar'
+import { Header } from './components/Header'
+import { Parallax } from './components/Parallax'
+import { Description } from './components/Description'
+import { Tools } from './components/Tools'
+import { WatchHome } from './components/WatchHome'
+import { Footer } from './components/Footer'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -16,6 +16,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faImdb } from '@fortawesome/free-brands-svg-icons'
 
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 library.add(faFilm);
 library.add(faCalendarAlt);
@@ -29,23 +30,32 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      genre : '',
-      rating : '',
-      score : '',
-      year : ''
+      genre: '',
+      rating: '',
+      score: '',
+      year: '',
+      searched: false
     }
   }
 
   updateState = (genre, rating, score, year) => {
     console.log(this.state);
-    console.log(genre);
+    console.log(year);
     this.setState({
-      genre : genre,
-      rating : rating,
-      score : score,
-      year : year
+      genre: genre,
+      rating: rating,
+      score: score,
+      year: year
     });
     console.log(this.state);
+  }
+
+  handleSearch = () => {
+    console.log(this.state.searched);
+    this.setState({
+      searched: true,
+    })
+    console.log(this.state.searched);
   }
 
   getState = () => {
@@ -54,16 +64,48 @@ class App extends Component {
 
   render() {
     return (
+      <Router>
+        <Switch>
+        <Route exact path='/' component={HomePage} />
+        <Route path='/interacted' component={Content} />
+        </Switch>
+      </Router>
+    );
+
+    // <Switch>
+    //   <Route exact path='/' render={this.renderBlogForm} />
+    //   <Route path='/about' component={AboutPage} />
+    //   <Route path='/info' component={MoreInfoPage} />
+    // </Switch>
+  }
+}
+
+class HomePage extends Component {
+  render() {
+    return (
       <div>
+        <Route path="/" />
         <Nav />
-        <Header selections={this.updateState} getState={this.getState}/>
+        <Header selections={this.updateState} getState={this.getState} handleSearch={this.handleSearch} />
         <Parallax />
         <Description />
         <Tools />
         <WatchHome />
         <Footer />
       </div>
-      );
+    );
+  }
+}
+
+class Content extends Component {
+  render() {
+    return (
+      <div>
+        <Route path="/interacted" />
+        <Nav />
+
+      </div>
+    );
   }
 }
 
