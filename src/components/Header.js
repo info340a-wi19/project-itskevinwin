@@ -77,38 +77,38 @@ class Filters extends Component {
     }
 }
 
-class Inputs extends Component {
+// class Inputs extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            value : ''
-        }
-    }
-    handleChange = (event) => {
-        let prevState = this.props.getState();
-        console.log(prevState);
-        let type = this.props.text;
-        console.log(this.props.text);
-        console.log(event.target.value);
-        if(type.indexOf("Year") !== -1) {
-            this.props.selections(prevState.genre, prevState.rating, prevState.score, event.target.value);
-        } else {
-            this.props.selections(prevState.genre, prevState.rating, event.target.value, prevState.year);
-        }
-    }
+//     constructor(props) {
+//         super(props);
+//         this.state = {
+//             value : ''
+//         }
+//     }
+//     handleChange = (event) => {
+//         let prevState = this.props.getState();
+//         console.log(prevState);
+//         let type = this.props.text;
+//         console.log(this.props.text);
+//         console.log(event.target.value);
+//         if(type.indexOf("Year") !== -1) {
+//             this.props.selections(prevState.genre, prevState.rating, prevState.score, event.target.value);
+//         } else {
+//             this.props.selections(prevState.genre, prevState.rating, event.target.value, prevState.year);
+//         }
+//     }
 
-    render() {
-        return (
-            <div className="input-group input-group-sm mb-3 ml-3 mx-auto w-50">
-                <div className="input-group-prepend">
-                    <span className="input-group-text">{this.props.text}</span>
-                </div>
-                <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" onChange={this.handleChange}/>
-            </div>
-        );
-    }
-}
+//     render() {
+//         return (
+//             <div className="input-group input-group-sm mb-3 ml-3 mx-auto w-50">
+//                 <div className="input-group-prepend">
+//                     <span className="input-group-text">{this.props.text}</span>
+//                 </div>
+//                 <input type="text" className="form-control" aria-label="Small" aria-describedby="inputGroup-sizing-sm" onChange={this.handleChange}/>
+//             </div>
+//         );
+//     }
+// }
 
 const genres = [
     { "name": "Genres" },

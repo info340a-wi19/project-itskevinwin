@@ -35,13 +35,14 @@ library.add(faInstagram);
 
 class App extends Component {
   constructor(props) {
+    let num = Math.floor(Math.random() * 10);
     super(props);
     this.state = {
       genre: '',
       rating: '',
-      score: '',
+      score: num,
       year: '',
-      firstImg : ''
+      item : ''
     }
   }
 
@@ -58,20 +59,19 @@ class App extends Component {
     return this.state;
   }
 
-  addContentPic = (item) => {
-    this.setState({firstImg : item});
+  addContent = (item) => {
+    this.setState({item : item});
   }
 
   shouldComponentUpdate() {
-    if(this.state.year.length === 0 || this.state.year.length === 4) {
-      return true;
-    } else {
+    if(this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year != '') {
       return false;
+    } else {
+      return true;
     }
   }
 
   componentDidUpdate() {
-
     let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
 
     let tempGenre;
@@ -87,31 +87,32 @@ class App extends Component {
         tempRate = cert.id;
       }
     });
-    
+
+    let num = Math.floor(Math.random() * 10);
     if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' && this.state.year!== '' ) {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year
+      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num
         + "&vote_average.gte=" + this.state.score;
     } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' ) {
       url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
     } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.year !== '') {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year;
+      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num;
     } else if (this.state.genre !== '' && this.state.score !== '' && this.state.year !== '' ) {
-      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year + "&vote_average.gte=" + this.state.score;
+      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0,3) + num + "&vote_average.gte=" + this.state.score;
     } else if (this.state.rating !== '' && this.state.score !== '' && this.state.year !== '' ) {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year
+      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num
         + "&vote_average.gte=" + this.state.score;
     } else if (this.state.genre !== '' && this.state.rating !== '' ) {
       url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
     } else if (this.state.genre !== '' && this.state.score !== '' ) {
       url = url + "&with_genres=" + tempGenre + "&vote_average.gte=" + this.state.score;
     } else if (this.state.genre !== '' && this.state.year !== '' ) {
-      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year;
+      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0,3) + num;
     } else if (this.state.rating !== '' && this.state.score !== '' ) {
       url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
     } else if (this.state.rating !== '' && this.state.year !== '' ) {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year;
+      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num;
     } else if (this.state.score !== '' && this.state.year !== '' ) {
-      url = url + "&primary_release_year=" + this.state.year + "&vote_average.gte=" + this.state.score;
+      url = url + "&primary_release_year=" + this.state.year.substring(0,3) + num + "&vote_average.gte=" + this.state.score;
     } else if (this.state.genre !== '' ) {
       url = url + "&with_genres=" + tempGenre;
     } else if (this.state.rating !== '' ) {
@@ -119,35 +120,11 @@ class App extends Component {
     } else if (this.state.score !== '' ) {
       url = url + "&vote_average.gte=" + this.state.score;
     } else if (this.state.year !== '' ) {
-      console.log(this.state.year);
-      url = url + "&primary_release_year=" + this.state.year;
-      console.log(url);
+      url = url + "&primary_release_year=" + this.state.year.substring(0,3) + num;
     } else {
       let num = Math.floor(Math.random() * 10);
       url = url + "&vote_average.gte=" + num;
     }
-
-    //   let similarTitles = [];
-    //   let similarPosters = [];
-    //   let similarOverview = [];
-    //   let similarRatings = [];
-    //   let similarGenreId = [];
-    //   let similarGenreNames = [];
-    //   let similarRelease = [];
-
-    //   for(let i = 9; i < 13; i++) {
-    //     similarTitles.push(data['results'][i]['original_title']);
-    //     let baseUrl = 'http://image.tmdb.org/t/p/w185';
-    //     baseUrl = baseUrl + data['results'][i]['poster_path'];
-    //     similarPosters.push(baseUrl);
-    //     similarOverview.push(data['results'][i]['overview']);
-    //     similarRatings.push(data['results'][i]['vote_average'] + "/10");
-    //     similarGenreId.push(data['results'][i]['genre_ids']);
-    //     similarRelease.push(new Date((data['results'][i]['release_date'])).toLocaleDateString('en-US'));
-    // }
-
-    // Change genre ids into actual genre names
-
 
     fetch(url)
       .then(function (response) {
@@ -156,7 +133,29 @@ class App extends Component {
       }).then((data) => {
         // let baseUrl = 'http://image.tmdb.org/t/p/w185';
         // baseUrl = baseUrl + data['results'][0]['poster_path'];
-        this.addContentPic(data.results[0]);
+        let num = Math.floor(Math.random() * data.results.length);
+        this.addContent(data.results[num]);
+      })
+      .catch(function (err) {
+        //do something with the error
+        console.error(err);  //e.g., show in the console
+      });
+  }
+  
+  componentDidMount() {
+    let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
+    let num = Math.floor(Math.random() * 10);
+    url = url + "&vote_average.gte=" + num;
+
+    fetch(url)
+      .then(function (response) {
+        let dataPromise = response.json();
+        return dataPromise;
+      }).then((data) => {
+        // let baseUrl = 'http://image.tmdb.org/t/p/w185';
+        // baseUrl = baseUrl + data['results'][0]['poster_path'];
+        let num = Math.floor(Math.random() * 10);
+        this.addContent(data.results[num]);
       })
       .catch(function (err) {
         //do something with the error
@@ -172,7 +171,7 @@ class App extends Component {
             <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch}/>
           )}/>
           <Route path='/interacted' render={(routeProps) => (
-              <Content {...routeProps} pic={this.state.firstImg} rating={this.state.rating}/>
+              <Content {...routeProps} item={this.state.item} rating={this.state.rating}/>
             )}
           />
         </Switch>
@@ -205,9 +204,9 @@ class Content extends Component {
       <div>
         <Route path="/interacted" />
         <Nav />
-        <ContentTop pic={this.props.pic} rating={this.props.rating}/>
-        <ContentDesc />
-        <ContentWatch />
+        <ContentTop item={this.props.item} rating={this.props.rating}/>
+        <ContentDesc item={this.props.item} />
+        <ContentWatch item={this.props.item}/>
         <ContentSim />
         <Footer />
       </div>

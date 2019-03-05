@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 export class ContentTop extends Component {
     render(){
-        let item = this.props.pic;
+        let item = this.props.item;
         console.log(item);
         let itemImg = 'http://image.tmdb.org/t/p/w185' + item.poster_path;
         let rating = () => {

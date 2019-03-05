@@ -68,7 +68,7 @@ export class ContentWatch extends Component {
                         <div class="column col-12 col-sm-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12">
                             <div class="img_wrap">
                                 <div class="content">
-                                    <img class="watchImg" src="" alt="" />
+                                    <img class="watchImg" src='' alt='' />
                                     <div class="container">
                                         <div class="img_description_layer md-change row mt-0">
                                             <p class="new_img_description col-sm-12"></p>
