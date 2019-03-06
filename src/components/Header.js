@@ -61,7 +61,7 @@ class Filters extends Component {
         return (
             <div className="container" value=''>
                 <div className="row justify-content-around">
-                    <div className="form-group col-2">
+                    <div className="form-group col-6">
                         <label htmlFor={this.props.purpose}></label>
                         <select className="form-control" id={this.props.purpose} value={this.state.value} onChange={this.handleChange}>
                             {allOptions})}

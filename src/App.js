@@ -44,7 +44,29 @@ class App extends Component {
       year: '',
       item: '',
       recs: [],
+      genreNames: []
     }
+  }
+
+  getGenres = (item) => {
+    let genreIds = item.genre_ids;
+
+    let genreNames = genreIds.map((genreId) => {
+      for (let i = 0; i < genres.length; i++) {
+        if (genreId === genres[i].id) {
+          return genres[i].name;
+        }
+      }
+    });
+
+    let genresComplete = [];
+    for (let i = 0; i < genreNames.length - 1; i++) {
+      genresComplete.push(genreNames[i] + ', ');
+    }
+
+    genresComplete.push(genreNames[genreNames.length - 1]);
+
+    this.setState({ genreNames: genresComplete });
   }
 
   updateState = (genre, rating, score, year) => {
@@ -61,7 +83,8 @@ class App extends Component {
   }
 
   addContent = (item) => {
-    this.setState({ item: item });
+    this.setState({ item: item })
+    this.getGenres(item);
   }
 
   addRecommendations = (item) => {
@@ -71,7 +94,7 @@ class App extends Component {
   }
 
   shouldComponentUpdate() {
-    if (this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year != '') {
+    if (this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year !== '') {
       return false;
     } else {
       return true;
@@ -184,7 +207,7 @@ class App extends Component {
             <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} />
           )} />
           <Route path='/interacted' render={(routeProps) => (
-            <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} />
+            <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
           )}
           />
         </Switch>
@@ -211,10 +234,28 @@ class HomePage extends Component {
 }
 
 class Content extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props);
     this.state = {
-      watchList : []
+      watchList: [
+        {
+        title: "Split",
+        overview: 'Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.',
+        poster_path: '/rXMWOZiCt6eMX22jWuTOSdQ98bY.jpg'
+        },
+        {
+        title: "Crazy Rich Asians",
+        overview: "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
+        poster_path: '/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg'
+        }
+      ],
+      firstMovie : [
+        {
+          title: "The Avengers",
+          overview: "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
+          poster_path: '/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg' 
+        }
+      ]
     }
   }
 
@@ -227,25 +268,33 @@ class Content extends Component {
 
   removeFromList = (item) => {
     let prevState = this.state.watchList;
-    // for (let i = 0; i < prevState.length - 1; i++) {
-    //   if (prevState[i] === item) {
-    //     console.log(item);
-    //     console.log(prevState[i]);
-    //     prevState.splice(i, 1);
-    //   }
-    // }
     prevState = prevState.splice(0, prevState.indexOf(item)).concat(prevState.slice(prevState.indexOf(item) + 1));
-    this.setState({watchList : prevState});
+    this.setState({ watchList: prevState });
+  }
+
+  removeFirstFromList = (item) => {
+    let watchList = this.state.watchList;
+    let newState;
+    if(watchList.length > 1){
+      newState = watchList.slice(1, watchList.length + 1);
+    } else {
+      newState = [];
+    }
+
+    this.setState({ 
+      watchList: newState,
+      firstMovie: [watchList[0]] });
   }
 
   render() {
+    console.log(this.state.firstMovie)
     return (
       <div>
         <Route path="/interacted" />
         <Nav />
-        <ContentTop item={this.props.item} rating={this.props.rating} />
-        <ContentDesc item={this.props.item} addToList={this.addToList}/>
-        <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList}/>
+        <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
+        <ContentDesc item={this.props.item} addToList={this.addToList} />
+        <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList} firstMovie={this.state.firstMovie}/>
         <ContentSim recs={this.props.recs} addToList={this.addToList} />
         <Footer />
       </div>

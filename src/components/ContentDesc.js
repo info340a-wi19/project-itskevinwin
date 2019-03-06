@@ -17,7 +17,7 @@ export class ContentDesc extends Component {
             <div className="container-fluid padding pt-2 h-lg">
                 <div className="row padding">
                     <div className="flex-md">
-                        <div className="col-lg-6">
+                        <div className="col-lg-6 text-center">
                             <img src={url} alt="The Disaster Artist" className="img-fluid cover" />
                         </div>
 
