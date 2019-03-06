@@ -3,15 +3,6 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export class Header extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { selected: false }
-    }
-
-    handleSelect = () => {
-        this.setState({ selected: true });
-    }
-
     onClick = () => {
         let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
         let curState = this.props.getState();
@@ -97,15 +88,6 @@ export class Header extends Component {
     }
 
     render() {
-        let searchBtn;
-        if (this.state.selected === false) {
-            searchBtn = <Link to="./interacted" className="btn btn-secondary btn-lg ml-3 disabled" role="button" aria-pressed="true"
-                alt="" onClick={this.handleClick}>GO!</Link>
-        } else {
-            searchBtn = <Link to="./interacted" className="btn btn-secondary btn-lg ml-3" role="button" aria-pressed="true"
-                alt="" onClick={this.onClick}>GO!</Link>
-        }
-        console.log(this.props.genres);
         return (
             <header>
                 <div className="header-content">
@@ -113,18 +95,19 @@ export class Header extends Component {
                         <h1 className="text-center text-uppercase display-2">Can't Decide?</h1>
                         <h2 className="text-center text-uppercase display-2 d-none">We Got it.</h2>
                         <div className="inputs">
-                            <Filters options={this.props.genres} purpose="Genre" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
-                            <Filters options={[{ name: "Film Rating" }, { name: "G" }, { name: "PG" }, { name: "PG-13" }, { name: "R" }, { name: "NC-17" }]} purpose="Film Rating" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
+                            <Filters options={this.props.genres} purpose="Genre" selections={this.props.selections} getState={this.props.getState} />
+                            <Filters options={[{ name: "Film Rating" }, { name: "G" }, { name: "PG" }, { name: "PG-13" }, { name: "R" }, { name: "NC-17" }]} purpose="Film Rating" selections={this.props.selections} getState={this.props.getState} />
                             <Filters options={[{ name: "IMDB Score" }, { name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }, { name: "5" }, { name: "6" },
-                            { name: "7" }, { name: "8" }, { name: "9" }]} purpose="IMDB Score" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
+                            { name: "7" }, { name: "8" }, { name: "9" }]} purpose="IMDB Score" selections={this.props.selections} getState={this.props.getState} />
                             <Filters options={[{ name: "Year" }, { name: "1920" }, { name: "1930" }, { name: "1940" }, { name: "1950" }, { name: "1960" }, { name: "1970" },
-                            { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
+                            { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState}  />
                             <div className="text-center">
-                                {searchBtn}
+                            <Link to="./interacted" className="btn btn-secondary btn-lg ml-3" role="button" aria-pressed="true"
+                                alt="" onClick={this.onClick}>GO!</Link>
                             </div>
                         </div>
                         <hr />
-                        <p className="dark-head text-center">Input your preferences and search!</p>
+                        <p className="dark-head text-center">Leave your preferences blank if you want a random movie!</p>
                     </div>
                 </div>
             </header>
@@ -143,7 +126,6 @@ class Filters extends Component {
 
     handleChange = (event) => {
         let prevState = this.props.getState();
-        this.props.handleSelect();
         let type = this.props.purpose;
         if (type === "Genre") {
             console.log(1);
