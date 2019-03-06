@@ -17,7 +17,7 @@ export class Header extends Component {
         let curState = this.props.getState();
 
         let tempGenre;
-        genres.forEach((genre) => {
+        this.props.genres.forEach((genre) => {
             if (genre.name === curState.genre) {
                 tempGenre = genre.id;
             }
@@ -105,6 +105,7 @@ export class Header extends Component {
             searchBtn = <Link to="./interacted" className="btn btn-secondary btn-lg ml-3" role="button" aria-pressed="true"
                 alt="" onClick={this.onClick}>GO!</Link>
         }
+        console.log(this.props.genres);
         return (
             <header>
                 <div className="header-content">
@@ -112,7 +113,7 @@ export class Header extends Component {
                         <h1 className="text-center text-uppercase display-2">Can't Decide?</h1>
                         <h2 className="text-center text-uppercase display-2 d-none">We Got it.</h2>
                         <div className="inputs">
-                            <Filters options={genres} purpose="Genre" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
+                            <Filters options={this.props.genres} purpose="Genre" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
                             <Filters options={[{ name: "Film Rating" }, { name: "G" }, { name: "PG" }, { name: "PG-13" }, { name: "R" }, { name: "NC-17" }]} purpose="Film Rating" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
                             <Filters options={[{ name: "IMDB Score" }, { name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }, { name: "5" }, { name: "6" },
                             { name: "7" }, { name: "8" }, { name: "9" }]} purpose="IMDB Score" selections={this.props.selections} getState={this.props.getState} handleSelect={this.handleSelect} />
@@ -184,86 +185,7 @@ class Filters extends Component {
     }
 }
 
-const genres = [
-    { "name": "Genres" },
-
-    {
-        "id": 28,
-        "name": "Action"
-    },
-    {
-        "id": 12,
-        "name": "Adventure"
-    },
-    {
-        "id": 16,
-        "name": "Animation"
-    },
-    {
-        "id": 35,
-        "name": "Comedy"
-    },
-    {
-        "id": 80,
-        "name": "Crime"
-    },
-    {
-        "id": 99,
-        "name": "Documentary"
-    },
-    {
-        "id": 18,
-        "name": "Drama"
-    },
-    {
-        "id": 10751,
-        "name": "Family"
-    },
-    {
-        "id": 14,
-        "name": "Fantasy"
-    },
-    {
-        "id": 36,
-        "name": "History"
-    },
-    {
-        "id": 27,
-        "name": "Horror"
-    },
-    {
-        "id": 10402,
-        "name": "Music"
-    },
-    {
-        "id": 9648,
-        "name": "Mystery"
-    },
-    {
-        "id": 10749,
-        "name": "Romance"
-    },
-    {
-        "id": 878,
-        "name": "Science Fiction"
-    },
-    {
-        "id": 10770,
-        "name": "TV Movie"
-    },
-    {
-        "id": 53,
-        "name": "Thriller"
-    },
-    {
-        "id": 10752,
-        "name": "War"
-    },
-    {
-        "id": 37,
-        "name": "Western"
-    }
-]
+const genres = []
 const certs = [
     {
       "id": 1,

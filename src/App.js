@@ -34,6 +34,9 @@ library.add(faInstagram);
 
 
 class App extends Component {
+
+  genres = [];
+
   constructor(props) {
     // let num = Math.floor(Math.random() * 10);
     super(props);
@@ -45,7 +48,8 @@ class App extends Component {
       item: '',
       recs: [],
       genreNames: [],
-      update : false,
+      update: false,
+      genres : []
     }
   }
 
@@ -53,9 +57,9 @@ class App extends Component {
     let genreIds = item.genre_ids;
 
     let genreNames = genreIds.map((genreId) => {
-      for (let i = 0; i < genres.length; i++) {
-        if (genreId === genres[i].id) {
-          return genres[i].name;
+      for (let i = 0; i < this.state.genres.length; i++) {
+        if (genreId === this.state.genres[i].id) {
+          return this.state.genres[i].name;
         }
       }
     });
@@ -95,126 +99,22 @@ class App extends Component {
     this.setState({ recs: prevState });
   }
 
-  // activateUpdate = () => {
-  //   this.setState({update : true});
-  // }
-
-  // shouldComponentUpdate() {
-  //   // if (this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year !== '') {
-  //   //   return false;
-  //   // } else {
-  //   //   return true;
-  //   // }
-  //   // console.log(this.state.update);
-  //   // return this.state.update;
-  // }
-
-  // componentDidUpdate() {
-  //   let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
-
-  //   let tempGenre;
-  //   genres.forEach((genre) => {
-  //     if (genre.name === this.state.genre) {
-  //       tempGenre = genre.id;
-  //     }
-  //   });
-
-  //   let tempRate;
-  //   certs.forEach((cert) => {
-  //     if (cert.name === this.state.rating) {
-  //       tempRate = cert.id;
-  //     }
-  //   });
-
-  //   let num = Math.floor(Math.random() * 10);
-  //   url = url + "&vote_average.gte=" + num;
-
-  //   if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
-  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
-  //       + "&vote_average.gte=" + this.state.score;
-  //     console.log(url)
-
-  //   } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '') {
-  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
-  //     console.log(url)
-
-  //   } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.year !== '') {
-  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-  //   } else if (this.state.genre !== '' && this.state.score !== '' && this.state.year !== '') {
-  //     url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
-  //   } else if (this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
-  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
-  //       + "&vote_average.gte=" + this.state.score;
-  //   } else if (this.state.genre !== '' && this.state.rating !== '') {
-  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
-  //   } else if (this.state.genre !== '' && this.state.score !== '') {
-  //     url = url + "&with_genres=" + tempGenre + "&vote_average.gte=" + this.state.score;
-  //   } else if (this.state.genre !== '' && this.state.year !== '') {
-  //     url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-  //   } else if (this.state.rating !== '' && this.state.score !== '') {
-  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
-  //   } else if (this.state.rating !== '' && this.state.year !== '') {
-  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-  //   } else if (this.state.score !== '' && this.state.year !== '') {
-  //     url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
-  //   } else if (this.state.genre !== '') {
-  //     url = url + "&with_genres=" + tempGenre;
-  //   } else if (this.state.rating !== '') {
-  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
-  //   } else if (this.state.score !== '') {
-  //     url = url + "&vote_average.gte=" + this.state.score;
-  //   } else if (this.state.year !== '') {
-  //     url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-  //   } else {
-  //     url = url + "&vote_average.gte=" + num;
-  //   }
-
-  //   console.log(url)
-
-  //   fetch(url)
-  //     .then(function (response) {
-  //       let dataPromise = response.json();
-  //       return dataPromise;
-  //     }).then((data) => {
-  //       // let baseUrl = 'http://image.tmdb.org/t/p/w185';
-  //       // baseUrl = baseUrl + data['results'][0]['poster_path'];
-  //       let num = Math.floor(Math.random() * data.results.length);
-  //       this.addContent(data.results[num]);
-  //       data.results.forEach((item) => {
-  //         this.addRecommendations(item);
-  //       })
-  //     })
-  //     .catch(function (err) {
-  //       //do something with the error
-  //       console.error(err);  //e.g., show in the console
-  //     });
-  // }
-
-  // componentDidMount() {
-  //   if(this.state.genre === '' && this.state.rating === '' && this.state.score === '' && this.state.year === ''){
-  //     let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
-  //     let num = Math.floor(Math.random() * 10);
-  //     url = url + "&vote_average.gte=" + num;
-  
-  //     fetch(url)
-  //       .then(function (response) {
-  //         let dataPromise = response.json();
-  //         return dataPromise;
-  //       }).then((data) => {
-  //         // let baseUrl = 'http://image.tmdb.org/t/p/w185';
-  //         // baseUrl = baseUrl + data['results'][0]['poster_path'];
-  //         let num = Math.floor(Math.random() * 10);
-  //         this.addContent(data.results[num]);
-  //         data.results.forEach((item) => {
-  //           this.addRecommendations(item);
-  //         })
-  //       })
-  //       .catch(function (err) {
-  //         //do something with the error 
-  //         console.error(err);  //e.g., show in the console
-  //       });
-  //   }
-  // }
+  componentDidMount() {
+    fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US")
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        let edit = data.genres;
+        edit.unshift({name : "Genre"})
+        console.log(edit);
+        this.setState({genres : edit});
+      })
+      .catch(function (err) {
+        //do something with the error
+        console.error(err);  //e.g., show in the console
+      });
+  }
 
 
   render() {
@@ -223,7 +123,7 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={(routeProps) => (
             <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
-            addContent={this.addContent} addRecs={this.addRecommendations}/>
+              addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres}/>
           )} />
           <Route path='/interacted' render={(routeProps) => (
             <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
@@ -237,12 +137,13 @@ class App extends Component {
 
 class HomePage extends Component {
   render() {
+    console.log(this.props.genres);
     return (
       <div>
         <Route path="/" />
         <Nav />
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
-        addContent={this.props.addContent} addRecs={this.props.addRecs}/>
+          addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres}/>
         <Parallax />
         <Description />
         <Tools />
@@ -259,21 +160,21 @@ class Content extends Component {
     this.state = {
       watchList: [
         {
-        title: "Split",
-        overview: 'Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.',
-        poster_path: '/rXMWOZiCt6eMX22jWuTOSdQ98bY.jpg'
+          title: "Split",
+          overview: 'Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.',
+          poster_path: '/rXMWOZiCt6eMX22jWuTOSdQ98bY.jpg'
         },
         {
-        title: "Crazy Rich Asians",
-        overview: "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
-        poster_path: '/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg'
+          title: "Crazy Rich Asians",
+          overview: "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
+          poster_path: '/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg'
         }
       ],
-      firstMovie : [
+      firstMovie: [
         {
           title: "The Avengers",
           overview: "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
-          poster_path: '/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg' 
+          poster_path: '/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'
         }
       ]
     }
@@ -295,15 +196,16 @@ class Content extends Component {
   removeFirstFromList = (item) => {
     let watchList = this.state.watchList;
     let newState;
-    if(watchList.length > 1){
+    if (watchList.length > 1) {
       newState = watchList.slice(1, watchList.length + 1);
     } else {
       newState = [];
     }
 
-    this.setState({ 
+    this.setState({
       watchList: newState,
-      firstMovie: [watchList[0]] });
+      firstMovie: [watchList[0]]
+    });
   }
 
   render() {
@@ -313,7 +215,7 @@ class Content extends Component {
         <Nav />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentDesc item={this.props.item} addToList={this.addToList} />
-        <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList} firstMovie={this.state.firstMovie}/>
+        <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList} firstMovie={this.state.firstMovie} />
         <ContentSim recs={this.props.recs} addToList={this.addToList} />
         <Footer />
       </div>
@@ -322,87 +224,6 @@ class Content extends Component {
 }
 
 export default App;
-
-const genres = [
-  { "name": "Genres" },
-
-  {
-    "id": 28,
-    "name": "Action"
-  },
-  {
-    "id": 12,
-    "name": "Adventure"
-  },
-  {
-    "id": 16,
-    "name": "Animation"
-  },
-  {
-    "id": 35,
-    "name": "Comedy"
-  },
-  {
-    "id": 80,
-    "name": "Crime"
-  },
-  {
-    "id": 99,
-    "name": "Documentary"
-  },
-  {
-    "id": 18,
-    "name": "Drama"
-  },
-  {
-    "id": 10751,
-    "name": "Family"
-  },
-  {
-    "id": 14,
-    "name": "Fantasy"
-  },
-  {
-    "id": 36,
-    "name": "History"
-  },
-  {
-    "id": 27,
-    "name": "Horror"
-  },
-  {
-    "id": 10402,
-    "name": "Music"
-  },
-  {
-    "id": 9648,
-    "name": "Mystery"
-  },
-  {
-    "id": 10749,
-    "name": "Romance"
-  },
-  {
-    "id": 878,
-    "name": "Science Fiction"
-  },
-  {
-    "id": 10770,
-    "name": "TV Movie"
-  },
-  {
-    "id": 53,
-    "name": "Thriller"
-  },
-  {
-    "id": 10752,
-    "name": "War"
-  },
-  {
-    "id": 37,
-    "name": "Western"
-  }
-]
 
 const certs = [
   {
