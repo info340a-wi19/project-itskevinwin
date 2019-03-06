@@ -101,7 +101,7 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate(prevState) {
+  componentDidUpdate() {
     let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
 
     let tempGenre;

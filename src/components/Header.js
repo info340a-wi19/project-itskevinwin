@@ -14,7 +14,7 @@ export class Header extends Component {
                             <Filters options={genres} purpose="Genre" selections={this.props.selections} getState={this.props.getState}/>
                             <Filters options={[{ name: "Film Rating" }, { name: "G" }, { name: "PG" }, { name: "PG-13" }, { name: "R" }, { name: "NC-17" }]} purpose="Film Rating" selections={this.props.selections} getState={this.props.getState}/>
                             <Filters options={[{ name: "IMDB Score" }, { name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }, { name: "5" }, { name: "6" },
-                        { name: "7" }, { name: "8" }, { name: "9" }, { name: "10" }]} purpose="IMDB Score" selections={this.props.selections} getState={this.props.getState}/>
+                        { name: "7" }, { name: "8" }, { name: "9" }]} purpose="IMDB Score" selections={this.props.selections} getState={this.props.getState}/>
                             <Filters options={[{ name: "Year" }, { name: "1920" }, { name: "1930" }, { name: "1940" }, { name: "1950" }, { name: "1960" }, { name: "1970" },
                         { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState}/>
                             <div className="text-center">
