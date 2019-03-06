@@ -44,7 +44,8 @@ class App extends Component {
       year: '',
       item: '',
       recs: [],
-      genreNames: []
+      genreNames: [],
+      update : false,
     }
   }
 
@@ -76,6 +77,7 @@ class App extends Component {
       score: score,
       year: year
     });
+    console.log(this.state);
   }
 
   getState = () => {
@@ -93,88 +95,100 @@ class App extends Component {
     this.setState({ recs: prevState });
   }
 
-  shouldComponentUpdate() {
-    if (this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year !== '') {
-      return false;
-    } else {
-      return true;
-    }
-  }
+  // activateUpdate = () => {
+  //   this.setState({update : true});
+  // }
 
-  componentDidUpdate() {
-    let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
+  // shouldComponentUpdate() {
+  //   // if (this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year !== '') {
+  //   //   return false;
+  //   // } else {
+  //   //   return true;
+  //   // }
+  //   // console.log(this.state.update);
+  //   // return this.state.update;
+  // }
 
-    let tempGenre;
-    genres.forEach((genre) => {
-      if (genre.name === this.state.genre) {
-        tempGenre = genre.id;
-      }
-    });
+  // componentDidUpdate() {
+  //   let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
 
-    let tempRate;
-    certs.forEach((cert) => {
-      if (cert.name === this.state.rating) {
-        tempRate = cert.id;
-      }
-    });
+  //   let tempGenre;
+  //   genres.forEach((genre) => {
+  //     if (genre.name === this.state.genre) {
+  //       tempGenre = genre.id;
+  //     }
+  //   });
 
-    let num = Math.floor(Math.random() * 10);
-    url = url + "&vote_average.gte=" + num;
+  //   let tempRate;
+  //   certs.forEach((cert) => {
+  //     if (cert.name === this.state.rating) {
+  //       tempRate = cert.id;
+  //     }
+  //   });
 
-    if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
-        + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '') {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.year !== '') {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-    } else if (this.state.genre !== '' && this.state.score !== '' && this.state.year !== '') {
-      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
-        + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' && this.state.rating !== '') {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
-    } else if (this.state.genre !== '' && this.state.score !== '') {
-      url = url + "&with_genres=" + tempGenre + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' && this.state.year !== '') {
-      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-    } else if (this.state.rating !== '' && this.state.score !== '') {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.rating !== '' && this.state.year !== '') {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-    } else if (this.state.score !== '' && this.state.year !== '') {
-      url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '') {
-      url = url + "&with_genres=" + tempGenre;
-    } else if (this.state.rating !== '') {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
-    } else if (this.state.score !== '') {
-      url = url + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.year !== '') {
-      url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
-    } else {
-      url = url + "&vote_average.gte=" + num;
-    }
-    
-    fetch(url)
-      .then(function (response) {
-        let dataPromise = response.json();
-        return dataPromise;
-      }).then((data) => {
-        // let baseUrl = 'http://image.tmdb.org/t/p/w185';
-        // baseUrl = baseUrl + data['results'][0]['poster_path'];
-        let num = Math.floor(Math.random() * data.results.length);
-        this.addContent(data.results[num]);
-        data.results.forEach((item) => {
-          this.addRecommendations(item);
-        })
-      })
-      .catch(function (err) {
-        //do something with the error
-        console.error(err);  //e.g., show in the console
-      });
-  }
+  //   let num = Math.floor(Math.random() * 10);
+  //   url = url + "&vote_average.gte=" + num;
+
+  //   if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
+  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
+  //       + "&vote_average.gte=" + this.state.score;
+  //     console.log(url)
+
+  //   } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '') {
+  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
+  //     console.log(url)
+
+  //   } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.year !== '') {
+  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
+  //   } else if (this.state.genre !== '' && this.state.score !== '' && this.state.year !== '') {
+  //     url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
+  //   } else if (this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
+  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
+  //       + "&vote_average.gte=" + this.state.score;
+  //   } else if (this.state.genre !== '' && this.state.rating !== '') {
+  //     url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
+  //   } else if (this.state.genre !== '' && this.state.score !== '') {
+  //     url = url + "&with_genres=" + tempGenre + "&vote_average.gte=" + this.state.score;
+  //   } else if (this.state.genre !== '' && this.state.year !== '') {
+  //     url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
+  //   } else if (this.state.rating !== '' && this.state.score !== '') {
+  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
+  //   } else if (this.state.rating !== '' && this.state.year !== '') {
+  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
+  //   } else if (this.state.score !== '' && this.state.year !== '') {
+  //     url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
+  //   } else if (this.state.genre !== '') {
+  //     url = url + "&with_genres=" + tempGenre;
+  //   } else if (this.state.rating !== '') {
+  //     url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
+  //   } else if (this.state.score !== '') {
+  //     url = url + "&vote_average.gte=" + this.state.score;
+  //   } else if (this.state.year !== '') {
+  //     url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
+  //   } else {
+  //     url = url + "&vote_average.gte=" + num;
+  //   }
+
+  //   console.log(url)
+
+  //   fetch(url)
+  //     .then(function (response) {
+  //       let dataPromise = response.json();
+  //       return dataPromise;
+  //     }).then((data) => {
+  //       // let baseUrl = 'http://image.tmdb.org/t/p/w185';
+  //       // baseUrl = baseUrl + data['results'][0]['poster_path'];
+  //       let num = Math.floor(Math.random() * data.results.length);
+  //       this.addContent(data.results[num]);
+  //       data.results.forEach((item) => {
+  //         this.addRecommendations(item);
+  //       })
+  //     })
+  //     .catch(function (err) {
+  //       //do something with the error
+  //       console.error(err);  //e.g., show in the console
+  //     });
+  // }
 
   // componentDidMount() {
   //   if(this.state.genre === '' && this.state.rating === '' && this.state.score === '' && this.state.year === ''){
@@ -196,7 +210,7 @@ class App extends Component {
   //         })
   //       })
   //       .catch(function (err) {
-  //         //do something with the error
+  //         //do something with the error 
   //         console.error(err);  //e.g., show in the console
   //       });
   //   }
@@ -208,7 +222,8 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path='/' render={(routeProps) => (
-            <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch}/>
+            <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
+            addContent={this.addContent} addRecs={this.addRecommendations}/>
           )} />
           <Route path='/interacted' render={(routeProps) => (
             <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
@@ -226,7 +241,8 @@ class HomePage extends Component {
       <div>
         <Route path="/" />
         <Nav />
-        <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} />
+        <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
+        addContent={this.props.addContent} addRecs={this.props.addRecs}/>
         <Parallax />
         <Description />
         <Tools />

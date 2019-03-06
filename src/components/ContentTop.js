@@ -22,7 +22,7 @@ export class ContentTop extends Component {
                 </div>
     
                 <div className="col-lg-6 text-center">
-                    <img src={itemImg} alt={item.title} className="img-fluid cover" />
+                    <img src={itemImg} alt={item.title} className="img-fluid cover w-50" />
                 </div>
             </div>
         </div>
