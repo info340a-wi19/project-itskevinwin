@@ -202,12 +202,20 @@ class App extends Component {
   //   }
   // }
 
+  handleRandom = () => {
+    let num = Math.floor(Math.random() * 10);
+    console.log('am i getting here');
+    if(this.state.genre === '' && this.state.rating === '' && this.state.score === '' && this.state.year === ''){
+      this.setState({score: num});
+    }
+  }
+
   render() {
     return (
       <Router>
         <Switch>
           <Route exact path='/' render={(routeProps) => (
-            <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} />
+            <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} handleRandom={this.handleRandom}/>
           )} />
           <Route path='/interacted' render={(routeProps) => (
             <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
@@ -290,7 +298,6 @@ class Content extends Component {
   }
 
   render() {
-    console.log(this.state.firstMovie)
     return (
       <div>
         <Route path="/interacted" />

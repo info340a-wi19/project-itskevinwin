@@ -42,7 +42,6 @@ class Filters extends Component {
     handleChange = (event) => {
         let prevState = this.props.getState();
         let type = this.props.purpose;
-        // this.setState({value : event.target.value});
         if(type === "Genre") {
             this.props.selections(event.target.value, prevState.rating, prevState.score, prevState.year);
         } else if (type === "Film Rating") {
@@ -52,6 +51,7 @@ class Filters extends Component {
         } else {
             this.props.selections(prevState.genre, prevState.rating, prevState.score, event.target.value);
         }
+        this.setState({value: event.target.value})
     }
 
     render() {
@@ -61,7 +61,7 @@ class Filters extends Component {
         return (
             <div className="container" value=''>
                 <div className="row justify-content-around">
-                    <div className="form-group col-6">
+                    <div className="form-group col-5">
                         <label htmlFor={this.props.purpose}></label>
                         <select className="form-control" id={this.props.purpose} value={this.state.value} onChange={this.handleChange}>
                             {allOptions})}
