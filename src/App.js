@@ -35,12 +35,12 @@ library.add(faInstagram);
 
 class App extends Component {
   constructor(props) {
-    let num = Math.floor(Math.random() * 10);
+    // let num = Math.floor(Math.random() * 10);
     super(props);
     this.state = {
       genre: '',
       rating: '',
-      score: num,
+      score: '',
       year: '',
       item: '',
       recs: [],
@@ -101,7 +101,7 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate() {
+  componentDidUpdate(prevState) {
     let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
 
     let tempGenre;
@@ -119,6 +119,8 @@ class App extends Component {
     });
 
     let num = Math.floor(Math.random() * 10);
+    url = url + "&vote_average.gte=" + num;
+
     if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
       url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
         + "&vote_average.gte=" + this.state.score;
@@ -152,10 +154,9 @@ class App extends Component {
     } else if (this.state.year !== '') {
       url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
     } else {
-      let num = Math.floor(Math.random() * 10);
       url = url + "&vote_average.gte=" + num;
     }
-
+    
     fetch(url)
       .then(function (response) {
         let dataPromise = response.json();
@@ -175,29 +176,31 @@ class App extends Component {
       });
   }
 
-  componentDidMount() {
-    let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
-    let num = Math.floor(Math.random() * 10);
-    url = url + "&vote_average.gte=" + num;
-
-    fetch(url)
-      .then(function (response) {
-        let dataPromise = response.json();
-        return dataPromise;
-      }).then((data) => {
-        // let baseUrl = 'http://image.tmdb.org/t/p/w185';
-        // baseUrl = baseUrl + data['results'][0]['poster_path'];
-        let num = Math.floor(Math.random() * 10);
-        this.addContent(data.results[num]);
-        data.results.forEach((item) => {
-          this.addRecommendations(item);
-        })
-      })
-      .catch(function (err) {
-        //do something with the error
-        console.error(err);  //e.g., show in the console
-      });
-  }
+  // componentDidMount() {
+  //   if(this.state.genre === '' && this.state.rating === '' && this.state.score === '' && this.state.year === ''){
+  //     let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
+  //     let num = Math.floor(Math.random() * 10);
+  //     url = url + "&vote_average.gte=" + num;
+  
+  //     fetch(url)
+  //       .then(function (response) {
+  //         let dataPromise = response.json();
+  //         return dataPromise;
+  //       }).then((data) => {
+  //         // let baseUrl = 'http://image.tmdb.org/t/p/w185';
+  //         // baseUrl = baseUrl + data['results'][0]['poster_path'];
+  //         let num = Math.floor(Math.random() * 10);
+  //         this.addContent(data.results[num]);
+  //         data.results.forEach((item) => {
+  //           this.addRecommendations(item);
+  //         })
+  //       })
+  //       .catch(function (err) {
+  //         //do something with the error
+  //         console.error(err);  //e.g., show in the console
+  //       });
+  //   }
+  // }
 
   render() {
     return (
