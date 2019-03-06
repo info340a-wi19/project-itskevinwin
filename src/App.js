@@ -42,7 +42,8 @@ class App extends Component {
       rating: '',
       score: num,
       year: '',
-      item : ''
+      item: '',
+      recs: [],
     }
   }
 
@@ -60,11 +61,17 @@ class App extends Component {
   }
 
   addContent = (item) => {
-    this.setState({item : item});
+    this.setState({ item: item });
+  }
+
+  addRecommendations = (item) => {
+    let prevState = this.state.recs;
+    prevState = prevState.concat(item);
+    this.setState({ recs: prevState });
   }
 
   shouldComponentUpdate() {
-    if(this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year != '') {
+    if (this.state.genre !== '' || this.state.rating !== '' || this.state.score !== '' || this.state.year != '') {
       return false;
     } else {
       return true;
@@ -89,38 +96,38 @@ class App extends Component {
     });
 
     let num = Math.floor(Math.random() * 10);
-    if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' && this.state.year!== '' ) {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num
+    if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
+      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
         + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '' ) {
+    } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.score !== '') {
       url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
     } else if (this.state.genre !== '' && this.state.rating !== '' && this.state.year !== '') {
-      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num;
-    } else if (this.state.genre !== '' && this.state.score !== '' && this.state.year !== '' ) {
-      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0,3) + num + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.rating !== '' && this.state.score !== '' && this.state.year !== '' ) {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num
+      url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
+    } else if (this.state.genre !== '' && this.state.score !== '' && this.state.year !== '') {
+      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
+    } else if (this.state.rating !== '' && this.state.score !== '' && this.state.year !== '') {
+      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num
         + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' && this.state.rating !== '' ) {
+    } else if (this.state.genre !== '' && this.state.rating !== '') {
       url = url + "&with_genres=" + tempGenre + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
-    } else if (this.state.genre !== '' && this.state.score !== '' ) {
+    } else if (this.state.genre !== '' && this.state.score !== '') {
       url = url + "&with_genres=" + tempGenre + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' && this.state.year !== '' ) {
-      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0,3) + num;
-    } else if (this.state.rating !== '' && this.state.score !== '' ) {
+    } else if (this.state.genre !== '' && this.state.year !== '') {
+      url = url + "&with_genres=" + tempGenre + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
+    } else if (this.state.rating !== '' && this.state.score !== '') {
       url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.rating !== '' && this.state.year !== '' ) {
-      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0,3) + num;
-    } else if (this.state.score !== '' && this.state.year !== '' ) {
-      url = url + "&primary_release_year=" + this.state.year.substring(0,3) + num + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.genre !== '' ) {
+    } else if (this.state.rating !== '' && this.state.year !== '') {
+      url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
+    } else if (this.state.score !== '' && this.state.year !== '') {
+      url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num + "&vote_average.gte=" + this.state.score;
+    } else if (this.state.genre !== '') {
       url = url + "&with_genres=" + tempGenre;
-    } else if (this.state.rating !== '' ) {
+    } else if (this.state.rating !== '') {
       url = url + "&certification=" + this.state.rating + "&certification.lte=" + tempRate;
-    } else if (this.state.score !== '' ) {
+    } else if (this.state.score !== '') {
       url = url + "&vote_average.gte=" + this.state.score;
-    } else if (this.state.year !== '' ) {
-      url = url + "&primary_release_year=" + this.state.year.substring(0,3) + num;
+    } else if (this.state.year !== '') {
+      url = url + "&primary_release_year=" + this.state.year.substring(0, 3) + num;
     } else {
       let num = Math.floor(Math.random() * 10);
       url = url + "&vote_average.gte=" + num;
@@ -135,13 +142,16 @@ class App extends Component {
         // baseUrl = baseUrl + data['results'][0]['poster_path'];
         let num = Math.floor(Math.random() * data.results.length);
         this.addContent(data.results[num]);
+        data.results.forEach((item) => {
+          this.addRecommendations(item);
+        })
       })
       .catch(function (err) {
         //do something with the error
         console.error(err);  //e.g., show in the console
       });
   }
-  
+
   componentDidMount() {
     let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
     let num = Math.floor(Math.random() * 10);
@@ -156,6 +166,9 @@ class App extends Component {
         // baseUrl = baseUrl + data['results'][0]['poster_path'];
         let num = Math.floor(Math.random() * 10);
         this.addContent(data.results[num]);
+        data.results.forEach((item) => {
+          this.addRecommendations(item);
+        })
       })
       .catch(function (err) {
         //do something with the error
@@ -168,11 +181,11 @@ class App extends Component {
       <Router>
         <Switch>
           <Route exact path='/' render={(routeProps) => (
-            <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch}/>
-          )}/>
+            <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} />
+          )} />
           <Route path='/interacted' render={(routeProps) => (
-              <Content {...routeProps} item={this.state.item} rating={this.state.rating}/>
-            )}
+            <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} />
+          )}
           />
         </Switch>
       </Router>
@@ -198,16 +211,42 @@ class HomePage extends Component {
 }
 
 class Content extends Component {
+  constructor (props) {
+    super(props);
+    this.state = {
+      watchList : []
+    }
+  }
+
+  addToList = (item) => {
+    let prevState = this.state.watchList;
+    prevState = prevState.concat(item);
+    this.setState({ watchList: prevState });
+    console.log(this.state.watchList);
+  }
+
+  removeFromList = (item) => {
+    let prevState = this.state.watchList;
+    // for (let i = 0; i < prevState.length - 1; i++) {
+    //   if (prevState[i] === item) {
+    //     console.log(item);
+    //     console.log(prevState[i]);
+    //     prevState.splice(i, 1);
+    //   }
+    // }
+    prevState = prevState.splice(0, prevState.indexOf(item)).concat(prevState.slice(prevState.indexOf(item) + 1));
+    this.setState({watchList : prevState});
+  }
 
   render() {
     return (
       <div>
         <Route path="/interacted" />
         <Nav />
-        <ContentTop item={this.props.item} rating={this.props.rating}/>
-        <ContentDesc item={this.props.item} />
-        <ContentWatch item={this.props.item}/>
-        <ContentSim />
+        <ContentTop item={this.props.item} rating={this.props.rating} />
+        <ContentDesc item={this.props.item} addToList={this.addToList}/>
+        <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList}/>
+        <ContentSim recs={this.props.recs} addToList={this.addToList} />
         <Footer />
       </div>
     );
