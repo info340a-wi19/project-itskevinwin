@@ -12,7 +12,7 @@ export class ContentWatch extends Component {
                 <h2 id="watchTitle" className="text-center">Your Current Watch List</h2>
                 <hr className="dark" />
                 <p className="text-center">Hover or click on the movie image to see more information!</p>
-                <div className="container container-fluid padding">
+                <div className="container">
                     <div className="row" id="watchList">
                         {firstMovie}
                         {this.props.list.map((item) => {
@@ -38,7 +38,7 @@ class Movie extends Component {
         }
 
         return (
-            <div className="column col-12 col-md-6 col-lg-3 d-flex justify-content-center mt-12 md-mt-0" key={this.props.item.title}>
+            <div className="col-12 col-md-6 col-lg-3 img-fluid h-100" key={this.props.item.title}>
                 <div className="img_wrap">
                     <div className="content">
                         <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} className="watchImg" />
@@ -63,7 +63,7 @@ class FirstMovie extends Component {
 
     render() {
         return (
-            <div className="column col-12 col-md-6 col-lg-3 d-flex justify-content-center md-mt-0" key={this.props.firstMovie[0].title}>
+            <div className="col-12 col-md-6 col-lg-3 img-fluid h-100" key={this.props.firstMovie[0].title}>
                 <div className="img_wrap">
                     <div className="content">
                         <img src={'http://image.tmdb.org/t/p/w185' + this.props.firstMovie[0].poster_path} alt={this.props.firstMovie[0].title} className="watchImg" />
