@@ -6,7 +6,7 @@ export class WatchHome extends Component {
             <div className="container-fluid padding cushion">
         <div className="row title text-center">
             <div className="col-12">
-                <h1 className="display-4 dark-head">Your Watch Later for the Week!</h1>
+                <h1 className="display-4 dark-head">Your Watch Later List!</h1>
                 <hr />
             </div>
         </div>

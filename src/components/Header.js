@@ -102,7 +102,7 @@ export class Header extends Component {
                             <Filters options={[{ name: "Year" }, { name: "1920" }, { name: "1930" }, { name: "1940" }, { name: "1950" }, { name: "1960" }, { name: "1970" },
                             { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState}  />
                             <div className="text-center">
-                            <Link to="./interacted" className="btn btn-secondary btn-lg ml-3" role="button" aria-pressed="true"
+                            <Link to="./interacted" className="btn btn-secondary btn-lg" role="button" aria-pressed="true"
                                 alt="" onClick={this.onClick}>GO!</Link>
                             </div>
                         </div>

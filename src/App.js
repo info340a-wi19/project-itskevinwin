@@ -95,7 +95,11 @@ class App extends Component {
 
   addRecommendations = (item) => {
     let prevState = this.state.recs;
-    prevState = prevState.concat(item);
+    console.log('state:', this.state.item.title)
+    console.log('item:', item.title)
+    if(this.state.item.title !== item.title && item.post_path !== null){
+      prevState = prevState.concat(item);
+    }
     this.setState({ recs: prevState });
   }
 
