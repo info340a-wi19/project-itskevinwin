@@ -6,7 +6,7 @@ export class ContentSim extends Component {
             <div className="cushion" >
                 <h2 id="similarTitle" className="dark-head text-center">Similar Movies</h2>
                 <hr className="red" />
-                <div className="container wrapper text-center w-75">
+                <div className="container wrapper text-center w-sim">
                     <div id="slider" className="text-center pb-5">
                         {this.props.recs.map((item) => {
                             return <Slide item={item} addToList={this.props.addToList} key={item.title} />
@@ -43,12 +43,18 @@ class Slide extends Component {
         }
 
         genresComplete.push(genreNames[genreNames.length - 1]);
+        
+        let overview = this.props.item.overview;
+        if(this.props.item.overview.length > 630){
+          overview = this.props.item.overview.substring(0,630) + "...";
+        }
+
         return (
             <div className="slide img_wrap">
                 <img className="d-block w-100 resize" src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} />
                 <div className="container">
                     <div className="img_description_layer row mt-0">
-                        <p className="img_description col-sm-12 wrapword" >{this.props.item.overview}</p>
+                        <p className="img_description col-sm-12 wrapword" >{overview}</p>
                         <p className="img_description col-sm-12 wrapword" >IMDB Score: {this.props.item.vote_average}</p>
                         <p className="img_description col-sm-12 wrapword" >Genres: {genresComplete}</p>
                         <p className="img_description col-sm-12 wrapword" >Release Date: {this.props.item.release_date}</p>

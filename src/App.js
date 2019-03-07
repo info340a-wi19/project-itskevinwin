@@ -49,7 +49,8 @@ class App extends Component {
       recs: [],
       genreNames: [],
       update: false,
-      genres : []
+      genres : [],
+      hasError: false
     }
   }
 
@@ -81,7 +82,6 @@ class App extends Component {
       score: score,
       year: year
     });
-    console.log(this.state);
   }
 
   getState = () => {
@@ -95,12 +95,14 @@ class App extends Component {
 
   addRecommendations = (item) => {
     let prevState = this.state.recs;
-    console.log('state:', this.state.item.title)
-    console.log('item:', item.title)
-    if(this.state.item.title !== item.title && item.post_path !== null){
+    if(this.state.item.title !== item.title && item.poster_path !== null && item.poster_path !== undefined){
       prevState = prevState.concat(item);
     }
     this.setState({ recs: prevState });
+  }
+
+  updateError = () => {
+    this.setState({hasError: true});
   }
 
   componentDidMount() {
@@ -111,7 +113,6 @@ class App extends Component {
       .then((data) => {
         let edit = data.genres;
         edit.unshift({name : "Genre"})
-        console.log(edit);
         this.setState({genres : edit});
       })
       .catch(function (err) {
@@ -120,34 +121,40 @@ class App extends Component {
       });
   }
 
-
+  
   render() {
-    return (
-      <Router>
+      if(!this.state.hasError){
+        return (
+        <Router>
         <Switch>
           <Route exact path='/' render={(routeProps) => (
             <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
-              addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres}/>
+              addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError}/>
           )} />
           <Route path='/interacted' render={(routeProps) => (
             <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
-          )}
-          />
+          )} />
         </Switch>
       </Router>
-    );
+       );
+      } else{
+        return (
+        <div>
+          <Nav/>
+          <div className="alert alert-danger m-3" role="alert">No results found - please try again!</div>
+        </div>);
+      }
   }
 }
 
 class HomePage extends Component {
   render() {
-    console.log(this.props.genres);
     return (
       <div>
         <Route path="/" />
         <Nav />
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
-          addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres}/>
+          addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError}/>
         <Parallax />
         <Description />
         <Tools />
@@ -188,7 +195,6 @@ class Content extends Component {
     let prevState = this.state.watchList;
     prevState = prevState.concat(item);
     this.setState({ watchList: prevState });
-    console.log(this.state.watchList);
   }
 
   removeFromList = (item) => {

@@ -28,12 +28,8 @@ export class Header extends Component {
         if (curState.genre !== '' && curState.rating !== '' && curState.score !== '' && curState.year !== '') {
             url = url + "&with_genres=" + tempGenre + "&certification=" + curState.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + curState.year.substring(0, 3) + num
                 + "&vote_average.gte=" + curState.score;
-            console.log(url)
-
         } else if (curState.genre !== '' && curState.rating !== '' && curState.score !== '') {
             url = url + "&with_genres=" + tempGenre + "&certification=" + curState.rating + "&certification.lte=" + tempRate + "&vote_average.gte=" + curState.score;
-            console.log(url)
-
         } else if (curState.genre !== '' && curState.rating !== '' && curState.year !== '') {
             url = url + "&with_genres=" + tempGenre + "&certification=" + curState.rating + "&certification.lte=" + tempRate + "&primary_release_year=" + curState.year.substring(0, 3) + num;
         } else if (curState.genre !== '' && curState.score !== '' && curState.year !== '') {
@@ -65,28 +61,34 @@ export class Header extends Component {
             url = url + "&vote_average.gte=" + num;
         }
 
-        console.log(url)
-
         fetch(url)
-            .then(function (response) {
+            .then((response) => {
                 let dataPromise = response.json();
                 return dataPromise;
             }).then((data) => {
                 // let baseUrl = 'http://image.tmdb.org/t/p/w185';
                 // baseUrl = baseUrl + data['results'][0]['poster_path'];
-                let num = Math.floor(Math.random() * data.results.length);
-                this.props.addContent(data.results[num]);
-                data.results.forEach((item) => {
-                    console.log(item);
-                    this.props.addRecs(item);
-                })
+                if (data.results.length !== 0) {
+                    let num = Math.floor(Math.random() * data.results.length);
+                    this.props.addContent(data.results[num]);
+                    data.results.forEach((item) => {
+                        this.props.addRecs(item);
+                    })
+                } else {
+                    this.callError();
+                }
             })
-            .catch(function (err) {
+            .catch((err) => {
                 //do something with the error
+                this.callError();
+
                 console.error(err);  //e.g., show in the console
             });
     }
 
+    callError = () => {
+        this.props.hasError() ;
+    }
     render() {
         return (
             <header>
@@ -100,10 +102,10 @@ export class Header extends Component {
                             <Filters options={[{ name: "IMDB Score" }, { name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }, { name: "5" }, { name: "6" },
                             { name: "7" }, { name: "8" }, { name: "9" }]} purpose="IMDB Score" selections={this.props.selections} getState={this.props.getState} />
                             <Filters options={[{ name: "Year" }, { name: "1920" }, { name: "1930" }, { name: "1940" }, { name: "1950" }, { name: "1960" }, { name: "1970" },
-                            { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState}  />
+                            { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState} />
                             <div className="text-center">
-                            <Link to="./interacted" className="btn btn-secondary btn-lg" role="button" aria-pressed="true"
-                                alt="" onClick={this.onClick}>GO!</Link>
+                                <Link to="./interacted" className="btn btn-secondary btn-lg" role="button" aria-pressed="true"
+                                    alt="" onClick={this.onClick}>GO!</Link>
                             </div>
                         </div>
                         <hr />
@@ -170,23 +172,23 @@ class Filters extends Component {
 const genres = []
 const certs = [
     {
-      "id": 1,
-      "name": "G"
+        "id": 1,
+        "name": "G"
     },
     {
-      "id": 2,
-      "name": "PG"
+        "id": 2,
+        "name": "PG"
     },
     {
-      "id": 3,
-      "name": "PG-13"
+        "id": 3,
+        "name": "PG-13"
     },
     {
-      "id": 4,
-      "name": "R"
+        "id": 4,
+        "name": "R"
     },
     {
-      "id": 5,
-      "name": "NC-17"
+        "id": 5,
+        "name": "NC-17"
     }
-  ]
+]

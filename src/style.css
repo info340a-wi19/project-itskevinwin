@@ -391,6 +391,10 @@ hr.dark{
     margin-top: 11rem;
 }
 
+.w-sim{
+    width: 95% !important;
+}
+
 @media(min-width: 598px)
 {
     .cover{
@@ -421,6 +425,9 @@ hr.dark{
         height: 320%;
     }
 
+    .w-sim{
+        width: 75% !important;
+    }
 
 }
 
