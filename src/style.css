@@ -76,7 +76,7 @@ header{
 }
 
 .jumbotron{
-    padding: 1.5rem;
+    padding: 2rem !important;
     border-radius: 0;
 }
 
