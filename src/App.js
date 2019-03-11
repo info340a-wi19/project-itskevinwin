@@ -50,7 +50,9 @@ class App extends Component {
       genreNames: [],
       update: false,
       genres : [],
-      hasError: false
+      hasError: false,
+      search: '',
+      searchResults: []
     }
   }
 
@@ -84,6 +86,13 @@ class App extends Component {
     });
   }
 
+  updateSearch = (value) => {
+    console.log(value);
+    this.setState({
+      search: value
+    })
+  }
+
   getState = () => {
     return this.state;
   }
@@ -99,6 +108,14 @@ class App extends Component {
       prevState = prevState.concat(item);
     }
     this.setState({ recs: prevState });
+  }
+
+  addSearchResults = (item) => {
+    let prevState = this.state.searchResults;
+    if(item.poster_path !== null && item.poster_path !== undefined){
+      prevState = prevState.concat(item);
+    }
+    this.setState({ searchResults: prevState });
   }
 
   updateError = () => {
@@ -129,10 +146,15 @@ class App extends Component {
         <Switch>
           <Route exact path='/' render={(routeProps) => (
             <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
-              addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError}/>
+              addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError} updateSearch={this.updateSearch}
+              addSearchResults={this.addSearchResults} />
           )} />
           <Route path='/interacted' render={(routeProps) => (
-            <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
+            <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} 
+            firstMovie={this.state.firstMovie} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults}/>
+          )} />
+          <Route path='/search' render={(routeProps) => (
+            <Search {...routeProps} />
           )} />
         </Switch>
       </Router>
@@ -152,7 +174,7 @@ class HomePage extends Component {
     return (
       <div>
         <Route path="/" />
-        <Nav />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults}/>
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError}/>
         <Parallax />
@@ -222,12 +244,24 @@ class Content extends Component {
     return (
       <div>
         <Route path="/interacted" />
-        <Nav />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults}/>
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentDesc item={this.props.item} addToList={this.addToList} />
         <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList} firstMovie={this.state.firstMovie} />
         <ContentSim recs={this.props.recs} addToList={this.addToList} />
         <Footer />
+      </div>
+    );
+  }
+}
+
+class Search extends Component {
+  
+  render() {
+    return(
+      <div>
+        <Route path="/search" />
+        <Nav />
       </div>
     );
   }
