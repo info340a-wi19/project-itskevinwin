@@ -15,7 +15,6 @@ export class Nav extends Component {
         let url = 'https://api.themoviedb.org/3/search/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1&include_adult=false'
         let query = '&query=' + curValue;
         url = url + query;
-
         fetch(url)
             .then((response) => {
                 let dataPromise = response.json();
