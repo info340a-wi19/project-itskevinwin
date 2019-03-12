@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from 'react-bootstrap/Navbar'
 import Button from 'react-bootstrap/Button'
+import { Link } from 'react-router-dom';
 
 
 export class Nav extends Component {
@@ -25,7 +26,7 @@ export class Nav extends Component {
                             <a className="nav-link" href="#">Watch Later</a>
                         </li>
                         <li className="nav-item">
-                            <a className="nav-link" href="#">My Profile</a>
+                          <Link to="./myprofile"><a className="nav-link" href="#">My Profile</a></Link> 
                         </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0">

@@ -12,6 +12,8 @@ import { ContentDesc } from './components/ContentDesc'
 import { ContentWatch } from './components/ContentWatch'
 import { ContentSim } from './components/ContentSim'
 
+import { ProfileBody } from './components/ProfileBody'
+
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -134,6 +136,9 @@ class App extends Component {
           <Route path='/interacted' render={(routeProps) => (
             <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
           )} />
+          <Route path='/myprofile' render={(routeProps) => (
+            <MyProfile {...routeProps}></MyProfile>
+          )} />
         </Switch>
       </Router>
        );
@@ -144,6 +149,18 @@ class App extends Component {
           <div className="alert alert-danger m-3" role="alert">No results found - please try again!</div>
         </div>);
       }
+  }
+}
+
+class MyProfile extends Component {
+  render() {
+    return (
+      <div>
+      <Nav />
+      <Route path="/myprofile" />
+      <ProfileBody />
+      </div>
+    );
   }
 }
 

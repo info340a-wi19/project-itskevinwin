@@ -16,6 +16,17 @@
     background-size: cover;
   }
 
+.profile-pic {
+    border-radius: 25px;
+    /* padding-top: 50px; */
+    max-width: 20%;
+}
+
+#profile-name {
+    font-family: 'Noto Serif';
+    
+}
+
 html, body{
     height: 100%;
     width: 100%;
