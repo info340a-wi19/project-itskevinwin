@@ -66,14 +66,13 @@ export class Header extends Component {
                 let dataPromise = response.json();
                 return dataPromise;
             }).then((data) => {
-                // let baseUrl = 'http://image.tmdb.org/t/p/w185';
-                // baseUrl = baseUrl + data['results'][0]['poster_path'];
                 if (data.results.length !== 0) {
                     let num = Math.floor(Math.random() * data.results.length);
                     this.props.addContent(data.results[num]);
                     data.results.forEach((item) => {
                         this.props.addRecs(item);
                     })
+
                 } else {
                     this.callError();
                 }
@@ -130,21 +129,14 @@ class Filters extends Component {
         let prevState = this.props.getState();
         let type = this.props.purpose;
         if (type === "Genre") {
-            console.log(1);
             this.props.selections(event.target.value, prevState.rating, prevState.score, prevState.year);
         } else if (type === "Film Rating") {
-            console.log(2);
             this.props.selections(prevState.genre, event.target.value, prevState.score, prevState.year);
         } else if (type === "IMDB Score") {
-            console.log(3);
             this.props.selections(prevState.genre, prevState.rating, event.target.value, prevState.year);
         } else if (type === "Year") {
-            console.log(4);
-
             this.props.selections(prevState.genre, prevState.rating, prevState.score, event.target.value);
         } else {
-            console.log(5);
-
             this.props.selections(prevState.genre, prevState.rating, prevState.score, prevState.year);
         }
         this.setState({ value: event.target.value })

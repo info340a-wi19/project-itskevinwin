@@ -13,6 +13,7 @@ import { ContentWatch } from './components/ContentWatch'
 import { ContentSim } from './components/ContentSim'
 
 import { ProfileBody } from './components/ProfileBody'
+import { SearchCards } from './components/SearchCards'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -51,8 +52,10 @@ class App extends Component {
       recs: [],
       genreNames: [],
       update: false,
-      genres : [],
-      hasError: false
+      genres: [],
+      hasError: false,
+      search: '',
+      searchResults: []
     }
   }
 
@@ -86,6 +89,13 @@ class App extends Component {
     });
   }
 
+  updateSearch = (value) => {
+    console.log(value);
+    this.setState({
+      search: value
+    })
+  }
+
   getState = () => {
     return this.state;
   }
@@ -97,14 +107,22 @@ class App extends Component {
 
   addRecommendations = (item) => {
     let prevState = this.state.recs;
-    if(this.state.item.title !== item.title && item.poster_path !== null && item.poster_path !== undefined){
+    if (this.state.item.title !== item.title && item.poster_path !== null && item.poster_path !== undefined) {
       prevState = prevState.concat(item);
     }
     this.setState({ recs: prevState });
   }
 
+  addSearchResults = (item) => {
+    let prevState = this.state.searchResults;
+    if (item.poster_path !== null && item.poster_path !== undefined) {
+      prevState = prevState.concat(item);
+    }
+    this.setState({ searchResults: prevState });
+  }
+
   updateError = () => {
-    this.setState({hasError: true});
+    this.setState({ hasError: true });
   }
 
   componentDidMount() {
@@ -114,8 +132,8 @@ class App extends Component {
       })
       .then((data) => {
         let edit = data.genres;
-        edit.unshift({name : "Genre"})
-        this.setState({genres : edit});
+        edit.unshift({ name: "Genre" })
+        this.setState({ genres: edit });
       })
       .catch(function (err) {
         //do something with the error
@@ -123,32 +141,37 @@ class App extends Component {
       });
   }
 
-  
+
   render() {
-      if(!this.state.hasError){
-        return (
+    if (!this.state.hasError) {
+      return (
         <Router>
-        <Switch>
-          <Route exact path='/' render={(routeProps) => (
-            <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
-              addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError}/>
-          )} />
-          <Route path='/interacted' render={(routeProps) => (
-            <Content {...routeProps} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames} firstMovie={this.state.firstMovie} />
-          )} />
-          <Route path='/myprofile' render={(routeProps) => (
+          <Switch>
+            <Route exact path='/' render={(routeProps) => (
+              <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
+                addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError} updateSearch={this.updateSearch}
+                addSearchResults={this.addSearchResults} />
+            )} />
+            <Route path='/interacted' render={(routeProps) => (
+              <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
+                firstMovie={this.state.firstMovie} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} />
+            )} />
+            <Route path='/search' render={(routeProps) => (
+              <Search {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} />
+            )} />
+            <Route path='/myprofile' render={(routeProps) => (
             <MyProfile {...routeProps}></MyProfile>
           )} />
-        </Switch>
-      </Router>
-       );
-      } else{
-        return (
+          </Switch>
+        </Router>
+      );
+    } else {
+      return (
         <div>
-          <Nav/>
+          <Nav />
           <div className="alert alert-danger m-3" role="alert">No results found - please try again!</div>
         </div>);
-      }
+    }
   }
 }
 
@@ -169,9 +192,9 @@ class HomePage extends Component {
     return (
       <div>
         <Route path="/" />
-        <Nav />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
-          addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError}/>
+          addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} />
         <Parallax />
         <Description />
         <Tools />
@@ -239,12 +262,25 @@ class Content extends Component {
     return (
       <div>
         <Route path="/interacted" />
-        <Nav />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentDesc item={this.props.item} addToList={this.addToList} />
         <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList} firstMovie={this.state.firstMovie} />
         <ContentSim recs={this.props.recs} addToList={this.addToList} />
         <Footer />
+      </div>
+    );
+  }
+}
+
+class Search extends Component {
+
+  render() {
+    return (
+      <div>
+        <Route path="/search" />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
+        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
       </div>
     );
   }
