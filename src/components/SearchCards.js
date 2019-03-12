@@ -25,9 +25,9 @@ class SearchCard extends Component {
                     <div className="card-body">
                         <div className="flex-column">
                             <h4 className="card-title font-weight-bold">{this.props.item.title}</h4>
-                            <p className="card-text wrapword">Rating: {this.props.item.vote_average}</p>
-                            <p className="card-text wrapword">Release Date: {this.props.item.release_date}</p>
-                            <p className="card-text wrapword">Description: {this.props.item.overview}</p>
+                            <p className="card-text wrapword text-left">Rating: {this.props.item.vote_average}</p>
+                            <p className="card-text wrapword text-left">Release Date: {this.props.item.release_date}</p>
+                            <p className="card-text wrapword text-left">{this.props.item.overview}</p>
                         </div>
                         <button ref="btn" type="submit" className="btn btn-info mt-5" role="button" onClick={this.updateList}>Watch Later</button>
                     </div>
