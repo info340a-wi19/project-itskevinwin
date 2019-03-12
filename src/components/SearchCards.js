@@ -17,7 +17,6 @@ export class SearchCards extends Component {
 
 class SearchCard extends Component {
     render() {
-        console.log(this.props.item);
         return (
             <div className="card flex-row col-12">
                 <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} />
