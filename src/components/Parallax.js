@@ -66,7 +66,7 @@ export class LoginPar extends Component {
                                 </div>
                             </div>
                             <div className="sign-up d-none d-sm-block col-sm-6 col-lg-4">
-                                <h1 className="text-center text-dark">Get started now!</h1>
+                                <h1 className="text-center text-dark">Get started!</h1>
                                 <form className="container">
                                     <div className="form-group text-dark">
                                         <label for="exampleInputEmail1" className="title">Name</label>
@@ -75,16 +75,16 @@ export class LoginPar extends Component {
                                                 <input type="text" className="form-control" placeholder="First" id="fname" aria-label="First name" />
                                             </div>
                                             <div className="col-6">
-                                                <input type="text" className="form-control" placeholder="Last" id="lname" aria-label="Last Name" />
+                                                <input type="text" className="form-control" placeholder="Last" id="lname" aria-label="Last name" />
                                             </div>
                                         </div>
                                         <div className="form-group">
-                                            <label for="exampleInputEmail1" className="title">Email address</label>
-                                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                            <label for="exampleInputEmail1" className="title">Email</label>
+                                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="email@example.com" />
                                         </div>
                                         <div className="form-group">
                                             <label for="exampleInputPassword1" className="title">Password</label>
-                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" />
                                         </div>
                                         <div className="row justify-content-center">
                                             <Link to='/home' className="btn btn-outline-dark" id="sign-up-button">Sign Up</Link>

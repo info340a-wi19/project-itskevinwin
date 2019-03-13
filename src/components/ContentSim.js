@@ -28,7 +28,6 @@ class Slide extends Component {
 
     render() {
         let genreIds = this.props.item.genre_ids;
-
         let genreNames = genreIds.map((genreId) => {
             for (let i = 0; i < genres.length; i++) {
                 if (genreId === genres[i].id) {
