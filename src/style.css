@@ -16,12 +16,7 @@
     background-size: cover;
   }
 
-.nav {
-    background-color: grey;
-    font-size: 2.5vh;
-}
-
-li a {
+.nav-item a {
     color: white;
 }
 
