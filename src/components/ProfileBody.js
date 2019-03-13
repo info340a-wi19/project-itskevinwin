@@ -5,26 +5,55 @@ import 'firebase/database';
 
 export class ProfileBody extends Component {
     //firebase user content
+    constructor(props) {
+        super(props);
+        this.state = {
+            movies: ''
+        }
+    }
+
+    revealUpdate = (event) => {
+        this.componentDidMount();
+        this.forceUpdate();
+    }
+
     render() {
-        console.log(this.props.list);
         return(
-        <ProfileInfo list={this.props.list}></ProfileInfo>
+        <ProfileInfo list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate}></ProfileInfo>
         )
     }
+
+
+componentDidMount() {
+
+
+    let movieArray = '';
+    firebase.database().ref('movie').once('value').then((snapshot) => {
+    let movieObject = snapshot.val();
+    if(movieObject == null) {
+        movieArray =''
+    } else {
+    let movieKeys = Object.keys(movieObject);
+        movieArray = movieKeys.map((key) => {
+            let movie = movieObject[key];
+            movie.key = key;
+            return movie;
+        });
+    }
+    this.setState({movies: movieArray})
+})
+}
 }
 
 class ProfileInfo extends Component {
+
+    revealUpdate = (event) => {
+        this.props.revealUpdate();
+    }
+
     render() {
-        firebase.database().ref('movie').once('value').then(function(snapshot){
-            console.log(snapshot.val());
-            let movieObject = snapshot.val();
-            let movieKeys = Object.keys(movieObject);
-            let movieArray = movieKeys.map((key) =>{
-                let movie = movieObject[key];
-                movie.key = key;
-                return <Movie item={movie}  key={movie.title} removeFromList={this.props.removeFromList}/>
-            })
-        })
+        let movies = this.props.movies;
+        if(Array.isArray(movies)) {
         return (
             <div className="text-center bg-light">
             <img className="profile-pic mt-4 mb-3" src="https://pbs.twimg.com/profile_images/605545593482547200/9Zotvyw5_400x400.jpg" alt="profile picture"/>
@@ -35,14 +64,31 @@ class ProfileInfo extends Component {
                 <p className="text-center">Hover or click on the movie image to see more information!</p>
                 <div className="container container-fluid padding">
                     <div className="row justify-content-around" id="watchList">
-                        {this.props.list.map((item) => {
-                            return <Movie item={item}  key={item.title} removeFromList={this.props.removeFromList}/>
+                    {movies.map((item) => {
+                            return <Movie item={item}  key={item.title} removeFromList={this.props.removeFromList} revealUpdate={this.revealUpdate}/>
                         })}
                     </div>
                 </div>
             </div>
             </div>
         )
+     } else {
+         return (
+                <div className="text-center bg-light">
+                <img className="profile-pic mt-4 mb-3" src="https://pbs.twimg.com/profile_images/605545593482547200/9Zotvyw5_400x400.jpg" alt="profile picture"/>
+                <h2 id="profile-name">Lucas Woo</h2>
+                <hr className="dark"></hr>
+                <div>
+                    <h2 id="profile-watch" className="text-center">Your Current Watch List</h2>
+                    <p className="text-center">No Movies Here Yet :(</p>
+                    <div className="container container-fluid padding">
+                        <div className="row justify-content-around" id="watchList">
+                        </div>
+                    </div>
+                </div>
+                </div>
+         )
+     }
     }
 }
 
@@ -50,6 +96,7 @@ class Movie extends Component {
 
     remove = (event) => {
         this.props.removeFromList(this.props.item);
+        this.props.revealUpdate();
     }
 
     render() {

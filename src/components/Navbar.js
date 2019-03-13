@@ -76,7 +76,7 @@ export class Nav extends Component {
                             <NavLink href="#">About</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/myprofile">Watch Later</NavLink>
+                            <Link className="nav-link" to="/myprofile">Watch Later</Link>
                         </NavItem>
                         <NavItem>
                             <NavLink href="/search/">Search</NavLink>

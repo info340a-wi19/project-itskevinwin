@@ -78,6 +78,7 @@ class App extends Component {
   }
 
   addToList = (item) => {
+    // console.log(this.state.watchList);
     let movieList = firebase.database().ref('movie');
     movieList.push(item);
     let prevState = this.state.watchList;
@@ -86,6 +87,7 @@ class App extends Component {
   }
 
   removeFromList = (item) => {
+   firebase.database().ref('movie').child('' + item.key).remove();
     let prevState = this.state.watchList;
     prevState = prevState.splice(0, prevState.indexOf(item)).concat(prevState.slice(prevState.indexOf(item) + 1));
     this.setState({ watchList: prevState });
@@ -126,7 +128,7 @@ class App extends Component {
     this.setState({
       search: value
     });
-    console.log(this.state.search);
+    // console.log(this.state.search);
   }
 
   updateSearchPressed = () => {
@@ -232,7 +234,6 @@ class App extends Component {
   render() {
     
     if (!this.state.hasError) {
-      
       return (
         <div>
         <Router>
@@ -258,7 +259,7 @@ class App extends Component {
               updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults}/>
             )} />
             <Route path='/myprofile' render={(routeProps) => (
-            <MyProfile {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} list={this.state.watchList}></MyProfile>
+            <MyProfile {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} list={this.state.watchList} removeFromList={this.removeFromList}></MyProfile>
           )} />
             <Redirect to="/" />
 
@@ -282,7 +283,7 @@ class MyProfile extends Component {
       <div>
       <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
       <Route path="/myprofile" />
-      <ProfileBody list={this.props.list} />
+      <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList}/>
       </div>
     );
   }
@@ -322,7 +323,6 @@ class HomePage extends Component {
 
 class Content extends Component {
   render() {
-    console.log(this.props.list);
     return (
       <div>
         <Route path="/interacted" />
