@@ -65,7 +65,7 @@ export class LoginPar extends Component {
                                 </div>
                             </div>
                             <div className="sign-up d-none d-sm-block col-sm-6 col-lg-4">
-                                <h1 className="text-center">Get started now!</h1>
+                                <h1 className="text-center text-dark">Get started now!</h1>
                                 <form className="container">
                                     <div className="form-group">
                                         <label for="exampleInputEmail1" className="title">Name</label>
@@ -86,7 +86,7 @@ export class LoginPar extends Component {
                                             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
                                         </div>
                                         <div className="row justify-content-center">
-                                            <Link to='/home' className="btn btn-outline-danger" id="sign-up-button">Sign Up</Link>
+                                            <Link to='/home' className="btn btn-outline-dark" id="sign-up-button">Sign Up</Link>
                                         </div>
                                     </div>
                                 </form>

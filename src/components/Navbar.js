@@ -64,7 +64,7 @@ export class Nav extends Component {
             //         </div>
             //         </div>
             //     </nav>
-            <Navbar color="dark" className="navbar-dark" expand="md">
+            <Navbar color="dark" fixed='top' className="navbar-dark sticky-nav" expand="md">
                 <NavbarBrand href="/home">MoviePicks</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
@@ -117,7 +117,7 @@ export class LoginNav extends Component {
 
     render() {
         return (
-            <Navbar color="dark" className="navbar-dark" expand="md">
+            <Navbar color="dark" fixed='top' className="navbar-dark" expand="md">
                 <NavbarBrand href="/">MoviePicks</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
