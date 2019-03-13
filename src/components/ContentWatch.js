@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 
 export class ContentWatch extends Component {
     render() {
+        console.log(this.props.firstMovie.length);
+        console.log(this.props.list);
         let firstMovie;
         if(this.props.firstMovie.length === 1 && this.props.list.length >= 0 && this.props.firstMovie[0] !== undefined){
             firstMovie = <FirstMovie firstMovie={this.props.firstMovie} key={this.props.firstMovie.title} removeFromList={this.props.removeFromList} removeFirstFromList={this.props.removeFirstFromList}/>

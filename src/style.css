@@ -22,9 +22,13 @@
     max-width: 20%;
 }
 
-#profile-name {
+#profile-name, #profile-watch {
     font-family: 'Noto Serif';
-    
+    color: black;
+}
+
+hr { 
+    border-width: 3px !important;
 }
 
 html, body{

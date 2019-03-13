@@ -59,12 +59,12 @@ export class Nav extends Component {
                             <a className="nav-link" href="#">Watch Later</a>
                         </li>
                         <li className="nav-item">
-                          <Link to="./myprofile"><a className="nav-link" href="#">My Profile</a></Link> 
+                          <a className="nav-link" href="./myprofile">My Profile</a>
                         </li>
                     </ul>
                     <form className="form-inline my-2 my-lg-0">
-                        <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={this.props.getState.value} onChange={this.handleChange}/>
-                        <button className="btn btn-outline-light my-2 my-sm-0" type="submit" id="srchBtn" onClick={this.handleClick}>Search</button>
+                        {/* <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={this.props.getState.value} onChange={this.handleChange}/> */}
+                        <Button className="btn btn-outline-light my-2 my-sm-0" type="submit" id="srchBtn" onClick={this.handleClick}>Search</Button>
                     </form>
                     </div>
                 </div>
