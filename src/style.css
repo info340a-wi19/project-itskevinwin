@@ -16,7 +16,28 @@
     background-size: cover;
   }
 
-.nav-item a {
+.profile-pic {
+    border-radius: 25px;
+    /* padding-top: 50px; */
+    max-width: 20%;
+}
+
+#profile-name, #profile-watch {
+    font-family: 'Noto Serif';
+    color: black;
+}
+
+hr { 
+    border-width: 3px !important;
+
+}
+
+.nav {
+    background-color: grey;
+    font-size: 2.5vh;
+}
+
+li a {
     color: white;
 }
 
