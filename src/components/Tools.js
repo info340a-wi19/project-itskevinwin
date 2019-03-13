@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export class Tools extends Component {
     render() {
         return (
-            <div className="dark-back">
+            <div className="bg-secondary">
                 <div className="container-fluid padding">
                     <div className="row title text-center">
                         <div className="col-12">

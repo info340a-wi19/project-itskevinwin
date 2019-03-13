@@ -51,6 +51,7 @@ export class LoginPar extends Component {
                     <div className="container-fluid">
                         <div className="row jumbotron gradient">
                             <div className="col-12 col-sm-6 col-lg-8 my-auto">
+                                <h1 className='text-center text-dark'>Welcome to MoviePicks!</h1>
                                 <p className="text-center lead">Have you ever sat down with your friends, ready to watch a movie, but
                                     can't
                                     ever decide which one to watch? Well, this website will help you with that!
@@ -67,7 +68,7 @@ export class LoginPar extends Component {
                             <div className="sign-up d-none d-sm-block col-sm-6 col-lg-4">
                                 <h1 className="text-center text-dark">Get started now!</h1>
                                 <form className="container">
-                                    <div className="form-group">
+                                    <div className="form-group text-dark">
                                         <label for="exampleInputEmail1" className="title">Name</label>
                                         <div className="row">
                                             <div className="col-6">
@@ -110,7 +111,7 @@ export class LoginPar extends Component {
                                     <div className="row justify-content-center">
                                         <h1 className="text-center">Get started now!</h1>
                                         <form class="container">
-                                            <div class="form-group">
+                                            <div class="form-group text-dark">
                                                 <label for="exampleInputEmail1" class="title">Name</label>
                                                 <div class="row">
                                                     <div class="col-6">
@@ -158,7 +159,7 @@ export class LoginPar extends Component {
                                     <div className="row justify-content-center">
                                         <h1 className="text-center">Welcome Back!</h1>
                                         <form className="container">
-                                            <div className="form-group">
+                                            <div className="form-group text-dark">
                                                 <div className='row'>
                                                     <div className="form-group col-6">
                                                         <label for="exampleInputEmail1" className="title">Email address</label>
