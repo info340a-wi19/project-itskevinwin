@@ -13,6 +13,7 @@ import {
     DropdownMenu,
     DropdownItem
 } from 'reactstrap';
+import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 
 
 export class Nav extends Component {
@@ -32,8 +33,8 @@ export class Nav extends Component {
     }
 
 
-    render(){
-        return(
+    render() {
+        return (
             // <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
             //     <div className="container-fluid">
             //         <a className="navbar-brand" href="/">MoviePicks</a>
@@ -58,7 +59,7 @@ export class Nav extends Component {
             //         </ul>
             //         <form className="form-inline my-2 my-lg-0">
             //             <a href="/search/" className="btn btn-outline-light my-2 my-sm-0" type="submit"  onClick={this.handleClick}>Search</a>
-                        
+
             //         </form>
             //         </div>
             //         </div>
@@ -86,23 +87,32 @@ export class Nav extends Component {
                     </NavStrap>
                 </Collapse>
             </Navbar>
-            );
-        }
+        );
     }
+}
 
 export class LoginNav extends Component {
     constructor(props) {
         super(props);
 
         this.toggle = this.toggle.bind(this);
+        this.toggleModal = this.toggleModal.bind(this);
+
         this.state = {
-            isOpen: false
+            isOpen: false,
+            modal: false
         };
     }
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
         });
+    }
+
+    toggleModal() {
+        this.setState(prevState => ({
+            modal: !prevState.modal
+        }));
     }
 
     render() {
@@ -119,7 +129,30 @@ export class LoginNav extends Component {
                             <NavLink href="#">About</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#">Login</NavLink>
+                            <NavLink href="#" onClick={this.toggleModal}>Login</NavLink>
+                            <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
+                                <ModalHeader toggle={this.toggleModal}>Welcome Back!</ModalHeader>
+                                <ModalBody>
+                                    <form className="container">
+                                        <div className="form-group">
+                                            <div className='row'>
+                                                <div className="form-group col-6">
+                                                    <label for="exampleInputEmail1" className="title">Email address</label>
+                                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                                </div>
+                                                <div className="form-group col-6">
+                                                    <label for="exampleInputPassword1" className="title">Password</label>
+                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </ModalBody>
+                                <ModalFooter>
+                                    <Button outline color="secondary" onClick={this.toggleModal}>Back</Button>{' '}
+                                    <Button outline color="danger" href='/home'>Login</Button>
+                                </ModalFooter>
+                            </Modal>
                         </NavItem>
                     </NavStrap>
                 </Collapse>
