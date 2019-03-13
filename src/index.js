@@ -5,10 +5,13 @@ import './style.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import firebase from 'firebase/app';
-import 'firebase/database'; 
+
 
 // Initialize Firebase
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database'; 
+
 var config = {
     apiKey: "AIzaSyDnK8Sh8DPnq38Nd97FgSSFVVqandtSt2s",
     authDomain: "moviepicks-5b9b0.firebaseapp.com",
@@ -18,8 +21,6 @@ var config = {
     messagingSenderId: "740129038357"
   };
   firebase.initializeApp(config);
- 
-  
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

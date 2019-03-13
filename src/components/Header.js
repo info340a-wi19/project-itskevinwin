@@ -70,6 +70,7 @@ export class Header extends Component {
                     let num = Math.floor(Math.random() * data.results.length);
                     this.props.addContent(data.results[num]);
                     data.results.forEach((item) => {
+                        console.log(item);
                         this.props.addRecs(item);
                     })
 

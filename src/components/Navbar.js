@@ -35,35 +35,6 @@ export class Nav extends Component {
 
     render() {
         return (
-            // <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
-            //     <div className="container-fluid">
-            //         <a className="navbar-brand" href="/">MoviePicks</a>
-            //             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-            //                 aria-controls="navbarToggler" aria-expanded="false" aria-label="Toggle navigation">
-            //                 <span className="navbar-toggler-icon"></span>
-            //             </button>
-            //         <div className="collapse navbar-collapse" id="navbarResponsive">
-            //         <ul className="navbar-nav ml-auto">
-            //             <li className="nav-item active">
-            //                 <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
-            //             </li>
-            //             <li className="nav-item">
-            //                 <a className="nav-link" href="#">About</a>
-            //             </li>
-            //             <li className="nav-item">
-            //                 <a className="nav-link" href="#">Watch Later</a>
-            //             </li>
-            //             <li className="nav-item">
-            //                 <a className="nav-link" href="#">My Profile</a>
-            //             </li>
-            //         </ul>
-            //         <form className="form-inline my-2 my-lg-0">
-            //             <a href="/search/" className="btn btn-outline-light my-2 my-sm-0" type="submit"  onClick={this.handleClick}>Search</a>
-
-            //         </form>
-            //         </div>
-            //         </div>
-            //     </nav>
             <Navbar color="dark" fixed='top' className="navbar-dark sticky-nav" expand="md">
                 <NavbarBrand href="/home">MoviePicks</NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
@@ -100,9 +71,27 @@ export class LoginNav extends Component {
 
         this.state = {
             isOpen: false,
-            modal: false
+            modal: false,
+            email: undefined,
+            password: undefined
         };
     }
+
+    handleChange = (event) => {
+        let field = event.target.name; //which input
+        let value = event.target.value; //what value
+    
+        let changes = {}; //object to hold changes
+        changes[field] = value; //change this field
+        this.setState(changes); //update state
+      }
+    
+    handleSignIn = (event) => {
+        event.preventDefault(); //don't submit
+        this.props.signInCallback(this.state.email, this.state.password);
+      }
+
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -138,11 +127,11 @@ export class LoginNav extends Component {
                                             <div className='row'>
                                                 <div className="form-group col-6">
                                                     <label for="exampleInputEmail1" className="title">Email address</label>
-                                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" name="email" onChange={this.handleChange} />
                                                 </div>
                                                 <div className="form-group col-6">
                                                     <label for="exampleInputPassword1" className="title">Password</label>
-                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
                                                 </div>
                                             </div>
                                         </div>
