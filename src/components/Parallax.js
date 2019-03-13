@@ -33,16 +33,34 @@ export class LoginPar extends Component {
         this.state = {
             signUp: false,
             login: false,
+            email: undefined,
+            password: undefined,
+            first: undefined,
+            last: undefined
         }
     }
 
-    signUp = () => {
+    handleChange = (event) => {
+        let field = event.target.name; 
+        let value = event.target.value; 
+    
+        let changes = {};
+        changes[field] = value; 
+        this.setState(changes); 
+      }
+    
+      handleSignUp = (event) => {
+        event.preventDefault(); 
         this.setState({ signUp: !this.state.signUp });
-    }
-
-    login = () => {
+        this.props.signUpCallback(this.state.email, this.state.password, this.state.first, this.state.last);
+      }
+    
+      handleSignIn = (event) => {
+        event.preventDefault(); 
         this.setState({ login : !this.state.login });
-    }
+        this.props.signInCallback(this.state.email, this.state.password);
+      }
+
 
     render() {
         if (!this.state.signUp && !this.state.login) {
@@ -60,8 +78,8 @@ export class LoginPar extends Component {
                             </p>
                                 <div className="container d-sm-none">
                                     <div className="row justify-content-center">
-                                        <button className="btn btn-outline-secondary col-xs-6 mx-2" data-toggle="collapse" onClick={this.login}>Login</button>
-                                        <button className="btn btn-outline-danger col-xs-6 mx-2" data-toggle="collapse" onClick={this.signUp}>Sign Up</button>
+                                        <button className="btn btn-outline-secondary col-xs-6 mx-2" data-toggle="collapse" onClick={this.handleSignIn}>Login</button>
+                                        <button className="btn btn-outline-danger col-xs-6 mx-2" data-toggle="collapse" onClick={this.handleSignUp}>Sign Up</button>
                                     </div>
                                 </div>
                             </div>
@@ -72,22 +90,22 @@ export class LoginPar extends Component {
                                         <label for="exampleInputEmail1" className="title">Name</label>
                                         <div className="row">
                                             <div className="col-6">
-                                                <input type="text" className="form-control" placeholder="First" id="fname" aria-label="First name" />
+                                                <input type="text" className="form-control" placeholder="First" id="fname" aria-label="First name" name="first" onChange={this.handleChange} />
                                             </div>
                                             <div className="col-6">
-                                                <input type="text" className="form-control" placeholder="Last" id="lname" aria-label="Last name" />
+                                                <input type="text" className="form-control" placeholder="Last" id="lname" aria-label="Last name" name="last" onChange={this.handleChange} />
                                             </div>
                                         </div>
                                         <div className="form-group">
                                             <label for="exampleInputEmail1" className="title">Email</label>
-                                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="email@example.com" />
+                                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="email@example.com" name="email" onChange={this.handleChange} />
                                         </div>
                                         <div className="form-group">
                                             <label for="exampleInputPassword1" className="title">Password</label>
-                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" />
+                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" name="password" onChange={this.handleChange} />
                                         </div>
                                         <div className="row justify-content-center">
-                                            <Link to='/home' className="btn btn-outline-dark" id="sign-up-button">Sign Up</Link>
+                                            <Link to='/home' className="btn btn-outline-dark" id="sign-up-button" onClick={this.handleSignUp} >Sign Up</Link>
                                         </div>
                                     </div>
                                 </form>
@@ -115,24 +133,24 @@ export class LoginPar extends Component {
                                                 <label for="exampleInputEmail1" class="title">Name</label>
                                                 <div class="row">
                                                     <div class="col-6">
-                                                        <input type="text" class="form-control" placeholder="First" id="fname" aria-label="First name" />
+                                                        <input type="text" class="form-control" placeholder="First" id="fname" aria-label="First name" name="first" onChange={this.handleChange} />
                                                     </div>
                                                     <div class="col-6">
-                                                        <input type="text" class="form-control" placeholder="Last" id="lname" aria-label="Last Name" />
+                                                        <input type="text" class="form-control" placeholder="Last" id="lname" aria-label="Last Name" name="last" onChange={this.handleChange} />
                                                     </div>
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputEmail1" class="title">Email address</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" name="email" onChange={this.handleChange} />
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="exampleInputPassword1" class="title">Password</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
                                                 </div>
                                                 <div className="row justify-content-between px-3">
-                                                    <Link to='/' class="btn btn-outline-success" id="sign-up-button" onClick={this.signUp}>Back</Link>
+                                                    <Link to='/' class="btn btn-outline-success" id="sign-up-button" onClick={this.handleSignUp}>Back</Link>
 
-                                                    <Link to='/home' class="btn btn-outline-danger" id="sign-up-button">Sign Up</Link>
+                                                    <Link to='/home' class="btn btn-outline-danger" id="sign-up-button" onClick={this.handleSignUp}>Sign Up</Link>
                                                 </div>
                                             </div>
                                         </form>
@@ -163,16 +181,16 @@ export class LoginPar extends Component {
                                                 <div className='row'>
                                                     <div className="form-group col-6">
                                                         <label for="exampleInputEmail1" className="title">Email address</label>
-                                                        <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                                        <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" name="email" onChange={this.handleChange} />
                                                     </div>
                                                     <div className="form-group col-6">
                                                         <label for="exampleInputPassword1" className="title">Password</label>
-                                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
                                                     </div>
                                                 </div>
                                                 <div className="row justify-content-between px-3">
-                                                    <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.login}>Back</Link>
-                                                    <Link to='/home' className="btn btn-outline-danger" id="sign-up-button">Login</Link>
+                                                    <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.handleSignIn}>Back</Link>
+                                                    <Link to='/home' className="btn btn-outline-danger" id="sign-up-button" onClick={this.handleSignIn}>Login</Link>
                                                 </div>
                                             </div>
                                         </form>

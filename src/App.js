@@ -205,24 +205,26 @@ class App extends Component {
       });
   }
 
-  handleSignUp = (email, password, handle, avatar) => {
+  handleSignUp = (email, password, first, last) => {
     this.setState({ errorMessage: null }); //clear any old errors
 
     /* TODO: sign up user here */
     firebase.auth().createUserWithEmailAndPassword(email, password)
-      .then((value, handle, avatar) => {
-        // console.log(value);
-        // let user = firebase.auth().currentUser;
-        let user = value.user;
+      .then((userCredential) => {
+        let user = userCredential.user;
 
-        return user.updateProfile({
-          displayName: handle,
-          photoURL: avatar
-        });
+        let updatePromise = user.updateProfile({ firstName: first, lastName: last });
+        return updatePromise;
       })
-      .catch((err) => {
-        this.setState({ errorMessage: err.message });
-      });
+      // .then(() => {
+      //   this.setState((prevState) => {
+      //     let updatedUser = { ...prevState.user, displayName: this.state.username }
+      //     return { user: updatedUser }; //update state
+      //   });
+      // })
+        .catch((err) => {
+          this.setState({ errorMessage: err.message })
+        });
   }
 
   //A callback function for logging in existing users
@@ -253,7 +255,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/' render={(routeProps) => (
-              <LoginPage {...routeProps} />
+              <LoginPage {...routeProps} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn}/>
             )} />
             <Route path='/home' render={(routeProps) => (
               <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
@@ -284,7 +286,7 @@ class App extends Component {
     } else{
       return (
         <div>
-          {/* <Nav /> */}
+          <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
           <div className="alert alert-danger m-3" role="alert">No results found - please try again!</div>
         </div>);
     }
@@ -307,8 +309,8 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <LoginNav />
-        <LoginPar />
+        <LoginNav signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
+        <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
         <Description />
         <Tools />
         <Footer />
