@@ -110,7 +110,7 @@ export class Nav extends Component {
                                     <a className="nav-link" href="#">Watch Later</a>
                                 </li>
                                 <li className="nav-item">
-                                    <a className="nav-link" href="./myprofile">My Profile</a>
+                                   <Link className="nav-link" to='./myprofile'>My Profile</Link>
                                 </li>
                             </ul>
                             <form className="form-inline my-2 my-lg-0">

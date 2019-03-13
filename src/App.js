@@ -28,6 +28,7 @@ import { faImdb } from '@fortawesome/free-brands-svg-icons'
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
 import firebase from 'firebase/app';
+import 'firebase/database';
 
 library.add(faFilm);
 library.add(faCalendarAlt);
@@ -40,7 +41,7 @@ library.add(faInstagram);
 class App extends Component {
 
   genres = [];
-
+  
   constructor(props) {
     // let num = Math.floor(Math.random() * 10);
     super(props);
@@ -66,42 +67,26 @@ class App extends Component {
         title: "Crazy Rich Asians",
         overview: "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
         poster_path: '/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg'
-      }],
-      firstMovie: [{
-        title: "The Avengers",
-        overview: "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
-        poster_path: '/7WsyChQLEftFiDOVTGkv3hFpyyt.jpg'
       }]
     }
+    let rootRef = firebase.database().ref();
+    rootRef.set({
+      movie: {}
+    });
   }
 
   addToList = (item) => {
-    console.log("in addToList");
+    let movieList = firebase.database().ref('movie');
+    movieList.push(item);
     let prevState = this.state.watchList;
     prevState = prevState.concat(item);
     this.setState({ watchList: prevState });
-    console.log(this.state.watchList);
   }
 
   removeFromList = (item) => {
     let prevState = this.state.watchList;
     prevState = prevState.splice(0, prevState.indexOf(item)).concat(prevState.slice(prevState.indexOf(item) + 1));
     this.setState({ watchList: prevState });
-  }
-
-  removeFirstFromList = (item) => {
-    let watchList = this.state.watchList;
-    let newState;
-    if (watchList.length > 1) {
-      newState = watchList.slice(1, watchList.length + 1);
-    } else {
-      newState = [];
-    }
-
-    this.setState({
-      watchList: newState,
-      firstMovie: [watchList[0]]
-    });
   }
 
   getGenres = (item) => {
@@ -243,7 +228,7 @@ class App extends Component {
             )} />
             <Route path='/interacted' render={(routeProps) => (
               <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
-                firstMovie={this.state.firstMovie} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} addToList={this.addToList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList}/>
+                updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} addToList={this.addToList} removeFromList={this.removeFromList} />
             )} />
             <Route path='/search' render={(routeProps) => (
               <Search {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} 
@@ -311,13 +296,14 @@ class HomePage extends Component {
 
 class Content extends Component {
   render() {
+    console.log(this.props.list);
     return (
       <div>
         <Route path="/interacted" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError}/>
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentDesc item={this.props.item} addToList={this.props.addToList} />
-        <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} removeFirstFromList={this.props.removeFirstFromList} firstMovie={this.props.firstMovie} />
+        <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} />
         <ContentSim recs={this.props.recs} addToList={this.props.addToList} />
         <Footer />
       </div>

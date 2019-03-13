@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import firebase from 'firebase/app';
+import 'firebase/database';
+
 export class ProfileBody extends Component {
     //firebase user content
     render() {
@@ -12,7 +15,16 @@ export class ProfileBody extends Component {
 
 class ProfileInfo extends Component {
     render() {
-        console.log(this.props.list);
+        firebase.database().ref('movie').once('value').then(function(snapshot){
+            console.log(snapshot.val());
+            let movieObject = snapshot.val();
+            let movieKeys = Object.keys(movieObject);
+            let movieArray = movieKeys.map((key) =>{
+                let movie = movieObject[key];
+                movie.key = key;
+                return <Movie item={movie}  key={movie.title} removeFromList={this.props.removeFromList}/>
+            })
+        })
         return (
             <div className="text-center">
             <img className="profile-pic mt-4 mb-3" src="https://pbs.twimg.com/profile_images/605545593482547200/9Zotvyw5_400x400.jpg" alt="profile picture"/>
