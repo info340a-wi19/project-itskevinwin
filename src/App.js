@@ -13,6 +13,7 @@ import { ContentWatch } from './components/ContentWatch'
 import { ContentSim } from './components/ContentSim'
 
 import { SearchCards } from './components/SearchCards'
+import { SearchBox } from './components/SearchBox'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -24,7 +25,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faImdb } from '@fortawesome/free-brands-svg-icons'
 
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 
 
 library.add(faFilm);
@@ -54,7 +55,8 @@ class App extends Component {
       genres: [],
       hasError: false,
       search: '',
-      searchResults: []
+      searchResults: [],
+      searchPressed: false
     }
   }
 
@@ -89,10 +91,16 @@ class App extends Component {
   }
 
   updateSearch = (value) => {
-    console.log(value);
     this.setState({
       search: value
-    })
+    });
+    console.log(this.state.search);
+  }
+
+  updateSearchPressed = () => {
+    this.setState({
+      searchPressed: !this.state.searchPressed
+    });
   }
 
   getState = () => {
@@ -114,10 +122,20 @@ class App extends Component {
 
   addSearchResults = (item) => {
     let prevState = this.state.searchResults;
-    if (item.poster_path !== null && item.poster_path !== undefined) {
+    let insert = true;
+    prevState.forEach((movie) => {
+      if(item.title === movie.title || item.poster_path === null || item.poster_path === undefined || item.overview == ''){
+        insert = false;
+      }
+    });
+    if (insert) {
       prevState = prevState.concat(item);
     }
     this.setState({ searchResults: prevState });
+  }
+
+  emptySearchResults = () => {
+    this.setState({ searchResults: []})
   }
 
   updateError = () => {
@@ -140,31 +158,39 @@ class App extends Component {
       });
   }
 
-
   render() {
     if (!this.state.hasError) {
       return (
+        <div>
+        <Nav getState={this.getState} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
+        updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults}/>
         <Router>
           <Switch>
             <Route exact path='/' render={(routeProps) => (
               <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
-                addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError} updateSearch={this.updateSearch}
-                addSearchResults={this.addSearchResults} />
+                addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError} />
             )} />
             <Route path='/interacted' render={(routeProps) => (
               <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
-                firstMovie={this.state.firstMovie} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} />
+                firstMovie={this.state.firstMovie} />
             )} />
-            <Route path='/search' render={(routeProps) => (
-              <Search {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} />
+            <Route path='/search/' render={(routeProps) => (
+              <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults}/>
             )} />
+            <Route path='/search/:movieName' render={(routeProps) => (
+              <SearchResults {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults}/>
+            )} />
+            <Redirect to="/" />
           </Switch>
         </Router>
+        </div>
       );
-    } else {
+    } else{
       return (
         <div>
-          <Nav />
+          {/* <Nav /> */}
           <div className="alert alert-danger m-3" role="alert">No results found - please try again!</div>
         </div>);
     }
@@ -176,7 +202,6 @@ class HomePage extends Component {
     return (
       <div>
         <Route path="/" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} />
         <Parallax />
@@ -203,9 +228,7 @@ class Content extends Component {
           title: "Crazy Rich Asians",
           overview: "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
           poster_path: '/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg'
-        }
-      ],
-      firstMovie: [
+        },
         {
           title: "The Avengers",
           overview: "The Avengers and their allies must be willing to sacrifice all in an attempt to defeat the powerful Thanos before his blitz of devastation and ruin puts an end to the universe.",
@@ -246,7 +269,6 @@ class Content extends Component {
     return (
       <div>
         <Route path="/interacted" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentDesc item={this.props.item} addToList={this.addToList} />
         <ContentWatch item={this.props.item} list={this.state.watchList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList} firstMovie={this.state.firstMovie} />
@@ -257,13 +279,29 @@ class Content extends Component {
   }
 }
 
-class Search extends Component {
+class SearchPage extends Component {
 
   render() {
     return (
       <div>
-        <Route path="/search" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
+        <Route path="/search/" />
+        <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
+        updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults}/>
+        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
+
+      </div>
+    );
+  }
+}
+
+class SearchResults extends Component {
+
+  render() {
+    return (
+      <div>
+        <Route path="/search/:movieName" />
+        <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
+        updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults}/>
         <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
       </div>
     );
