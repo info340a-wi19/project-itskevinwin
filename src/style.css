@@ -2,6 +2,10 @@
     box-sizing: border-box;
 }
 
+.navbar.fixed-top {
+    position: sticky;
+}
+
 .parallax { 
     /* The image used */
     background-image: url("/img/movies.jpg");

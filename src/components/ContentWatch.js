@@ -9,6 +9,7 @@ export class ContentWatch extends Component {
                 <p className="text-center">Hover or click on the movie image to see more information!</p>
                 <div className="container container-fluid padding">
                     <div className="row justify-content-around" id="watchList">
+                        
                         {this.props.list.map((item) => {
                             return <Movie item={item}  key={item.title} removeFromList={this.props.removeFromList}/>
                         })}

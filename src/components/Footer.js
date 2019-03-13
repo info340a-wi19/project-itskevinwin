@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 export class Footer extends Component {
     render(){
         return(
-            <footer>
+            <footer className="bg-dark">
             <div className="container-fluid padding">
                 <div className="row text-center">
                     <div className="col-md-4">

@@ -14,6 +14,7 @@ import { ContentSim } from './components/ContentSim'
 
 import { ProfileBody } from './components/ProfileBody'
 import { SearchCards } from './components/SearchCards'
+import { SearchBox } from './components/SearchBox'
 
 
 import { library } from '@fortawesome/fontawesome-svg-core'
@@ -25,7 +26,7 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faImdb } from '@fortawesome/free-brands-svg-icons'
 
-import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 
 import firebase from 'firebase/app';
 import 'firebase/database';
@@ -58,6 +59,7 @@ class App extends Component {
       hasError: false,
       search: '',
       searchResults: [],
+      searchPressed: false,
       watchList: [{
         title: "Split",
         overview: 'Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.',
@@ -121,10 +123,16 @@ class App extends Component {
 
 
   updateSearch = (value) => {
-    console.log(value);
     this.setState({
       search: value
-    })
+    });
+    console.log(this.state.search);
+  }
+
+  updateSearchPressed = () => {
+    this.setState({
+      searchPressed: !this.state.searchPressed
+    });
   }
 
   getState = () => {
@@ -146,10 +154,20 @@ class App extends Component {
 
   addSearchResults = (item) => {
     let prevState = this.state.searchResults;
-    if (item.poster_path !== null && item.poster_path !== undefined) {
+    let insert = true;
+    prevState.forEach((movie) => {
+      if(item.title === movie.title || item.poster_path === null || item.poster_path === undefined || item.overview == ''){
+        insert = false;
+      }
+    });
+    if (insert) {
       prevState = prevState.concat(item);
     }
     this.setState({ searchResults: prevState });
+  }
+
+  emptySearchResults = () => {
+    this.setState({ searchResults: []})
   }
 
   updateError = () => {
@@ -216,6 +234,7 @@ class App extends Component {
     if (!this.state.hasError) {
       
       return (
+        <div>
         <Router>
           <Switch>
             <Route exact path='/' render={(routeProps) => (
@@ -230,20 +249,27 @@ class App extends Component {
               <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
                 updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} addToList={this.addToList} removeFromList={this.removeFromList} />
             )} />
-            <Route path='/search' render={(routeProps) => (
-              <Search {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} 
-              hasError={this.updateError} />
+            <Route path='/search/' render={(routeProps) => (
+              <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults}/>
+            )} />
+            <Route path='/search/:movieName' render={(routeProps) => (
+              <SearchResults {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults}/>
             )} />
             <Route path='/myprofile' render={(routeProps) => (
             <MyProfile {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} list={this.state.watchList}></MyProfile>
           )} />
+            <Redirect to="/" />
+
           </Switch>
         </Router>
+        </div>
       );
-    } else {
+    } else{
       return (
         <div>
-          <Nav />
+          {/* <Nav /> */}
           <div className="alert alert-danger m-3" role="alert">No results found - please try again!</div>
         </div>);
     }
@@ -311,14 +337,31 @@ class Content extends Component {
   }
 }
 
-class Search extends Component {
+class SearchPage extends Component {
 
   render() {
     return (
       <div>
-        <Route path="/search" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} enterUpdate={this.props.enterUpdate} searchBoolean={this.props.searchBoolean} />
-        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} hasError={this.props.hasError} />
+        <Route path="/search/" />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError}/>
+        <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
+        updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults}/>
+        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
+
+      </div>
+    );
+  }
+}
+
+class SearchResults extends Component {
+
+  render() {
+    return (
+      <div>
+        <Route path="/search/:movieName" />
+        <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
+        updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults}/>
+        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
       </div>
     );
   }

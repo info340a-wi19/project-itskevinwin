@@ -32,16 +32,16 @@ export class LoginPar extends Component {
         super(props);
         this.state = {
             signUp: false,
-            login : false,
+            login: false,
         }
     }
 
     signUp = () => {
-        this.setState({signUp : true});
+        this.setState({ signUp: !this.state.signUp });
     }
 
     login = () => {
-        this.setState({login : true});
+        this.setState({ login : !this.state.login });
     }
 
     render() {
@@ -50,7 +50,8 @@ export class LoginPar extends Component {
                 <div className="parallax">
                     <div className="container-fluid">
                         <div className="row jumbotron gradient">
-                            <div className="col-12 col-sm-6 col-lg-8">
+                            <div className="col-12 col-sm-6 col-lg-8 my-auto">
+                                <h1 className='text-center text-dark'>Welcome to MoviePicks!</h1>
                                 <p className="text-center lead">Have you ever sat down with your friends, ready to watch a movie, but
                                     can't
                                     ever decide which one to watch? Well, this website will help you with that!
@@ -64,29 +65,29 @@ export class LoginPar extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div class="sign-up d-none d-sm-block col-sm-6 col-lg-4">
-                                <h1 className="text-center">Get started now!</h1>
-                                <form class="container">
-                                    <div class="form-group">
-                                        <label for="exampleInputEmail1" class="title">Name</label>
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" placeholder="First" id="fname" aria-label="First name" />
+                            <div className="sign-up d-none d-sm-block col-sm-6 col-lg-4">
+                                <h1 className="text-center text-dark">Get started now!</h1>
+                                <form className="container">
+                                    <div className="form-group text-dark">
+                                        <label for="exampleInputEmail1" className="title">Name</label>
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <input type="text" className="form-control" placeholder="First" id="fname" aria-label="First name" />
                                             </div>
-                                            <div class="col-6">
-                                                <input type="text" class="form-control" placeholder="Last" id="lname" aria-label="Last Name" />
+                                            <div className="col-6">
+                                                <input type="text" className="form-control" placeholder="Last" id="lname" aria-label="Last Name" />
                                             </div>
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputEmail1" class="title">Email address</label>
-                                            <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                        <div className="form-group">
+                                            <label for="exampleInputEmail1" className="title">Email address</label>
+                                            <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
                                         </div>
-                                        <div class="form-group">
-                                            <label for="exampleInputPassword1" class="title">Password</label>
-                                            <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                        <div className="form-group">
+                                            <label for="exampleInputPassword1" className="title">Password</label>
+                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
                                         </div>
                                         <div className="row justify-content-center">
-                                            <Link to='/home' class="btn btn-outline-danger" id="sign-up-button">Sign Up</Link>
+                                            <Link to='/home' className="btn btn-outline-dark" id="sign-up-button">Sign Up</Link>
                                         </div>
                                     </div>
                                 </form>
@@ -110,7 +111,7 @@ export class LoginPar extends Component {
                                     <div className="row justify-content-center">
                                         <h1 className="text-center">Get started now!</h1>
                                         <form class="container">
-                                            <div class="form-group">
+                                            <div class="form-group text-dark">
                                                 <label for="exampleInputEmail1" class="title">Name</label>
                                                 <div class="row">
                                                     <div class="col-6">
@@ -128,7 +129,9 @@ export class LoginPar extends Component {
                                                     <label for="exampleInputPassword1" class="title">Password</label>
                                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
                                                 </div>
-                                                <div className="row justify-content-center">
+                                                <div className="row justify-content-between px-3">
+                                                    <Link to='/' class="btn btn-outline-success" id="sign-up-button" onClick={this.signUp}>Back</Link>
+
                                                     <Link to='/home' class="btn btn-outline-danger" id="sign-up-button">Sign Up</Link>
                                                 </div>
                                             </div>
@@ -155,20 +158,21 @@ export class LoginPar extends Component {
                                 <div className="container d-sm-none">
                                     <div className="row justify-content-center">
                                         <h1 className="text-center">Welcome Back!</h1>
-                                        <form class="container">
-                                            <div class="form-group">
-                                            <div className='row'>
-                                                <div class="form-group col-6">
-                                                    <label for="exampleInputEmail1" class="title">Email address</label>
-                                                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                        <form className="container">
+                                            <div className="form-group text-dark">
+                                                <div className='row'>
+                                                    <div className="form-group col-6">
+                                                        <label for="exampleInputEmail1" className="title">Email address</label>
+                                                        <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" />
+                                                    </div>
+                                                    <div className="form-group col-6">
+                                                        <label for="exampleInputPassword1" className="title">Password</label>
+                                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" />
+                                                    </div>
                                                 </div>
-                                                <div class="form-group col-6">
-                                                    <label for="exampleInputPassword1" class="title">Password</label>
-                                                    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" />
-                                                </div>
-                                                </div>
-                                                <div className="row justify-content-end">
-                                                    <Link to='/home' class="btn btn-outline-danger mr-3" id="sign-up-button">Sign Up</Link>
+                                                <div className="row justify-content-between px-3">
+                                                    <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.login}>Back</Link>
+                                                    <Link to='/home' className="btn btn-outline-danger" id="sign-up-button">Login</Link>
                                                 </div>
                                             </div>
                                         </form>
