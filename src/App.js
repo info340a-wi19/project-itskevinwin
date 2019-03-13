@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import { Nav } from './components/Navbar'
+import { Nav , LoginNav } from './components/Navbar'
 import { Header } from './components/Header'
-import { Parallax } from './components/Parallax'
+import { Parallax, LoginPar } from './components/Parallax'
 import { Description } from './components/Description'
 import { Tools } from './components/Tools'
 import { WatchHome } from './components/WatchHome'
@@ -27,6 +27,7 @@ import { faImdb } from '@fortawesome/free-brands-svg-icons'
 
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 
+import firebase from 'firebase/app';
 
 library.add(faFilm);
 library.add(faCalendarAlt);
@@ -186,6 +187,44 @@ class App extends Component {
       });
   }
 
+  handleSignUp = (email, password, handle, avatar) => {
+    this.setState({ errorMessage: null }); //clear any old errors
+
+    /* TODO: sign up user here */
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then((value, handle, avatar) => {
+        // console.log(value);
+        // let user = firebase.auth().currentUser;
+        let user = value.user;
+
+        return user.updateProfile({
+          displayName: handle,
+          photoURL: avatar
+        });
+      })
+      .catch((err) => {
+        this.setState({ errorMessage: err.message });
+      });
+  }
+
+  //A callback function for logging in existing users
+  handleSignIn = (email, password) => {
+    this.setState({ errorMessage: null }); //clear any old errors
+
+    /* TODO: sign in user here */
+    firebase.auth().signInWithEmailAndPassword(email, password)
+      .catch((err) => {
+        this.setState({ errorMessage: err })
+      });
+  }
+
+  //A callback function for logging out the current user
+  handleSignOut = () => {
+    this.setState({ errorMessage: null }); //clear any old errors
+
+    /* TODO: sign out user here */
+    firebase.auth().signOut();
+  }
 
   render() {
     
@@ -195,6 +234,9 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path='/' render={(routeProps) => (
+              <LoginPage {...routeProps} />
+            )} />
+            <Route path='/home' render={(routeProps) => (
               <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
                 addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError} updateSearch={this.updateSearch}
                 addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} />
@@ -204,7 +246,8 @@ class App extends Component {
                 firstMovie={this.state.firstMovie} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} addToList={this.addToList} removeFromList={this.removeFromList} removeFirstFromList={this.removeFirstFromList}/>
             )} />
             <Route path='/search' render={(routeProps) => (
-              <Search {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} />
+              <Search {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} 
+              hasError={this.updateError} />
             )} />
             <Route path='/myprofile' render={(routeProps) => (
             <MyProfile {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} list={this.state.watchList}></MyProfile>
@@ -234,12 +277,26 @@ class MyProfile extends Component {
   }
 }
 
-class HomePage extends Component {
-  render() { 
+class LoginPage extends Component {
+  render() {
     return (
       <div>
-        <Route path="/" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} enterUpdate={this.props.enterUpdate} searchBoolean={this.props.searchBoolean}/>
+        <LoginNav />
+        <LoginPar />
+        <Description />
+        <Tools />
+        <Footer />
+      </div>
+    );
+  }
+}
+
+class HomePage extends Component {
+  render() {
+    return (
+      <div>
+        <Route path="/home" />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError}/>
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} />
         <Parallax />
@@ -257,7 +314,7 @@ class Content extends Component {
     return (
       <div>
         <Route path="/interacted" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError}/>
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentDesc item={this.props.item} addToList={this.props.addToList} />
         <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} removeFirstFromList={this.props.removeFirstFromList} firstMovie={this.props.firstMovie} />
@@ -275,7 +332,7 @@ class Search extends Component {
       <div>
         <Route path="/search" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} enterUpdate={this.props.enterUpdate} searchBoolean={this.props.searchBoolean} />
-        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
+        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} hasError={this.props.hasError} />
       </div>
     );
   }
