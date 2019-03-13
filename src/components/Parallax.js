@@ -41,25 +41,31 @@ export class LoginPar extends Component {
     }
 
     handleChange = (event) => {
-        let field = event.target.name; 
-        let value = event.target.value; 
-    
+        let field = event.target.name;
+        let value = event.target.value;
+
         let changes = {};
-        changes[field] = value; 
-        this.setState(changes); 
-      }
-    
-      handleSignUp = (event) => {
-        event.preventDefault(); 
-        this.setState({ signUp: !this.state.signUp });
+        changes[field] = value;
+        this.setState(changes);
+    }
+
+    handleSignUp = (event) => {
+        event.preventDefault();
         this.props.signUpCallback(this.state.email, this.state.password, this.state.first, this.state.last);
-      }
-    
-      handleSignIn = (event) => {
-        event.preventDefault(); 
-        this.setState({ login : !this.state.login });
+    }
+
+    handleSignIn = (event) => {
+        event.preventDefault();
         this.props.signInCallback(this.state.email, this.state.password);
-      }
+    }
+
+    displayLogIn = () => {
+        this.setState({ login: !this.state.login });
+    }
+
+    displaySignUp = () => {
+        this.setState({ signUp: !this.state.signUp });
+    }
 
 
     render() {
@@ -78,8 +84,8 @@ export class LoginPar extends Component {
                             </p>
                                 <div className="container d-sm-none">
                                     <div className="row justify-content-center">
-                                        <button className="btn btn-outline-secondary col-xs-6 mx-2" data-toggle="collapse" onClick={this.handleSignIn}>Login</button>
-                                        <button className="btn btn-outline-danger col-xs-6 mx-2" data-toggle="collapse" onClick={this.handleSignUp}>Sign Up</button>
+                                        <button className="btn btn-outline-secondary col-xs-6 mx-2" data-toggle="collapse" onClick={this.displayLogIn}>Login</button>
+                                        <button className="btn btn-outline-danger col-xs-6 mx-2" data-toggle="collapse" onClick={this.displaySignUp}>Sign Up</button>
                                     </div>
                                 </div>
                             </div>
@@ -105,7 +111,7 @@ export class LoginPar extends Component {
                                             <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" name="password" onChange={this.handleChange} />
                                         </div>
                                         <div className="row justify-content-center">
-                                            <Link to='/home' className="btn btn-outline-dark" id="sign-up-button" onClick={this.handleSignUp} >Sign Up</Link>
+                                            <Link to='/home' className="btn btn-outline-dark" id="sign-up-button" onClick={this.handleSignUp}>Sign Up</Link>
                                         </div>
                                     </div>
                                 </form>
@@ -148,7 +154,7 @@ export class LoginPar extends Component {
                                                     <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
                                                 </div>
                                                 <div className="row justify-content-between px-3">
-                                                    <Link to='/' class="btn btn-outline-success" id="sign-up-button" onClick={this.handleSignUp}>Back</Link>
+                                                    <Link to='/' class="btn btn-outline-success" id="sign-up-button" onClick={this.displaySignUp}>Back</Link>
 
                                                     <Link to='/home' class="btn btn-outline-danger" id="sign-up-button" onClick={this.handleSignUp}>Sign Up</Link>
                                                 </div>
@@ -189,7 +195,7 @@ export class LoginPar extends Component {
                                                     </div>
                                                 </div>
                                                 <div className="row justify-content-between px-3">
-                                                    <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.handleSignIn}>Back</Link>
+                                                    <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.displayLogIn}>Back</Link>
                                                     <Link to='/home' className="btn btn-outline-danger" id="sign-up-button" onClick={this.handleSignIn}>Login</Link>
                                                 </div>
                                             </div>
