@@ -74,12 +74,12 @@ export class Header extends Component {
                     })
 
                 } else {
-                    this.callError();
+                    this.props.hasError();
                 }
             })
             .catch((err) => {
                 //do something with the error
-                this.callError();
+                this.props.hasError();
 
                 console.error(err);  //e.g., show in the console
             });

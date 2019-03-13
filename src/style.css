@@ -7,7 +7,7 @@
     background-image: url("/img/movies.jpg");
   
     /* Set a specific height */
-    height: 500px; 
+    /* height: 500px;  */
   
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -15,6 +15,35 @@
     background-repeat: no-repeat;
     background-size: cover;
   }
+
+.profile-pic {
+    border-radius: 25px;
+    /* padding-top: 50px; */
+    max-width: 20%;
+}
+
+#profile-name, #profile-watch {
+    font-family: 'Noto Serif';
+    color: black;
+}
+
+hr { 
+    border-width: 3px !important;
+
+}
+
+.nav {
+    background-color: grey;
+    font-size: 2.5vh;
+}
+
+li a {
+    color: white;
+}
+
+.active {
+    font-style: bold;
+}
 
 html, body{
     height: 100%;
