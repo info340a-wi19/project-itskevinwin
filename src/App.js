@@ -71,7 +71,9 @@ class App extends Component {
 
   removeFromList = (item) => {
     let userID = firebase.auth().currentUser.uid;
-   firebase.database().ref(userID).child('' + item.key).remove();
+    if(userID) {
+      firebase.database().ref(userID).child('' + item.key).remove();
+    }
   }
 
   getGenres = (item) => {

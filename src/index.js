@@ -13,14 +13,14 @@ import 'firebase/auth';
 import 'firebase/database'; 
 
 var config = {
-    apiKey: "AIzaSyDnK8Sh8DPnq38Nd97FgSSFVVqandtSt2s",
-    authDomain: "moviepicks-5b9b0.firebaseapp.com",
-    databaseURL: "https://moviepicks-5b9b0.firebaseio.com",
-    projectId: "moviepicks-5b9b0",
-    storageBucket: "moviepicks-5b9b0.appspot.com",
-    messagingSenderId: "740129038357"
-  };
-  firebase.initializeApp(config);
+  apiKey: "AIzaSyDYb_OnH19V9cnXIkc3oXstxaUKPaX0nHg",
+  authDomain: "moviepickstwo.firebaseapp.com",
+  databaseURL: "https://moviepickstwo.firebaseio.com",
+  projectId: "moviepickstwo",
+  storageBucket: "",
+  messagingSenderId: "640613003276"
+};
+firebase.initializeApp(config);
 ReactDOM.render(<App />, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change

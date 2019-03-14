@@ -73,6 +73,7 @@ class ProfileInfo extends Component {
         )
      } else {
          return (
+             <div>
                 <h2 id="profile-name">{name.displayName}</h2>
                 <hr className="dark"></hr>
                 <div>
