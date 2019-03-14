@@ -145,7 +145,7 @@ export class LoginPar extends Component {
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputEmail1" className="title">Email address</label>
-                                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" name="email" onChange={this.handleChange} />
+                                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" name="email" onChange={this.handleChange} />
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputPassword1" className="title">Password</label>
@@ -185,7 +185,7 @@ export class LoginPar extends Component {
                                                 <div className='row'>
                                                     <div className="form-group col-6">
                                                         <label htmlFor="exampleInputEmail1" className="title">Email address</label>
-                                                        <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" value="" name="email" onChange={this.handleChange} />
+                                                        <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" name="email" onChange={this.handleChange} />
                                                     </div>
                                                     <div className="form-group col-6">
                                                         <label htmlFor="exampleInputPassword1" className="title">Password</label>
