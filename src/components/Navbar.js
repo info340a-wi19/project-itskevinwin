@@ -53,7 +53,7 @@ export class Nav extends Component {
                             <NavLink href="/search/">Search</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/">Log Out</NavLink>
+                            <NavLink href="/" onClick={this.props.handleSignOut}>Log Out</NavLink>
                         </NavItem>
                     </NavStrap>
                 </Collapse>
@@ -87,9 +87,8 @@ export class LoginNav extends Component {
       }
     
     handleSignIn = (event) => {
-        event.preventDefault(); //don't submit
         this.props.signInCallback(this.state.email, this.state.password);
-      }
+    }
 
 
     toggle() {
@@ -126,21 +125,21 @@ export class LoginNav extends Component {
                                         <div className="form-group">
                                             <div className='row'>
                                                 <div className="form-group col-6">
-                                                    <label for="exampleInputEmail1" className="title">Email address</label>
+                                                    <label htmlFor="exampleInputEmail1" className="title">Email address</label>
                                                     <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" name="email" onChange={this.handleChange} />
                                                 </div>
                                                 <div className="form-group col-6">
-                                                    <label for="exampleInputPassword1" className="title">Password</label>
+                                                    <label htmlFor="exampleInputPassword1" className="title">Password</label>
                                                     <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </ModalBody>
-                                <ModalFooter>
+                                        <ModalFooter>
                                     <Button outline color="secondary" onClick={this.toggleModal}>Back</Button>{' '}
-                                    <Button outline color="danger" href='/home'>Login</Button>
-                                </ModalFooter>
+                                    <Button outline color="danger" href='/home' onClick={this.props.handleSignIn} >Login</Button>
+                                </ModalFooter>     
+                                    </form>
+                                    </ModalBody>
                             </Modal>
                         </NavItem>
                     </NavStrap>

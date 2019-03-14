@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export class ContentSim extends Component {
     render() {
@@ -26,124 +27,140 @@ class Slide extends Component {
         this.props.revealUpdate();
     }
 
+  onClick = () => {
+    let url = "https://api.themoviedb.org/3/movie/" + this.props.item.id + "?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US";
+    console.log(this.props.item.id);
 
-    render() {
-        let genreIds = this.props.item.genre_ids;
-        let genreNames = genreIds.map((genreId) => {
-            for (let i = 0; i < genres.length; i++) {
-                if (genreId === genres[i].id) {
-                    return genres[i].name;
-                }
-            }
-        });
+    // fetch(url)
+    // .then((response) => {
+    //     let dataPromise = response.json();
+    //     return dataPromise;
+    // }).then((data) => {
+    //         console.log(data);
+    //     })
+    // .catch((err) => {
+    //     console.error(err);
+    // });
 
-        let genresComplete = [];
-        for (let i = 0; i < genreNames.length - 1; i++) {
-            genresComplete.push(genreNames[i] + ', ');
+  }
+
+
+  render() {
+    let genreIds = this.props.item.genre_ids;
+    let genreNames = genreIds.map((genreId) => {
+      for (let i = 0; i < genres.length; i++) {
+        if (genreId === genres[i].id) {
+          return genres[i].name;
         }
+      }
+    });
 
-        genresComplete.push(genreNames[genreNames.length - 1]);
-        
-        let overview = this.props.item.overview;
-        if(this.props.item.overview.length > 630){
-          overview = this.props.item.overview.substring(0,630) + "...";
-        }
-
-        return (
-            <div className="slide img_wrap">
-                <img className="d-block w-100 resize" src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} />
-                <div className="container">
-                    <div className="img_description_layer row mt-0">
-                        <p className="img_description col-sm-12 wrapword" >{overview}</p>
-                        <p className="img_description col-sm-12 wrapword" >IMDB Score: {this.props.item.vote_average}</p>
-                        <p className="img_description col-sm-12 wrapword" >Genres: {genresComplete}</p>
-                        <p className="img_description col-sm-12 wrapword" >Release Date: {this.props.item.release_date}</p>
-                        <button ref="btn" type="submit" className="btn btn-primary col-sm-6 addBtn w-75" role="button" onClick={this.updateList}>Watch
-                                                        Later</button>
-                    </div>
-                </div>
-            </div>
-        );
+    let genresComplete = [];
+    for (let i = 0; i < genreNames.length - 1; i++) {
+      genresComplete.push(genreNames[i] + ', ');
     }
+
+    genresComplete.push(genreNames[genreNames.length - 1]);
+
+    let overview = this.props.item.overview;
+    if (this.props.item.overview.length > 630) {
+      overview = this.props.item.overview.substring(0, 630) + "...";
+    }
+
+    return (
+      <div className="slide img_wrap">
+        <img className="d-block w-100 resize" src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} />
+        <div className="container">
+          <div className="img_description_layer row mt-0">
+            <Link to="./interacted" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
+              <p className="img_description col-sm-12 wrapword">{overview}</p>
+            </Link>
+            <button ref="btn" type="submit" className="btn btn-success col-sm-6 addBtn w-75" role="button" onClick={this.updateList}>Watch
+                                                            Later</button>
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 const genres = [
-    { "name": "Genres" },
-  
-    {
-      "id": 28,
-      "name": "Action"
-    },
-    {
-      "id": 12,
-      "name": "Adventure"
-    },
-    {
-      "id": 16,
-      "name": "Animation"
-    },
-    {
-      "id": 35,
-      "name": "Comedy"
-    },
-    {
-      "id": 80,
-      "name": "Crime"
-    },
-    {
-      "id": 99,
-      "name": "Documentary"
-    },
-    {
-      "id": 18,
-      "name": "Drama"
-    },
-    {
-      "id": 10751,
-      "name": "Family"
-    },
-    {
-      "id": 14,
-      "name": "Fantasy"
-    },
-    {
-      "id": 36,
-      "name": "History"
-    },
-    {
-      "id": 27,
-      "name": "Horror"
-    },
-    {
-      "id": 10402,
-      "name": "Music"
-    },
-    {
-      "id": 9648,
-      "name": "Mystery"
-    },
-    {
-      "id": 10749,
-      "name": "Romance"
-    },
-    {
-      "id": 878,
-      "name": "Science Fiction"
-    },
-    {
-      "id": 10770,
-      "name": "TV Movie"
-    },
-    {
-      "id": 53,
-      "name": "Thriller"
-    },
-    {
-      "id": 10752,
-      "name": "War"
-    },
-    {
-      "id": 37,
-      "name": "Western"
-    }
-  ]
+  { "name": "Genres" },
+
+  {
+    "id": 28,
+    "name": "Action"
+  },
+  {
+    "id": 12,
+    "name": "Adventure"
+  },
+  {
+    "id": 16,
+    "name": "Animation"
+  },
+  {
+    "id": 35,
+    "name": "Comedy"
+  },
+  {
+    "id": 80,
+    "name": "Crime"
+  },
+  {
+    "id": 99,
+    "name": "Documentary"
+  },
+  {
+    "id": 18,
+    "name": "Drama"
+  },
+  {
+    "id": 10751,
+    "name": "Family"
+  },
+  {
+    "id": 14,
+    "name": "Fantasy"
+  },
+  {
+    "id": 36,
+    "name": "History"
+  },
+  {
+    "id": 27,
+    "name": "Horror"
+  },
+  {
+    "id": 10402,
+    "name": "Music"
+  },
+  {
+    "id": 9648,
+    "name": "Mystery"
+  },
+  {
+    "id": 10749,
+    "name": "Romance"
+  },
+  {
+    "id": 878,
+    "name": "Science Fiction"
+  },
+  {
+    "id": 10770,
+    "name": "TV Movie"
+  },
+  {
+    "id": 53,
+    "name": "Thriller"
+  },
+  {
+    "id": 10752,
+    "name": "War"
+  },
+  {
+    "id": 37,
+    "name": "Western"
+  }
+]
