@@ -134,12 +134,12 @@ export class LoginNav extends Component {
                                                 </div>
                                             </div>
                                         </div>
-                                    </form>
-                                </ModalBody>
-                                <ModalFooter>
+                                        <ModalFooter>
                                     <Button outline color="secondary" onClick={this.toggleModal}>Back</Button>{' '}
                                     <Button outline color="danger" href='/home' onClick={this.props.handleSignIn} >Login</Button>
-                                </ModalFooter>
+                                </ModalFooter>     
+                                    </form>
+                                    </ModalBody>
                             </Modal>
                         </NavItem>
                     </NavStrap>
