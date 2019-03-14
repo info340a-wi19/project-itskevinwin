@@ -78,7 +78,6 @@ class App extends Component {
   }
 
   addToList = (item) => {
-    // console.log(this.state.watchList);
     let movieList = firebase.database().ref('movie');
     movieList.push(item);
     let prevState = this.state.watchList;
@@ -345,9 +344,8 @@ class Content extends Component {
         <Route path="/interacted" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut}/>
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
-        <ContentDesc item={this.props.item} addToList={this.props.addToList} />
-        <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} />
-        <ContentSim recs={this.props.recs} addToList={this.props.addToList} />
+        
+        <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} recs={this.props.recs} addToList={this.props.addToList}/>
         <Footer />
       </div>
     );

@@ -2,29 +2,30 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export class ContentSim extends Component {
-  render() {
-    return (
-      <div className="cushion" >
-        <h2 id="similarTitle" className="dark-head text-center">Similar Movies</h2>
-        <hr className="red" />
-        <div className="container wrapper text-center w-sim">
-          <div id="slider" className="text-center pb-5">
-            {this.props.recs.map((item) => {
-              return <Slide item={item} addToList={this.props.addToList} key={item.title} />
-            })}
-          </div>
-        </div>
-      </div>
-    );
-  }
+    render() {
+        return (
+            <div className="cushion" >
+                <h2 id="similarTitle" className="dark-head text-center">Similar Movies</h2>
+                <hr className="red" />
+                <div className="container wrapper text-center w-sim">
+                    <div id="slider" className="text-center pb-5">
+                        {this.props.recs.map((item) => {
+                            return <Slide item={item} addToList={this.props.addToList} key={item.title} revealUpdate={this.props.revealUpdate}/>
+                        })}
+                    </div>
+                </div>
+            </div>
+        );
+    }
 }
 
 class Slide extends Component {
 
-  updateList = (event) => {
-    this.refs.btn.setAttribute("disabled", "disabled")
-    this.props.addToList(this.props.item);
-  }
+    updateList = (event) => {
+        this.refs.btn.setAttribute("disabled", "disabled")
+        this.props.addToList(this.props.item);
+        this.props.revealUpdate();
+    }
 
   onClick = () => {
     let url = "https://api.themoviedb.org/3/movie/" + this.props.item.id + "?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US";

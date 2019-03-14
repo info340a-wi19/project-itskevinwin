@@ -36,6 +36,12 @@ hr {
 
 }
 
+#generator-watch {
+    font-family: 'Noto Serif';
+   
+
+}
+
 .nav {
     background-color: grey;
     font-size: 2.5vh;
@@ -58,7 +64,7 @@ html, body{
 
 h1, h2{
     color: #D43F3F;
-    font-family: 'Work Sans', sans-serif;
+    font-family: 'Noto Serif';
     font-weight: 1000;
 }
 

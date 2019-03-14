@@ -5,6 +5,7 @@ export class ContentDesc extends Component {
     updateList = (event) => {
         this.refs.btn.setAttribute("disabled", "disabled")
         this.props.addToList(this.props.item);
+        this.props.revealUpdate();
     }
 
     render() {
