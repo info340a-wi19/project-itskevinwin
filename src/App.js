@@ -60,36 +60,18 @@ class App extends Component {
       search: '',
       searchResults: [],
       searchPressed: false,
-      watchList: [{
-        title: "Split",
-        overview: 'Three girls are kidnapped by a man with a diagnosed 23 distinct personalities. They must try to escape before the apparent emergence of a frightful new 24th.',
-        poster_path: '/rXMWOZiCt6eMX22jWuTOSdQ98bY.jpg'
-      },
-      {
-        title: "Crazy Rich Asians",
-        overview: "This contemporary romantic comedy, based on a global bestseller, follows native New Yorker Rachel Chu to Singapore to meet her boyfriend's family.",
-        poster_path: '/1XxL4LJ5WHdrcYcihEZUCgNCpAW.jpg'
-      }]
     }
-    let rootRef = firebase.database().ref();
-    rootRef.set({
-      movie: {}
-    });
+    
   }
 
   addToList = (item) => {
-    let movieList = firebase.database().ref('movie');
-    movieList.push(item);
-    let prevState = this.state.watchList;
-    prevState = prevState.concat(item);
-    this.setState({ watchList: prevState });
+    let userID = firebase.auth().currentUser.uid;
+    firebase.database().ref(userID).push(item);
   }
 
   removeFromList = (item) => {
-   firebase.database().ref('movie').child('' + item.key).remove();
-    let prevState = this.state.watchList;
-    prevState = prevState.splice(0, prevState.indexOf(item)).concat(prevState.slice(prevState.indexOf(item) + 1));
-    this.setState({ watchList: prevState });
+    let userID = firebase.auth().currentUser.uid;
+   firebase.database().ref(userID).child('' + item.key).remove();
   }
 
   getGenres = (item) => {
@@ -215,7 +197,7 @@ class App extends Component {
       .then((userCredential) => {
         let user = userCredential.user;
 
-        let updatePromise = user.updateProfile({ firstName: first, lastName: last });
+        let updatePromise = user.updateProfile({ displayName: first + ' ' + last });
         return updatePromise;
       })
       // .then(() => {

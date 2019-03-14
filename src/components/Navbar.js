@@ -41,19 +41,19 @@ export class Nav extends Component {
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <NavStrap className="ml-auto" navbar>
                         <NavItem>
-                            <NavLink href="/home">Home</NavLink>
+                            <Link className="nav-link" to="/home">Home</Link>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#">About</NavLink>
+                            <Link className="nav-link" to="#">About</Link>
                         </NavItem>
                         <NavItem>
                             <Link className="nav-link" to="/myprofile">Watch Later</Link>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/search/">Search</NavLink>
+                            <Link className="nav-link" to="/search/">Search</Link>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="/" onClick={this.props.handleSignOut}>Log Out</NavLink>
+                            <Link className="nav-link" to="/" onClick={this.props.handleSignOut}>Log Out</Link>
                         </NavItem>
                     </NavStrap>
                 </Collapse>

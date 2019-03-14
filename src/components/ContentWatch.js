@@ -28,10 +28,9 @@ export class ContentWatch extends Component {
     }
 
     componentDidMount() {
-
-
         let movieArray = '';
-        firebase.database().ref('movie').once('value').then((snapshot) => {
+        let userID = firebase.auth().currentUser.uid;
+        firebase.database().ref(userID).once('value').then((snapshot) => {
         let movieObject = snapshot.val();
         if(movieObject == null) {
             movieArray =''
