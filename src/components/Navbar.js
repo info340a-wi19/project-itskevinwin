@@ -91,6 +91,12 @@ export class LoginNav extends Component {
     }
 
 
+    onEnter = (event) => {
+        if (event.charCode === 13) {
+            this.handleSignIn();
+        }
+    }
+
     toggle() {
         this.setState({
             isOpen: !this.state.isOpen
@@ -130,16 +136,17 @@ export class LoginNav extends Component {
                                                 </div>
                                                 <div className="form-group col-6">
                                                     <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
+                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} onKeyPress={this.onEnter}/>
                                                 </div>
                                             </div>
                                         </div>
                                         <ModalFooter>
                                     <Button outline color="secondary" onClick={this.toggleModal}>Back</Button>{' '}
-                                    <Button outline color="danger" href='/home' onClick={this.props.handleSignIn} >Login</Button>
-                                </ModalFooter>     
+                                    <Link to='/home' className="btn btn-outline-danger" id="sign-up-button" onClick={this.handleSignIn}>Login</Link>
+                                </ModalFooter>
                                     </form>
-                                    </ModalBody>
+                                </ModalBody>
+                                
                             </Modal>
                         </NavItem>
                     </NavStrap>

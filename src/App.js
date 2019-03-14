@@ -184,7 +184,7 @@ class App extends Component {
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if(firebaseUser){
         console.log('logged in')
-        console.log(firebaseUser)
+        // console.log(firebaseUser)
         this.setState({user: firebaseUser, loading: false});
       } else{
         console.log('logged out')
@@ -192,7 +192,6 @@ class App extends Component {
       }
     });
 
-    // console.log(this.state.user || 'no user')
     fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US")
       .then((response) => {
         return response.json();
@@ -234,7 +233,6 @@ class App extends Component {
   handleSignIn = (email, password) => {
     this.setState({ errorMessage: null }); //clear any old errors
 
-    /* TODO: sign in user here */
     firebase.auth().signInWithEmailAndPassword(email, password)
       .catch((err) => {
         this.setState({ errorMessage: err })
@@ -246,40 +244,39 @@ class App extends Component {
   handleSignOut = () => {
     this.setState({ errorMessage: null }); //clear any old errors
     console.log('sign out')
-    /* TODO: sign out user here */
     firebase.auth().signOut();
   }
 
   render() {
-    
     if (!this.state.hasError) {
       return (
         <div>
         <Router>
           <Switch>
             <Route exact path='/' render={(routeProps) => (
-              <LoginPage {...routeProps} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn}/>
+              <LoginPage {...routeProps} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} />
             )} />
             <Route path='/home' render={(routeProps) => (
               <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
                 addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError} updateSearch={this.updateSearch}
-                addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} handleSignOut={this.handleSignOut}/>
+                addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} handleSignOut={this.handleSignOut} user={this.state.user} />
             )} />
             <Route path='/interacted' render={(routeProps) => (
               <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
-                updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} addToList={this.addToList} removeFromList={this.removeFromList} handleSignOut={this.handleSignOut} />
+                updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} addToList={this.addToList} removeFromList={this.removeFromList} handleSignOut={this.handleSignOut} 
+                user={this.state.user}/>
             )} />
             <Route path='/search/' render={(routeProps) => (
               <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} />
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}/>
             )} />
             <Route path='/search/:movieName' render={(routeProps) => (
               <SearchResults {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut}/>
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}/>
             )} />
             <Route path='/myprofile' render={(routeProps) => (
             <MyProfile {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} list={this.state.watchList} 
-            removeFromList={this.removeFromList} handleSignOut={this.handleSignOut}></MyProfile>
+            removeFromList={this.removeFromList} handleSignOut={this.handleSignOut} user={this.state.user}></MyProfile>
           )} />
             <Redirect to="/" />
 
@@ -290,7 +287,7 @@ class App extends Component {
     } else{
       return (
         <div>
-          <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} handleSignOut={this.handleSignOut} />
+          <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} handleSignOut={this.handleSignOut} user={this.state.user} />
           <div className="alert alert-danger m-3" role="alert">No results found - please try again!</div>
         </div>);
     }
