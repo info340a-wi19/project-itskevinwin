@@ -50,12 +50,10 @@ export class LoginPar extends Component {
     }
 
     handleSignUp = (event) => {
-        event.preventDefault();
         this.props.signUpCallback(this.state.email, this.state.password, this.state.first, this.state.last);
     }
 
     handleSignIn = (event) => {
-        event.preventDefault();
         this.props.signInCallback(this.state.email, this.state.password);
     }
 
