@@ -19,7 +19,7 @@ export class ProfileBody extends Component {
 
     render() {
         return(
-        <ProfileInfo list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate}></ProfileInfo>
+        <ProfileInfo list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate} user={this.props.user}></ProfileInfo>
         )
     }
 
@@ -52,10 +52,11 @@ class ProfileInfo extends Component {
 
     render() {
         let movies = this.props.movies;
+        let name = this.props.user;
         if(Array.isArray(movies)) {
         return (
             <div className="text-center bg-light">
-            <h2 id="profile-name">Lucas Woo</h2>
+            <h2 id="profile-name">{name.displayName}</h2>
             <hr className="dark"></hr>
             <div>
                 <h2 id="profile-watch" className="text-center">Your Current Watch List</h2>
@@ -72,9 +73,7 @@ class ProfileInfo extends Component {
         )
      } else {
          return (
-                <div className="text-center bg-light">
-                <img className="profile-pic mt-4 mb-3" src="https://pbs.twimg.com/profile_images/605545593482547200/9Zotvyw5_400x400.jpg" alt="profile picture"/>
-                <h2 id="profile-name">Lucas Woo</h2>
+                <h2 id="profile-name">{name.displayName}</h2>
                 <hr className="dark"></hr>
                 <div>
                     <h2 id="profile-watch" className="text-center">Your Current Watch List</h2>

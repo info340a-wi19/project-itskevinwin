@@ -165,7 +165,7 @@ class App extends Component {
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if(firebaseUser){
         console.log('logged in')
-        // console.log(firebaseUser)
+        console.log(firebaseUser)
         this.setState({user: firebaseUser, loading: false});
       } else{
         console.log('logged out')
@@ -281,7 +281,7 @@ class MyProfile extends Component {
       <div>
       <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} handleSignOut={this.props.handleSignOut} />
       <Route path="/myprofile" />
-      <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList}/>
+      <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList} user={this.props.user}/>
       </div>
     );
   }
