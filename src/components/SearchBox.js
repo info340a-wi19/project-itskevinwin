@@ -4,14 +4,14 @@ import { Redirect } from 'react-router-dom';
 export class SearchBox extends Component {
     constructor(props){
         super(props);
-        this.state = {redirect : false}
+        this.state = {redirect : false, id : undefined}
     }
 
     handleChange = (event) => {
         this.props.updateSearch(event.target.value);
     }
 
-    handleClick = (event) => {
+    handleSearch = (event) => {
         if (event.charCode === 13) {
         event.preventDefault();
         this.setState({redirect : true})
@@ -30,12 +30,18 @@ export class SearchBox extends Component {
                 return dataPromise;
             }).then((data) => {
                 if (data.results.length !== 0) {
-                    data.results.forEach((item) => {
-                        this.props.addSearchResults(item);
-                    })
+                    this.props.addSearchResults(data.results[0]);
+                    return fetch( 'https://api.themoviedb.org/3/movie/' + data.results[0]['id'] + '/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1')
                 } else {
                     this.props.hasError();
                 }
+            }).then((response) => {
+                let dataPromise = response.json();
+                return dataPromise;
+            }).then((data) => {
+                data.results.forEach((item) => {
+                    this.props.addSearchResults(item)
+                });
             })
             .catch((err) => {
                 //do something with the error
@@ -52,7 +58,7 @@ export class SearchBox extends Component {
             return <Redirect push to={url} />
         }
         return(
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleClick} onChange={this.handleChange}/>
+            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
 
         );
     };
