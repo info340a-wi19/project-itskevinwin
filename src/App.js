@@ -126,7 +126,7 @@ class App extends Component {
   }
 
   addContent = (item) => {
-    this.setState({ item: item })
+    this.setState({ item: item }, this.addRecommendations)
     this.getGenres(item);
   }
 
@@ -155,7 +155,7 @@ class App extends Component {
         this.setState({ recs: prevState });
       })
       .catch((err) => {
-        this.updateError();
+        // this.updateError();
         console.error(err);  //e.g., show in the console
       });
   }
@@ -270,11 +270,13 @@ class App extends Component {
               )} />
             <Route path='/search/' render={(routeProps) => (
               <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user} />
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
+              item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations}/>
             )} />
             <Route path='/search/:movieName' render={(routeProps) => (
               <SearchResults {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}/>
+              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
+              item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations}/>
             )} />
             <Route path='/myprofile/:uid' render={(routeProps) => (
             <MyProfile {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} list={this.state.watchList} 
@@ -366,7 +368,8 @@ class SearchPage extends Component {
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut}  />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
         updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults}/>
-        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
+        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList} 
+                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs}/>
 
       </div>
     );
@@ -381,7 +384,8 @@ class SearchResults extends Component {
         <Route path="/search/:movieName" />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
         updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSignOut={this.props.handleSignOut}/>
-        <SearchCards getState={this.props.getState} searchResults={this.props.searchResults} />
+        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList} 
+                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs}/>
       </div>
     );
   }

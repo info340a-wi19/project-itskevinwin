@@ -12,7 +12,7 @@ export class ContentSim extends Component {
                         {this.props.recs.map((item) => {
                           return <Slide item={item} addToList={this.props.addToList} key={item.id}
                           hasError={this.props.hasError} addContent={this.props.addContent}
-                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} revealUpdate={this.props.revealUpdate} />
+                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} revealUpdate={this.props.revealUpdate}/>
                         })}
                     </div>
                 </div>

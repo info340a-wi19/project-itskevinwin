@@ -19,6 +19,7 @@ export class ContentWatch extends Component {
 
 
     render() {
+        console.log(this.props.item);
         return (
             <div>
              <ContentDesc item={this.props.item} addToList={this.props.addToList} revealUpdate={this.revealUpdate} />
@@ -31,6 +32,8 @@ export class ContentWatch extends Component {
     }
 
     componentDidMount() {
+        firebase.auth().onAuthStateChanged((user) => {
+        if(user){
         let movieArray = '';
         let userID = firebase.auth().currentUser.uid;
         firebase.database().ref(userID).once('value').then((snapshot) => {
@@ -47,7 +50,11 @@ export class ContentWatch extends Component {
         }
         this.setState({movies: movieArray})
     })
+}
+    })
     }
+
+
 }
 
 class WatchList extends Component {
