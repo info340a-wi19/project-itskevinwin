@@ -7,6 +7,9 @@ export class SearchBox extends Component {
         this.state = {redirect : false, id : undefined}
     }
 
+    componentDidMount() {
+        this.props.emptySearchResults();
+    }
     handleChange = (event) => {
         this.props.updateSearch(event.target.value);
     }

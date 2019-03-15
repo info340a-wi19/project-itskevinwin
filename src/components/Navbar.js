@@ -49,6 +49,13 @@ export class Nav extends Component {
         )
         }
 
+        // firebase.auth().onAuthStateChanged((user) => {
+            if(!this.props.getState().user){
+                return(<Redirect push to='/' />)
+                }
+        // });
+
+
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark sticky-nav" expand="md">
                 <NavbarBrand href="/home">MoviePicks</NavbarBrand>
@@ -65,7 +72,7 @@ export class Nav extends Component {
                             <div className="nav-link"  onClick={this.handleClick}>Watch Later</div>
                         </NavItem>
                         <NavItem>
-                            <Link className="nav-link" to="/search/">Search</Link>
+                            <Link className="nav-link" to="/search/" onClick={this.emptySearchResults}>Search</Link>
                         </NavItem>
                         <NavItem>
                             <Link className="nav-link" to="/" onClick={this.props.handleSignOut}>Log Out</Link>
@@ -132,6 +139,17 @@ export class LoginNav extends Component {
                 <Redirect push to='/home' />
             )
         }
+
+        if(this.props.getState().user){
+            return(<Redirect push to='home' />);
+        }
+
+        // if(this.props.getState().loading){
+        //     return (<div className="text-center">
+        //             <i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
+        //             </div>);
+        // }
+
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark" expand="md">
                 <NavbarBrand href="/">MoviePicks</NavbarBrand>
