@@ -130,12 +130,34 @@ class App extends Component {
     this.getGenres(item);
   }
 
-  addRecommendations = (item) => {
-    let prevState = this.state.recs;
-    if (this.state.item.title !== item.title && item.poster_path !== null && item.poster_path !== undefined) {
-      prevState = prevState.concat(item);
-    }
-    this.setState({ recs: prevState });
+  addRecommendations = () => {
+    let url = "https://api.themoviedb.org/3/movie/" + this.state.item.id + "/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US";
+    let prevState = [];
+    console.log(prevState);
+    fetch(url)
+      .then((response) => {
+        let dataPromise = response.json();
+        return dataPromise;
+      }).then((data) => {
+        console.log(data);
+        // this.setState({ recs: [] });
+        if (data.length !== 0) {
+          data.results.forEach((item) => {
+            if (this.state.item.title !== item.title && item.poster_path !== null && item.poster_path !== undefined) {
+              prevState.push(item);
+            }
+          })
+        } else {
+          this.updateError();
+        }
+      }).then(() => {
+        console.log(prevState);
+        this.setState({ recs: prevState });
+      })
+      .catch((err) => {
+        this.updateError();
+        console.error(err);  //e.g., show in the console
+      });
   }
 
   addSearchResults = (item) => {
@@ -240,10 +262,12 @@ class App extends Component {
                 addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} handleSignOut={this.handleSignOut} user={this.state.user} />
             )} />
             <Route path='/interacted' render={(routeProps) => (
-              <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating} recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
-                updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} addToList={this.addToList} removeFromList={this.removeFromList} handleSignOut={this.handleSignOut} 
-                user={this.state.user} />
-            )} />
+                <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating}
+                  recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
+                  updateSearch={this.updateSearch} addSearchResults={this.addSearchResults}
+                  addToList={this.addToList} removeFromList={this.removeFromList} hasError={this.updateError}
+                  addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations}/>
+              )} />
             <Route path='/search/' render={(routeProps) => (
               <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
               updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user} />
@@ -309,7 +333,6 @@ class HomePage extends Component {
         <Parallax />
         <Description />
         <Tools />
-        <WatchHome />
         <Footer />
       </div>
     );
@@ -324,7 +347,10 @@ class Content extends Component {
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut}  />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         
-        <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} recs={this.props.recs} addToList={this.props.addToList}/>
+        <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} recs={this.props.recs} addToList={this.props.addToList} emptySimilar={this.props.emptySimilar}
+          recs={this.props.recs} addToList={this.props.addToList} selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
+          addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError}/>
+      
         <Footer />
       </div>
     );

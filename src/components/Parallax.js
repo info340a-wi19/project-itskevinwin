@@ -43,7 +43,6 @@ export class LoginPar extends Component {
     handleChange = (event) => {
         let field = event.target.name;
         let value = event.target.value;
-
         let changes = {};
         changes[field] = value;
         this.setState(changes);

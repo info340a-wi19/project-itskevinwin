@@ -22,7 +22,9 @@ export class ContentWatch extends Component {
             <div>
              <ContentDesc item={this.props.item} addToList={this.props.addToList} revealUpdate={this.revealUpdate} />
             <WatchList list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate}></WatchList>
-            <ContentSim recs={this.props.recs} addToList={this.props.addToList} revealUpdate={this.revealUpdate}/>
+            <ContentSim recs={this.props.recs} addToList={this.props.addToList} revealUpdate={this.revealUpdate} emptySimilar={this.props.emptySimilar}
+                recs={this.props.recs} addToList={this.props.addToList} selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
+                addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError}/>
             </div>
         );
     }
