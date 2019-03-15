@@ -338,7 +338,6 @@ class HomePage extends Component {
         <Parallax />
         <Description />
         <Tools />
-        <WatchHome />
         <Footer />
       </div>
     );
