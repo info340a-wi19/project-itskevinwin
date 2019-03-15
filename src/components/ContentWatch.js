@@ -8,7 +8,7 @@ export class ContentWatch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            movies: ''
+            movies: '',
         }
     }
 
@@ -17,6 +17,7 @@ export class ContentWatch extends Component {
         this.forceUpdate();
     }
 
+
     render() {
         return (
             <div>
@@ -24,7 +25,7 @@ export class ContentWatch extends Component {
             <WatchList list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate}></WatchList>
             <ContentSim recs={this.props.recs} addToList={this.props.addToList} revealUpdate={this.revealUpdate} emptySimilar={this.props.emptySimilar}
                 recs={this.props.recs} addToList={this.props.addToList} selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
-                addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError}/>
+                addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} revealUpdate={this.revealUpdate}/>
             </div>
         );
     }

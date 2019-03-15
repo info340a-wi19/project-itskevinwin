@@ -2,10 +2,14 @@ import React, { Component } from 'react';
 
 export class ContentDesc extends Component {
 
+
     updateList = (event) => {
         this.refs.btn.setAttribute("disabled", "disabled")
         this.props.addToList(this.props.item);
         this.props.revealUpdate();
+        if(this.props.newMovie) {
+            this.forceUpdate();
+        }
     }
 
     render() {

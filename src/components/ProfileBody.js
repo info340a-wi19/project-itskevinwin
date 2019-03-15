@@ -57,7 +57,7 @@ class ProfileInfo extends Component {
         if(Array.isArray(movies)) {
         return (
             <div className="text-center bg-light">
-            <h2 id="profile-name">{name.displayName}</h2>
+            <h2 id="profile-name" className="text-center">{name.displayName}</h2>
             <hr className="dark"></hr>
             <div>
                 <h2 id="profile-watch" className="text-center">Your Current Watch List</h2>

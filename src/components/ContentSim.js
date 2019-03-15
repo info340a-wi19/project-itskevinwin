@@ -10,9 +10,9 @@ export class ContentSim extends Component {
                 <div className="container wrapper text-center w-sim">
                     <div id="slider" className="text-center pb-5">
                         {this.props.recs.map((item) => {
-                          return <Slide item={item} addToList={this.props.addToList} key={item.title}
+                          return <Slide item={item} addToList={this.props.addToList} key={item.id}
                           hasError={this.props.hasError} addContent={this.props.addContent}
-                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs}/>
+                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} revealUpdate={this.props.revealUpdate} />
                         })}
                     </div>
                 </div>
@@ -27,6 +27,7 @@ class Slide extends Component {
         this.refs.btn.setAttribute("disabled", "disabled")
         this.props.addToList(this.props.item);
         this.props.revealUpdate();
+        this.props.newMovieDeterminer();
     }
 
     onClick = (event) => {
