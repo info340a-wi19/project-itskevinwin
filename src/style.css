@@ -62,7 +62,7 @@ border-color: transparent transparent transparent #505050;
     background-image: url("/img/movies.jpg");
   
     /* Set a specific height */
-    /* height: 500px;  */
+    height: 26em; 
   
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -219,6 +219,7 @@ header{
 .fa-film, .fa-calendar-alt, .fa-imdb{
     font-size: 4em;
     margin: 1;
+
 }
 
 #rated{

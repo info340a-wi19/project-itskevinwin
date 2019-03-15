@@ -1,13 +1,15 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
+
 
 export class SearchCards extends Component {
-
     render() {
         return (
             <div className="container wrapper text-center">
                 <div className="row">
                     {this.props.searchResults.map((item) => {
-                        return <SearchCard getState={this.props.getState} item={item} key={item.title + item.release_date} />
+                        return <SearchCard getState={this.props.getState} key={item.title + item.release_date} addToList={this.props.addToList} 
+                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} item={item}/>
                     })}
                 </div>
             </div>
@@ -17,6 +19,13 @@ export class SearchCards extends Component {
 }
 
 class SearchCard extends Component {
+    onClick = (event) => {
+    // console.log(this.props.item);
+    //   this.props.emptySimilar();
+      this.props.addContent(this.props.item);
+      console.log(this.props.getState().item)
+    //   this.props.addRecs();
+    }
     render() {
         return (
             <div className="card flex-row col-12">
@@ -29,7 +38,7 @@ class SearchCard extends Component {
                             <p className="card-text wrapword text-left">Release Date: {this.props.item.release_date}</p>
                             <p className="card-text wrapword text-left">{this.props.item.overview}</p>
                         </div>
-                        <button ref="btn" type="submit" className="btn btn-info mt-5" role="button" onClick={this.updateList}>Watch Later</button>
+                        <Link to="/interacted" className="text-white btn btn-info mt-5" style={{ textDecoration: 'none' }} onClick={this.onClick}>See More</Link>
                     </div>
                 </div>
             </div>
