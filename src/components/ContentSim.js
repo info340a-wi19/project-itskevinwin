@@ -12,7 +12,7 @@ export class ContentSim extends Component {
                         {this.props.recs.map((item) => {
                           return <Slide item={item} addToList={this.props.addToList} key={item.id}
                           hasError={this.props.hasError} addContent={this.props.addContent}
-                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} revealUpdate={this.props.revealUpdate}/>
+                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} revealUpdate={this.props.revealUpdate} handleNewMovieTwo={this.props.handleNewMovieTwo}/>
                         })}
                     </div>
                 </div>
@@ -27,7 +27,7 @@ class Slide extends Component {
         this.refs.btn.setAttribute("disabled", "disabled")
         this.props.addToList(this.props.item);
         this.props.revealUpdate();
-        this.props.newMovieDeterminer();
+        
     }
 
     onClick = (event) => {
@@ -36,6 +36,7 @@ class Slide extends Component {
       this.props.addContent(this.props.item);
       this.props.addRecs();
       console.log(this.props.item);
+      this.props.handleNewMovieTwo();
     }
 
 

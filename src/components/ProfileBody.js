@@ -25,22 +25,27 @@ export class ProfileBody extends Component {
 
 
 componentDidMount() {
-    let movieArray = '';
-    let userID = firebase.auth().currentUser.uid;
-    firebase.database().ref(userID).once('value').then((snapshot) => {
-    let movieObject = snapshot.val();
-    if(movieObject == null) {
-        movieArray =''
-    } else {
-    let movieKeys = Object.keys(movieObject);
-        movieArray = movieKeys.map((key) => {
-            let movie = movieObject[key];
-            movie.key = key;
-            return movie;
-        });
-    }
-    this.setState({movies: movieArray})
-})
+    firebase.auth().onAuthStateChanged((user) => {
+        if(user){
+            let movieArray = '';
+            let userID = firebase.auth().currentUser.uid;
+            firebase.database().ref(userID).once('value').then((snapshot) => {
+            let movieObject = snapshot.val();
+            if(movieObject == null) {
+                movieArray =''
+            } else {
+            let movieKeys = Object.keys(movieObject);
+                movieArray = movieKeys.map((key) => {
+                    let movie = movieObject[key];
+                    movie.key = key;
+                    return movie;
+                });
+            }
+            this.setState({movies: movieArray})
+        })
+        }
+    })
+    
 }
 }
 
