@@ -53,6 +53,7 @@ class ProfileInfo extends Component {
     render() {
         let movies = this.props.movies;
         let name = this.props.user;
+        console.log(this.props.user);
         if(Array.isArray(movies)) {
         return (
             <div className="text-center bg-light">
