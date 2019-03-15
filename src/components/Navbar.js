@@ -14,6 +14,8 @@ import {
     DropdownItem
 } from 'reactstrap';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
+import firebase from 'firebase/app';
+import 'firebase/database';
 
 
 export class Nav extends Component {
@@ -23,7 +25,8 @@ export class Nav extends Component {
 
         this.toggle = this.toggle.bind(this);
         this.state = {
-            isOpen: false
+            isOpen: false,
+            redirect: false
         };
     }
     toggle() {
@@ -32,8 +35,20 @@ export class Nav extends Component {
         });
     }
 
+    handleClick = () => {
+        let curr = ! this.state.redirect;
+        this.setState({redirect: curr})
+    }
 
     render() {
+        if(this.state.redirect) {
+        let userID = firebase.auth().currentUser.uid;
+        let rightPath = "/myprofile/" + userID;
+        return (
+            <Redirect push to={rightPath} />
+        )
+        }
+
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark sticky-nav" expand="md">
                 <NavbarBrand href="/home">MoviePicks</NavbarBrand>
@@ -47,7 +62,7 @@ export class Nav extends Component {
                             <Link className="nav-link" to="#">About</Link>
                         </NavItem>
                         <NavItem>
-                            <Link className="nav-link" to="/myprofile">Watch Later</Link>
+                            <div className="nav-link"  onClick={this.handleClick}>Watch Later</div>
                         </NavItem>
                         <NavItem>
                             <Link className="nav-link" to="/search/">Search</Link>
