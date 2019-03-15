@@ -68,11 +68,7 @@ export class Header extends Component {
                 if (data.results.length !== 0) {
                     let num = Math.floor(Math.random() * data.results.length);
                     this.props.addContent(data.results[num]);
-                    data.results.forEach((item) => {
-                        console.log(item);
-                        this.props.addRecs(item);
-                    })
-
+                    this.props.addRecs();
                 } else {
                     this.props.hasError();
                 }
@@ -104,7 +100,7 @@ export class Header extends Component {
                             { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState} />
                             <div className="text-center">
                                 <Link to="./interacted" className="btn btn-secondary btn-lg" role="button" aria-pressed="true"
-                                    alt="" onClick={this.onClick}>GO!</Link>
+                                    alt="" onClick={this.onClick}>GO</Link>
                             </div>
                         </div>
                         <hr />

@@ -10,7 +10,9 @@ export class ContentSim extends Component {
                 <div className="container wrapper text-center w-sim">
                     <div id="slider" className="text-center pb-5">
                         {this.props.recs.map((item) => {
-                            return <Slide item={item} addToList={this.props.addToList} key={item.title} revealUpdate={this.props.revealUpdate}/>
+                          return <Slide item={item} addToList={this.props.addToList} key={item.title}
+                          hasError={this.props.hasError} addContent={this.props.addContent}
+                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs}/>
                         })}
                     </div>
                 </div>
@@ -27,22 +29,13 @@ class Slide extends Component {
         this.props.revealUpdate();
     }
 
-  onClick = () => {
-    let url = "https://api.themoviedb.org/3/movie/" + this.props.item.id + "?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US";
-    console.log(this.props.item.id);
-
-    // fetch(url)
-    // .then((response) => {
-    //     let dataPromise = response.json();
-    //     return dataPromise;
-    // }).then((data) => {
-    //         console.log(data);
-    //     })
-    // .catch((err) => {
-    //     console.error(err);
-    // });
-
-  }
+    onClick = (event) => {
+      event.preventDefault();
+      // this.props.emptySimilar();
+      this.props.addContent(this.props.item);
+      this.props.addRecs();
+      console.log(this.props.item);
+    }
 
 
   render() {
