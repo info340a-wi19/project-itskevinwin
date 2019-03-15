@@ -62,7 +62,7 @@ border-color: transparent transparent transparent #505050;
     background-image: url("/img/movies.jpg");
   
     /* Set a specific height */
-    height: 26em; 
+    height: -webkit-fill-available; 
   
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -485,6 +485,7 @@ hr.dark{
 .w-sim{
     width: 95% !important;
 }
+
 
 @media(min-width: 598px)
 {

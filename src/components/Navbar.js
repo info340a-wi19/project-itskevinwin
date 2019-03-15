@@ -88,7 +88,8 @@ export class LoginNav extends Component {
             isOpen: false,
             modal: false,
             email: undefined,
-            password: undefined
+            password: undefined,
+            goHome: false
         };
     }
 
@@ -109,6 +110,7 @@ export class LoginNav extends Component {
     onEnter = (event) => {
         if (event.charCode === 13) {
             this.handleSignIn();
+            this.setState({goHome : true})
         }
     }
 
@@ -125,6 +127,11 @@ export class LoginNav extends Component {
     }
 
     render() {
+        if(this.state.goHome){
+            return (
+                <Redirect push to='/home' />
+            )
+        }
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark" expand="md">
                 <NavbarBrand href="/">MoviePicks</NavbarBrand>
