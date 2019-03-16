@@ -588,7 +588,7 @@ hr.dark{
     }
 
     .wrapper{
-        padding-left: 2.5rem;
+        margin-left: 2.5rem;
     }
 
     #watchContent{
@@ -648,7 +648,7 @@ hr.dark{
     }
 
     .col-lg-4{
-        padding-left: 3rem;
+        margin-left: 3rem;
     }
 
     .text-center .btn-outline-dark{
@@ -702,7 +702,7 @@ hr.dark{
     }
 
     .wrapper{
-        margin-left: 12rem;
+        margin-left: 7.5rem;
     }
 
     #watchContent{
@@ -753,8 +753,7 @@ hr.dark{
     }
 
     .wrapper{
-        padding-left: 0;
-        margin-left: 20rem;
+        margin-left: 18.5rem;
     }
 
     #watchContent{
