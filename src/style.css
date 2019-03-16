@@ -369,6 +369,10 @@ hr.dark{
     border: 1px solid #888;
     width: 100%;
 }
+
+.modal-backdrop {
+    z-index: 0 !important;
+}
   
 #inputDate{
     margin-left: auto;
