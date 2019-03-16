@@ -179,20 +179,18 @@ class App extends Component {
   }
 
   componentDidMount() {
-    this.handleSpinner();
+    this.handleSpinner()
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
       if(firebaseUser){
         console.log('logged in')
         console.log(firebaseUser)
-        this.setState({ user: firebaseUser, loading: false });
+        this.setState({ user: firebaseUser, showSpinner: false });
       } else {
         console.log('logged out')
-        // this.handleSpinner();
         this.setState({user: null});
       }
     });
 
-    // this.handleSpinner()
     fetch("https://api.themoviedb.org/3/genre/movie/list?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US")
       .then((response) => {
         return response.json();
@@ -201,7 +199,7 @@ class App extends Component {
         let edit = data.genres;
         edit.unshift({ name: "Genre" })
         this.setState({ genres: edit });
-        this.handleSpinner();
+        this.handleSpinner()
       })
       .catch(function (err) {
         //do something with the error
@@ -221,6 +219,7 @@ class App extends Component {
         return updatePromise;
       })
       .catch((err) => {
+        this.handleSpinner();
         this.setState({ errorMessage: err.message })
       });
   }
@@ -234,6 +233,7 @@ class App extends Component {
       this.handleSpinner();
     })
       .catch((err) => {
+        this.handleSpinner();
         this.setState({ errorMessage: err })
       });
   }
@@ -332,7 +332,7 @@ class LoginPage extends Component {
       <div>
         <Route path="/" />
         <LoginNav getState={this.props.getState} signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
-        <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} handleSpinner={this.handleSpinner}/>
+        <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} handleSpinner={this.props.handleSpinner}/>
         <Description />
         <Tools />
         <Footer />
@@ -346,7 +346,7 @@ class HomePage extends Component {
     return (
       <div>
         <Route path="/home" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} handleSpinner={this.props.handleSpinner}/>
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} handleSpinner={this.props.handleSpinner} />
         <Parallax />
