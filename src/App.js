@@ -4,7 +4,6 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-<<<<<<< HEAD
 import { Header } from './components/Header';
 import { Parallax, LoginPar } from './components/Parallax';
 import { Description } from './components/Description';
@@ -17,7 +16,6 @@ import { SearchCards } from './components/SearchCards';
 import { SearchBox } from './components/SearchBox';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faFilm } from '@fortawesome/free-solid-svg-icons';
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import { faFacebook } from '@fortawesome/free-brands-svg-icons';
@@ -25,27 +23,6 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faImdb } from '@fortawesome/free-brands-svg-icons';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
-=======
-import { Header } from './components/Header'
-import { Parallax, LoginPar } from './components/Parallax'
-import { Description } from './components/Description'
-import { Tools } from './components/Tools'
-import { Footer } from './components/Footer'
-import { ContentTop } from './components/ContentTop'
-import { ContentWatch } from './components/ContentWatch'
-import { ProfileBody } from './components/ProfileBody'
-import { SearchCards } from './components/SearchCards'
-import { SearchBox } from './components/SearchBox'
-
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faFilm } from '@fortawesome/free-solid-svg-icons'
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
-import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { faInstagram } from '@fortawesome/free-brands-svg-icons'
-import { faImdb } from '@fortawesome/free-brands-svg-icons'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
->>>>>>> f26653f528b7d42396b8a2ac1132cb04507eb3bc
 
 import Loader from 'react-loader-spinner'
 
