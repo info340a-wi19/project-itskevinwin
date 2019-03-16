@@ -25,6 +25,8 @@ import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faImdb } from '@fortawesome/free-brands-svg-icons'
 import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
+import Loader from 'react-loader-spinner'
+
 library.add(faFilm);
 library.add(faCalendarAlt);
 library.add(faImdb);
@@ -253,7 +255,12 @@ class App extends Component {
     if (this.state.showSpinner) {
       return (
         <div className="text-center">
-          <FontAwesomeIcon icon='spinner' size='3x' />
+          <Loader 
+         type="Rings"
+         color="#D43F3F"
+         height="250"	
+         width="250"
+      /> 
         </div>)
     }
     if (!this.state.hasError) {
