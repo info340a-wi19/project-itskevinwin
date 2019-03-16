@@ -76,15 +76,12 @@ export class Header extends Component {
                 }
             })
             .catch((err) => {
-                //do something with the error
                 this.props.hasError();
-
-                console.error(err);  //e.g., show in the console
             });
     }
 
     callError = () => {
-        this.props.hasError() ;
+        this.props.hasError();
     }
     render() {
         return (
@@ -115,7 +112,6 @@ export class Header extends Component {
 }
 
 class Filters extends Component {
-
     constructor(props) {
         super(props);
         this.state = {
