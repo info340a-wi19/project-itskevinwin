@@ -12,8 +12,7 @@ export class Parallax extends Component {
                                 can't
                                 ever decide which one to watch? Well, this website will help you with that!
                                 Rather than spending up to an hour searching for the perfect movie to watch, we'll take your
-                                preferences and find one for you!
-                            </p>
+                                preferences and find one for you! </p>
                         </div>
                         <div className="col-sm-12 col-md-3 col-lg-3 text-center">
                             <a href="#"><button type="button" className="btn btn-outline-dark btn-lg">View Profile</button></a>
@@ -53,7 +52,9 @@ export class LoginPar extends Component {
     }
 
     handleSignIn = (event) => {
+        this.props.handleSpinner();
         this.props.signInCallback(this.state.email, this.state.password);
+        this.props.handleSpinner();
     }
 
     displayLogIn = () => {
@@ -67,19 +68,19 @@ export class LoginPar extends Component {
     onEnter = (event) => {
         if (event.charCode === 13) {
             this.handleSignIn();
-            this.setState({goHome : true})
+            this.setState({ goHome: true })
         }
     }
 
     onEnterSignUp = (event) => {
         if (event.charCode === 13) {
             this.handleSignUp();
-            this.setState({goHome : true})
+            this.setState({ goHome: true })
         }
     }
 
     render() {
-        if(this.state.goHome){
+        if (this.state.goHome) {
             return (
                 <Redirect push to='/home' />
             )
@@ -93,9 +94,8 @@ export class LoginPar extends Component {
                                 <h1 className='text-center text-dark'>Welcome to MoviePicks!</h1>
                                 <p className="text-center lead">Have you ever sat down with your friends, ready to watch a movie, but
                                     can't
-                                    ever decide which one to watch? Well, this website will help you with that!
-                                    Rather than spending up to an hour searching for the perfect movie to watch, we'll take your
-                                    preferences and find one for you!
+                                    decide which one to pick? MoviePicks will help you with that!
+                                    Instead of spending up to an hour searching for a movie to watch, we'll find one for you based on your preferences!
                             </p>
                                 <div className="container d-sm-none">
                                     <div className="row justify-content-center">
@@ -123,7 +123,7 @@ export class LoginPar extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" name="password" onChange={this.handleChange} onKeyPress={this.onEnterSignUp}/>
+                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" name="password" onChange={this.handleChange} onKeyPress={this.onEnterSignUp} />
                                         </div>
                                         <div className="row justify-content-center">
                                             <Link to='/home' className="btn btn-outline-dark" id="sign-up-button" onClick={this.handleSignUp}>Sign Up</Link>
@@ -148,25 +148,25 @@ export class LoginPar extends Component {
                             </p>
                                 <div className="container d-sm-none">
                                     <div className="row justify-content-center">
-                                        <h1 className="text-center">Get started now!</h1>
+                                        <h1 className="text-center">Get started!</h1>
                                         <form className="container">
                                             <div className="form-group text-dark">
                                                 <label htmlFor="exampleInputEmail1" className="title">Name</label>
                                                 <div className="row">
                                                     <div className="col-6">
-                                                        <input type="text" className="form-control" placeholder="First" id="fname" aria-label="First name" name="first" onChange={this.handleChange} />
+                                                        <input type="text" className="form-control" placeholder="First" id="fname" aria-label="First Name" name="first" onChange={this.handleChange} />
                                                     </div>
                                                     <div className="col-6">
                                                         <input type="text" className="form-control" placeholder="Last" id="lname" aria-label="Last Name" name="last" onChange={this.handleChange} />
                                                     </div>
                                                 </div>
                                                 <div className="form-group">
-                                                    <label htmlFor="exampleInputEmail1" className="title">Email address</label>
-                                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="Enter email" name="email" onChange={this.handleChange} />
+                                                    <label htmlFor="exampleInputEmail1" className="title">Email</label>
+                                                    <input type="email" className="form-control" id="exampleInputEmail1" placeholder="email@example.com" name="email" onChange={this.handleChange} />
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} onKeyPress={this.onEnterSignUp}/>
+                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" name="password" onChange={this.handleChange} onKeyPress={this.onEnterSignUp} />
                                                 </div>
                                                 <div className="row justify-content-between px-3">
                                                     <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.displaySignUp}>Back</Link>
@@ -206,7 +206,7 @@ export class LoginPar extends Component {
                                                     </div>
                                                     <div className="form-group col-6">
                                                         <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} onKeyPress={this.onEnter}/>
+                                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} onKeyPress={this.onEnter} />
                                                     </div>
                                                 </div>
                                                 <div className="row justify-content-between px-3">
@@ -223,6 +223,5 @@ export class LoginPar extends Component {
                 </div>
             );
         }
-
     }
 }

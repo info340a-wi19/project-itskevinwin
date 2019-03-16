@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 export class SearchBox extends Component {
     constructor(props){
         super(props);
-        this.state = { id : undefined, searchTerm: ''}
+        this.state = {id : undefined, searchTerm: ''}
     }
 
     componentDidMount() {
@@ -35,8 +35,10 @@ export class SearchBox extends Component {
                 this.props.handleSpinner();
                 if (data.results.length !== 0) {
                     this.props.addSearchResults(data.results[0]);
+                    this.props.handleSpinner();
                     return fetch( 'https://api.themoviedb.org/3/movie/' + data.results[0]['id'] + '/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1')
                 } else {
+                    this.props.handleSpinner();
                     this.props.hasError();
                 }
             }).then((response) => {
@@ -56,11 +58,6 @@ export class SearchBox extends Component {
     }
 
     render() {
-        let movie = this.props.getState().search; //shortcut
-        if(this.state.redirect){
-            let url = '/search/' + movie;
-            return <Redirect push to={url} />
-        }
         return(
             <input className="input-form form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
           
