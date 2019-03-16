@@ -294,8 +294,8 @@ header{
 }
 
 .search-btn {
-   text-align: center;
-   color: #e6c300;
+   justify-content: center;
+   display: flex;
 }
 
 .search-jumbo { 
@@ -308,6 +308,10 @@ header{
     color: white;
 }
 
+.search-card { 
+    flex-wrap: wrap;
+    justify-content: center;
+}
 
 
 
@@ -590,6 +594,10 @@ hr.dark{
 
     .w-sim{
         width: 75% !important;
+    }
+
+    .search-card { 
+        flex-wrap: nowrap;
     }
 
 }
