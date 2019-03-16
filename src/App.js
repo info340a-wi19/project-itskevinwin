@@ -292,7 +292,7 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path='/' render={(routeProps) => (
-                <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} showError={showError} />
+                <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} showError={showError} handleSpinner={this.handleSpinner}/>
               )} />
               <Route path='/home' render={(routeProps) => (
                 <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
