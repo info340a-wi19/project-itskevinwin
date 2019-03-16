@@ -8,8 +8,8 @@ export class SearchCards extends Component {
             <div>
                 <div>
                     {this.props.searchResults.map((item) => {
-                        return <SearchCard getState={this.props.getState} key={item.title + item.release_date} addToList={this.props.addToList} 
-                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} item={item} handleSpinner={this.props.handleSpinner}                        />
+                        return <SearchCard getState={this.props.getState} key={item.title + item.release_date} addToList={this.props.addToList}
+                            addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} item={item} handleSpinner={this.props.handleSpinner} />
                     })}
                 </div>
             </div>
@@ -23,11 +23,11 @@ class SearchCard extends Component {
         // this.props.handleSpinner();
         this.props.addContent(this.props.item);
     }
-    
+
     render() {
         return (
             <div className="card flex-row col-12">
-                <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} className="img-card" alt={this.props.item.title}/>
+                <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} className="img-card" alt={this.props.item.title} />
                 <div className="d-flex flex-column">
                     <div className="card-body">
                         <div className="flex-column">

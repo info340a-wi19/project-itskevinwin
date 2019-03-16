@@ -25,7 +25,6 @@ export class SearchBox extends Component {
         let query = '&query=' + curValue;
         url = url + query;
 
-        console.log(url);
         this.props.handleSpinner();
         fetch(url)
             .then((response) => {
@@ -48,9 +47,7 @@ export class SearchBox extends Component {
                 });
             })
             .catch((err) => {
-                //do something with the error
-                // this.props.hasError();
-                console.error(err);  //e.g., show in the console
+               //ERROR
             });
         }
     }
@@ -58,7 +55,6 @@ export class SearchBox extends Component {
     render() {
         return(
             <input className="input-form form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
-          
         );
-    };
+    }
 }
