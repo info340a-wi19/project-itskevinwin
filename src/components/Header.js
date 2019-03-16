@@ -159,7 +159,6 @@ class Filters extends Component {
     }
 }
 
-const genres = []
 const certs = [
     {
         "id": 1,

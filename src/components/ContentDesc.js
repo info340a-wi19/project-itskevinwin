@@ -14,9 +14,9 @@ export class ContentDesc extends Component {
         console.log(this.state);
         let btn;
         if(this.props.clickedNewMovie) {
-            btn = (<button ref="btn" id="myBtn" className="btn btn-outline-secondary btn-lg" role="button" onClick={this.updateList}>Add to 'Watch Later'</button>)
+            btn = (<button ref="btn" id="myBtn" className="btn btn-outline-secondary btn-lg" onClick={this.updateList}>Add to 'Watch Later'</button>)
         } else {
-            btn = (<button ref="btn" id="myBtn" className="btn btn-outline-secondary btn-lg" role="button" onClick={this.updateList} disabled>Add to 'Watch Later'</button>)
+            btn = (<button ref="btn" id="myBtn" className="btn btn-outline-secondary btn-lg" onClick={this.updateList} disabled>Add to 'Watch Later'</button>)
         }
         return (
             <div className="container-fluid padding pt-2">
