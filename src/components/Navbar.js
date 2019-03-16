@@ -145,9 +145,6 @@ export class LoginNav extends Component {
                             <NavLink href="/">Home</NavLink>
                         </NavItem>
                         <NavItem>
-                            <NavLink href="#">About</NavLink>
-                        </NavItem>
-                        <NavItem>
                             <NavLink href="#" onClick={this.toggleModal}>Login</NavLink>
                             <Modal isOpen={this.state.modal} toggle={this.toggleModal}>
                                 <ModalHeader toggle={this.toggleModal}>Welcome Back!</ModalHeader>
