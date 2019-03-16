@@ -20,12 +20,9 @@ export class SearchCards extends Component {
 
 class SearchCard extends Component {
     onClick = (event) => {
-    // console.log(this.props.item);
-    //   this.props.emptySimilar();
       this.props.addContent(this.props.item);
-      console.log(this.props.getState().item)
-    //   this.props.addRecs();
     }
+    
     render() {
         return (
             <div className="card flex-row col-12">

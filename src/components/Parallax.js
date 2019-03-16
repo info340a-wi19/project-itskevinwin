@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-
-import { Link } from 'react-router-dom';
+import firebase from 'firebase/app';
+import { Link, Redirect } from 'react-router-dom';
 
 export class Parallax extends Component {
     render() {
@@ -36,7 +36,8 @@ export class LoginPar extends Component {
             email: undefined,
             password: undefined,
             first: undefined,
-            last: undefined
+            last: undefined,
+            goHome: false
         }
     }
 
@@ -64,8 +65,26 @@ export class LoginPar extends Component {
         this.setState({ signUp: !this.state.signUp });
     }
 
+    onEnter = (event) => {
+        if (event.charCode === 13) {
+            this.handleSignIn();
+            this.setState({goHome : true})
+        }
+    }
+
+    onEnterSignUp = (event) => {
+        if (event.charCode === 13) {
+            this.handleSignUp();
+            this.setState({goHome : true})
+        }
+    }
 
     render() {
+        if(this.state.goHome){
+            return (
+                <Redirect push to='/home' />
+            )
+        }
         if (!this.state.signUp && !this.state.login) {
             return (
                 <div className="parallax">
@@ -105,7 +124,7 @@ export class LoginPar extends Component {
                                         </div>
                                         <div className="form-group">
                                             <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" name="password" onChange={this.handleChange} />
+                                            <input type="password" className="form-control" id="exampleInputPassword1" placeholder="password" name="password" onChange={this.handleChange} onKeyPress={this.onEnterSignUp}/>
                                         </div>
                                         <div className="row justify-content-center">
                                             <Link to='/home' className="btn btn-outline-dark" id="sign-up-button" onClick={this.handleSignUp}>Sign Up</Link>
@@ -148,7 +167,7 @@ export class LoginPar extends Component {
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
+                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} onKeyPress={this.onEnterSignUp}/>
                                                 </div>
                                                 <div className="row justify-content-between px-3">
                                                     <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.displaySignUp}>Back</Link>
@@ -188,7 +207,7 @@ export class LoginPar extends Component {
                                                     </div>
                                                     <div className="form-group col-6">
                                                         <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
+                                                        <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} onKeyPress={this.onEnter}/>
                                                     </div>
                                                 </div>
                                                 <div className="row justify-content-between px-3">

@@ -25,6 +25,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faImdb } from '@fortawesome/free-brands-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 
@@ -37,6 +38,7 @@ library.add(faImdb);
 library.add(faFacebook);
 library.add(faTwitter);
 library.add(faInstagram);
+library.add(faSpinner);
 
 
 class App extends Component {
@@ -60,9 +62,12 @@ class App extends Component {
       search: '',
       searchResults: [],
       searchPressed: false,
+<<<<<<< HEAD
       searchTerm: '',
+=======
+      showSpinner: false
+>>>>>>> 1fccd31059fefad2a6832d278c85219ad813e603
     }
-    
   }
 
   addToList = (item) => {
@@ -232,9 +237,12 @@ class App extends Component {
 
   //A callback function for logging in existing users
   handleSignIn = (email, password) => {
+    this.handleSpinner();
     this.setState({ errorMessage: null }); //clear any old errors
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+      this.handleSpinner();
+    })
       .catch((err) => {
         this.setState({ errorMessage: err })
       });
@@ -248,26 +256,37 @@ class App extends Component {
     firebase.auth().signOut();
   }
 
+  handleSpinner = () => {
+    this.setState({showSpinner : !this.state.showSpinner})
+  }
+
   render() {
+    if(this.state.showSpinner){
+      return(
+      <div className="text-center">
+        <FontAwesomeIcon icon='spinner' size='3x' />
+      </div>)
+    }
     if (!this.state.hasError) {
       return (
         <div>
         <Router>
           <Switch>
             <Route exact path='/' render={(routeProps) => (
-              <LoginPage {...routeProps} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} />
+              <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} />
             )} />
             <Route path='/home' render={(routeProps) => (
               <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
                 addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.updateError} updateSearch={this.updateSearch}
-                addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} handleSignOut={this.handleSignOut} user={this.state.user} />
+                addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} handleSignOut={this.handleSignOut} user={this.state.user} 
+                emptySearchResults={this.emptySearchResults}/>
             )} />
             <Route path='/interacted' render={(routeProps) => (
                 <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating}
                   recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
                   updateSearch={this.updateSearch} addSearchResults={this.addSearchResults}
                   addToList={this.addToList} removeFromList={this.removeFromList} hasError={this.updateError}
-                  addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations}/>
+                  addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations} emptySearchResults={this.emptySearchResults}/>
               )} />
             <Route path='/search/' render={(routeProps) => (
               <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
@@ -281,7 +300,7 @@ class App extends Component {
             )} />
             <Route path='/myprofile/:uid' render={(routeProps) => (
             <MyProfile {...routeProps} getState={this.getState} searchResults={this.state.searchResults} addSearchResults={this.addSearchResults} updateSearch={this.updateSearch} list={this.state.watchList} 
-            removeFromList={this.removeFromList} handleSignOut={this.handleSignOut} user={this.state.user} ></MyProfile>
+            removeFromList={this.removeFromList} handleSignOut={this.handleSignOut} user={this.state.user} emptySearchResults={this.emptySearchResults} addContent={this.addContent}></MyProfile>
           )} />
             <Redirect to="/" />
 
@@ -303,10 +322,14 @@ class MyProfile extends Component {
   render() {
     return (
       <div>
-      <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} handleSignOut={this.props.handleSignOut}  />
+      <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} />
       <Route path="/myprofile" />
+<<<<<<< HEAD
       <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList} user={this.props.user}/>
 
+=======
+      <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList} user={this.props.user} addContent={this.props.addContent}/>
+>>>>>>> 1fccd31059fefad2a6832d278c85219ad813e603
       </div>
     );
   }
@@ -316,7 +339,8 @@ class LoginPage extends Component {
   render() {
     return (
       <div>
-        <LoginNav signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
+        <Route path="/" />
+        <LoginNav getState={this.props.getState} signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
         <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
         <Description />
         <Tools />
@@ -331,7 +355,7 @@ class HomePage extends Component {
     return (
       <div>
         <Route path="/home" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults}/>
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} />
         <Parallax />
@@ -348,7 +372,7 @@ class Content extends Component {
     return (
       <div>
         <Route path="/interacted" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut}  />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         
         <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} recs={this.props.recs} addToList={this.props.addToList} emptySimilar={this.props.emptySimilar}

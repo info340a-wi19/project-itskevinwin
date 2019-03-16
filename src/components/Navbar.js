@@ -49,6 +49,13 @@ export class Nav extends Component {
         )
         }
 
+        // firebase.auth().onAuthStateChanged((user) => {
+            if(!this.props.getState().user){
+                return(<Redirect push to='/' />)
+                }
+        // });
+
+
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark sticky-nav" expand="md">
                 <NavbarBrand href="/home">MoviePicks</NavbarBrand>
@@ -65,7 +72,7 @@ export class Nav extends Component {
                             <div className="nav-link"  onClick={this.handleClick}>Watch Later</div>
                         </NavItem>
                         <NavItem>
-                            <Link className="nav-link" to="/search/">Search</Link>
+                            <Link className="nav-link" to="/search/" onClick={this.emptySearchResults}>Search</Link>
                         </NavItem>
                         <NavItem>
                             <Link className="nav-link" to="/" onClick={this.props.handleSignOut}>Log Out</Link>
@@ -88,7 +95,8 @@ export class LoginNav extends Component {
             isOpen: false,
             modal: false,
             email: undefined,
-            password: undefined
+            password: undefined,
+            goHome: false
         };
     }
 
@@ -109,6 +117,7 @@ export class LoginNav extends Component {
     onEnter = (event) => {
         if (event.charCode === 13) {
             this.handleSignIn();
+            this.setState({goHome : true})
         }
     }
 
@@ -125,6 +134,16 @@ export class LoginNav extends Component {
     }
 
     render() {
+        if(this.state.goHome){
+            return (
+                <Redirect push to='/home' />
+            )
+        }
+
+        if(this.props.getState().user){
+            return(<Redirect push to='home' />);
+        }
+
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark" expand="md">
                 <NavbarBrand href="/">MoviePicks</NavbarBrand>

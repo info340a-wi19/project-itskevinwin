@@ -8,7 +8,8 @@ export class ContentWatch extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            movies: ''
+            movies: '',
+            clickedNewMovie: true
         }
     }
 
@@ -17,43 +18,53 @@ export class ContentWatch extends Component {
         this.forceUpdate();
     }
 
+    handleNewMovie = () => {
+        this.setState({clickedNewMovie: false});
+    }
+
+    handleNewMovieTwo = () => {
+        this.setState({clickedNewMovie: true});
+    }
+
     render() {
-        console.log(this.props.item);
         return (
             <div>
-             <ContentDesc item={this.props.item} addToList={this.props.addToList} revealUpdate={this.revealUpdate} />
-            <WatchList list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate}></WatchList>
+             <ContentDesc item={this.props.item} addToList={this.props.addToList} revealUpdate={this.revealUpdate} clickedNewMovie={this.state.clickedNewMovie} handleNewMovie={this.handleNewMovie} />
+            <WatchList list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate} newMovie={this.state.newMovie}></WatchList>
             <ContentSim recs={this.props.recs} addToList={this.props.addToList} revealUpdate={this.revealUpdate} emptySimilar={this.props.emptySimilar}
                 recs={this.props.recs} addToList={this.props.addToList} selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
+<<<<<<< HEAD
                 addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError}/>
+=======
+                addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} revealUpdate={this.revealUpdate} handleNewMovieTwo={this.handleNewMovieTwo} />
+>>>>>>> 1fccd31059fefad2a6832d278c85219ad813e603
             </div>
         );
     }
 
     componentDidMount() {
         firebase.auth().onAuthStateChanged((user) => {
-        if(user){
-        let movieArray = '';
-        let userID = firebase.auth().currentUser.uid;
-        firebase.database().ref(userID).once('value').then((snapshot) => {
-        let movieObject = snapshot.val();
-        if(movieObject == null) {
-            movieArray =''
-        } else {
-        let movieKeys = Object.keys(movieObject);
-            movieArray = movieKeys.map((key) => {
-                let movie = movieObject[key];
-                movie.key = key;
-                return movie;
-            });
-        }
-        this.setState({movies: movieArray})
-    })
-}
-    })
+            if(user){
+                let movieArray = '';
+                let userID = firebase.auth().currentUser.uid;
+                firebase.database().ref(userID).once('value').then((snapshot) => {
+                let movieObject = snapshot.val();
+                if(movieObject === null) {
+                    movieArray =''
+                } else {
+                let movieKeys = Object.keys(movieObject);
+                    movieArray = movieKeys.map((key) => {
+                        let movie = movieObject[key];
+                        movie.key = key;
+                        return movie;
+                    });
+                }
+                this.setState({movies: movieArray})
+            })
+            }
+        })
+        
     }
-
-
 }
 
 class WatchList extends Component {
