@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 
 export class Header extends Component {
     onClick = () => {
+        this.props.handleSpinner();
         let url = "https://api.themoviedb.org/3/discover/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&sort_by=popularity.desc&certification_country=US&include_adult=false&include_video=false&page=1";
         let curState = this.props.getState();
 
@@ -69,6 +70,7 @@ export class Header extends Component {
                     let num = Math.floor(Math.random() * data.results.length);
                     this.props.addContent(data.results[num]);
                     this.props.addRecs();
+                    this.props.handleSpinner();
                 } else {
                     this.props.hasError();
                 }

@@ -9,7 +9,7 @@ export class SearchCards extends Component {
                 <div>
                     {this.props.searchResults.map((item) => {
                         return <SearchCard getState={this.props.getState} key={item.title + item.release_date} addToList={this.props.addToList} 
-                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} item={item}/>
+                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} item={item} handleSpinner={this.props.handleSpinner}                        />
                     })}
                 </div>
             </div>
@@ -20,7 +20,8 @@ export class SearchCards extends Component {
 
 class SearchCard extends Component {
     onClick = (event) => {
-      this.props.addContent(this.props.item);
+        // this.props.handleSpinner();
+        this.props.addContent(this.props.item);
     }
     
     render() {
