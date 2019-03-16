@@ -48,20 +48,17 @@ export class Nav extends Component {
         // firebase.auth().onAuthStateChanged((user) => {
         if (!this.props.getState().user) {
             return (<Redirect push to='/' />)
-        }
+        } 
         // });
 
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark sticky-nav" expand="md">
-                <NavbarBrand href="/home">MoviePicks</NavbarBrand>
+                <NavbarBrand><Link className="text-white" to="/home">MoviePicks</Link></NavbarBrand>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <NavStrap className="ml-auto" navbar>
                         <NavItem>
                             <Link className="nav-link" to="/home">Home</Link>
-                        </NavItem>
-                        <NavItem>
-                            <Link className="nav-link" to="#">About</Link>
                         </NavItem>
                         <NavItem>
                             <div className="nav-link" onClick={this.handleClick}>Watch Later</div>
