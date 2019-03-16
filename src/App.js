@@ -62,11 +62,8 @@ class App extends Component {
       search: '',
       searchResults: [],
       searchPressed: false,
-<<<<<<< HEAD
       searchTerm: '',
-=======
       showSpinner: false
->>>>>>> 1fccd31059fefad2a6832d278c85219ad813e603
     }
   }
 
@@ -324,12 +321,7 @@ class MyProfile extends Component {
       <div>
       <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} />
       <Route path="/myprofile" />
-<<<<<<< HEAD
-      <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList} user={this.props.user}/>
-
-=======
       <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList} user={this.props.user} addContent={this.props.addContent}/>
->>>>>>> 1fccd31059fefad2a6832d278c85219ad813e603
       </div>
     );
   }
