@@ -124,11 +124,13 @@ class App extends Component {
   addRecommendations = () => {
     let url = "https://api.themoviedb.org/3/movie/" + this.state.item.id + "/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US";
     let prevState = [];
+    this.handleSpinner();
     fetch(url)
       .then((response) => {
         let dataPromise = response.json();
         return dataPromise;
       }).then((data) => {
+        this.handleSpinner();
         if (data.length !== 0) {
           data.results.forEach((item) => {
             if (this.state.item.title !== item.title && item.poster_path !== null && item.poster_path !== undefined) {
@@ -372,7 +374,7 @@ class SearchPage extends Component {
         <Route path="/search/" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
-          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} />
+          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSpinner={this.props.handleSpinner}/>
         <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList}
           addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
       </div>
@@ -386,7 +388,8 @@ class SearchResults extends Component {
       <div>
         <Route path="/search/:movieName" />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
-          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSignOut={this.props.handleSignOut} />
+          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSignOut={this.props.handleSignOut} 
+          handleSpinner={this.props.handleSpinner}/>
         <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList}
           addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
       </div>
