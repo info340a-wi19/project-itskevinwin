@@ -54,7 +54,9 @@ export class LoginPar extends Component {
     }
 
     handleSignIn = (event) => {
+        this.props.handleSpinner();
         this.props.signInCallback(this.state.email, this.state.password);
+        this.props.handleSpinner();
     }
 
     displayLogIn = () => {

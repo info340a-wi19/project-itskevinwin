@@ -39,6 +39,10 @@ export class ContentWatch extends Component {
     }
 
     componentDidMount() {
+        console.log(this.props.getState().showSpinner)
+        // if(this.props.getState().showSpinner === true){
+        //     this.props.handleSpinner();
+        // }
         firebase.auth().onAuthStateChanged((user) => {
             if(user){
                 let movieArray = '';

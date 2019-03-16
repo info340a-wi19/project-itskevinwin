@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 export class SearchBox extends Component {
     constructor(props){
         super(props);
-        this.state = {redirect : false, id : undefined, searchTerm: ''}
+        this.state = {id : undefined, searchTerm: ''}
     }
 
     componentDidMount() {
@@ -17,8 +17,6 @@ export class SearchBox extends Component {
     handleSearch = (event) => {
         if (event.charCode === 13) {
         event.preventDefault();
-        this.setState({redirect : true})
-        this.setState({redirect : false})
         this.props.emptySearchResults()
         let curValue = this.props.getState().search;
         this.setState({searchTerm: curValue});
@@ -28,6 +26,7 @@ export class SearchBox extends Component {
         url = url + query;
 
         console.log(url);
+        this.props.handleSpinner();
         fetch(url)
             .then((response) => {
                 let dataPromise = response.json();
@@ -35,8 +34,10 @@ export class SearchBox extends Component {
             }).then((data) => {
                 if (data.results.length !== 0) {
                     this.props.addSearchResults(data.results[0]);
+                    this.props.handleSpinner();
                     return fetch( 'https://api.themoviedb.org/3/movie/' + data.results[0]['id'] + '/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1')
                 } else {
+                    this.props.handleSpinner();
                     this.props.hasError();
                 }
             }).then((response) => {
@@ -56,11 +57,6 @@ export class SearchBox extends Component {
     }
 
     render() {
-        let movie = this.props.getState().search; //shortcut
-        if(this.state.redirect){
-            let url = '/search/' + movie;
-            return <Redirect push to={url} />
-        }
         return(
             <input className="input-form form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
           
