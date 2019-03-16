@@ -1,8 +1,26 @@
 import React, { Component } from 'react';
 import { Link, Redirect } from 'react-router-dom';
+import firebase from 'firebase/app';
 
 export class Parallax extends Component {
+    constructor(props) {
+        super(props);
+        this.state = ({redirect: false})
+    }
+    handleClick = () => {
+        let curr = !this.state.redirect;
+        this.setState({ redirect: curr })
+    }
+
     render() {
+        if (this.state.redirect) {
+            let userID = firebase.auth().currentUser.uid;
+            let rightPath = "/myprofile/" + userID;
+            return (
+                <Redirect push to={rightPath} />
+            )
+        }
+        
         return (
             <div className="parallax">
                 <div className="container-fluid">
@@ -15,7 +33,7 @@ export class Parallax extends Component {
                                 preferences and find one for you! </p>
                         </div>
                         <div className="col-sm-12 col-md-3 col-lg-3 text-center">
-                            <a href="#"><button type="button" className="btn btn-outline-dark btn-lg">View Profile</button></a>
+                            <button type="button" className="btn btn-outline-dark btn-lg" onClick={this.handleClick}>View Profile</button>
                         </div>
                     </div>
                 </div>

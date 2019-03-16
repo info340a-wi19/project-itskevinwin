@@ -16,7 +16,6 @@ import { SearchCards } from './components/SearchCards'
 import { SearchBox } from './components/SearchBox'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faFilm } from '@fortawesome/free-solid-svg-icons'
 import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
 import { faFacebook } from '@fortawesome/free-brands-svg-icons'
@@ -366,7 +365,7 @@ class Content extends Component {
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} recs={this.props.recs} addToList={this.props.addToList} emptySimilar={this.props.emptySimilar}
-          recs={this.props.recs} addToList={this.props.addToList} selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
+          selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} handleSpinner={this.props.handleSpinner}
         />
         <Footer />
@@ -407,26 +406,3 @@ class SearchResults extends Component {
 }
 
 export default App;
-
-const certs = [
-  {
-    "id": 1,
-    "name": "G"
-  },
-  {
-    "id": 2,
-    "name": "PG"
-  },
-  {
-    "id": 3,
-    "name": "PG-13"
-  },
-  {
-    "id": 4,
-    "name": "R"
-  },
-  {
-    "id": 5,
-    "name": "NC-17"
-  }
-]
