@@ -35,10 +35,8 @@ export class SearchBox extends Component {
                 this.props.handleSpinner();
                 if (data.results.length !== 0) {
                     this.props.addSearchResults(data.results[0]);
-                    this.props.handleSpinner();
                     return fetch( 'https://api.themoviedb.org/3/movie/' + data.results[0]['id'] + '/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1')
                 } else {
-                    this.props.handleSpinner();
                     this.props.hasError();
                 }
             }).then((response) => {
