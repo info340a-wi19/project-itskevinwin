@@ -124,7 +124,7 @@ class Movie extends Component {
                                 <p className="img_description col-sm-12 text-center">{overview}</p>
                                 </Link>
                                 <button type="submit" className="btn btn-danger col-sm-6 rmvBtn w-75"
-                                    role="button" onClick={this.remove}>Remove</button>
+                                    onClick={this.remove}>Remove</button>
                             </div>
                         </div>
                     </div>

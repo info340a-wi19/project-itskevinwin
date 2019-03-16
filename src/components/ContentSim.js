@@ -71,7 +71,7 @@ class Slide extends Component {
             <Link to="./interacted" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
               <p className="img_description col-sm-12 wrapword">{overview}</p>
             </Link>
-            <button ref="btn" type="submit" className="similar-btn btn btn-success col-sm-6" role="button" onClick={this.updateList}>Watch
+            <button ref="btn" type="submit" className="similar-btn btn btn-success col-sm-6" onClick={this.updateList}>Watch
                                                             Later</button>
           </div>
         </div>

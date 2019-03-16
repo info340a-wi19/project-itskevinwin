@@ -7,11 +7,7 @@ import {
     NavbarBrand,
     Nav as NavStrap,
     NavItem,
-    NavLink,
-    UncontrolledDropdown,
-    DropdownToggle,
-    DropdownMenu,
-    DropdownItem
+    NavLink
 } from 'reactstrap';
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from 'reactstrap';
 import firebase from 'firebase/app';
