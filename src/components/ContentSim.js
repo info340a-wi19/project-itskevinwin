@@ -64,7 +64,7 @@ class Slide extends Component {
         <img className="d-block" src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} />
         <div className="container">
           <div className="small_img_description_layer row mt-0">
-            <Link to="./interacted" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
+            <Link to="./description" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
               <p className="img_description col-sm-12 wrapword">{overview}</p>
             </Link>
             <button ref="btn" type="submit" className="similar-btn btn btn-success col-sm-6" onClick={this.updateList}>Watch Later</button>

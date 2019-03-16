@@ -4,26 +4,26 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import firebase from 'firebase/app';
 import 'firebase/database';
 
-import { Header } from './components/Header'
-import { Parallax, LoginPar } from './components/Parallax'
-import { Description } from './components/Description'
-import { Tools } from './components/Tools'
-import { Footer } from './components/Footer'
-import { ContentTop } from './components/ContentTop'
-import { ContentWatch } from './components/ContentWatch'
-import { ProfileBody } from './components/ProfileBody'
-import { SearchCards } from './components/SearchCards'
-import { SearchBox } from './components/SearchBox'
+import { Header } from './components/Header';
+import { Parallax, LoginPar } from './components/Parallax';
+import { Description } from './components/Description';
+import { Tools } from './components/Tools';
+import { Footer } from './components/Footer';
+import { ContentTop } from './components/ContentTop';
+import { ContentWatch } from './components/ContentWatch';
+import { ProfileBody } from './components/ProfileBody';
+import { SearchCards } from './components/SearchCards';
+import { SearchBox } from './components/SearchBox';
 
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faFilm } from '@fortawesome/free-solid-svg-icons'
-import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
-import { faFacebook } from '@fortawesome/free-brands-svg-icons'
-import { faTwitter } from '@fortawesome/free-brands-svg-icons'
-import { faInstagram } from '@fortawesome/free-brands-svg-icons'
-import { faImdb } from '@fortawesome/free-brands-svg-icons'
-import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faFilm } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
+import { faFacebook } from '@fortawesome/free-brands-svg-icons';
+import { faTwitter } from '@fortawesome/free-brands-svg-icons';
+import { faInstagram } from '@fortawesome/free-brands-svg-icons';
+import { faImdb } from '@fortawesome/free-brands-svg-icons';
+import { faSpinner } from '@fortawesome/free-solid-svg-icons';
 
 import Loader from 'react-loader-spinner'
 
@@ -40,6 +40,7 @@ class App extends Component {
 
   genres = [];
 
+  //set state
   constructor(props) {
     super(props);
     this.state = {
@@ -61,11 +62,13 @@ class App extends Component {
     }
   }
 
+  //add users to firebase
   addToList = (item) => {
     let userID = firebase.auth().currentUser.uid;
     firebase.database().ref(userID).push(item);
   }
 
+  //remove user from firebase
   removeFromList = (item) => {
     let userID = firebase.auth().currentUser.uid;
     if (userID) {
@@ -73,7 +76,7 @@ class App extends Component {
     }
   }
 
-
+  //get movie genre from filters
   getGenres = (item) => {
     let genreIds = item.genre_ids;
     let genreNames = genreIds.map((genreId) => {
@@ -93,6 +96,7 @@ class App extends Component {
     this.setState({ genreNames: genresComplete });
   }
 
+  //update state from users preferences
   updateState = (genre, rating, score, year) => {
     this.setState({
       genre: genre,
@@ -102,31 +106,37 @@ class App extends Component {
     });
   }
 
+  //update user search term
   updateSearch = (value) => {
     this.setState({
       search: value
     });
   }
 
+  //update to pressed if user search a term
   updateSearchPressed = () => {
     this.setState({
       searchPressed: !this.state.searchPressed
     });
   }
 
+  //return current state
   getState = () => {
     return this.state;
   }
 
+  //add movie to similar movie list
   addContent = (item) => {
     this.setState({ item: item }, this.addRecommendations)
     this.getGenres(item);
   }
 
+  //create a list of similar movies to current movie
   addRecommendations = () => {
     let url = "https://api.themoviedb.org/3/movie/" + this.state.item.id + "/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US";
     let prevState = [];
     this.handleSpinner();
+
     fetch(url)
       .then((response) => {
         let dataPromise = response.json();
@@ -149,6 +159,7 @@ class App extends Component {
       });
   }
 
+  //render list of movies based on search results
   addSearchResults = (item) => {
     let prevState = this.state.searchResults;
     let insert = true;
@@ -162,7 +173,6 @@ class App extends Component {
     if (insert) {
       prevState = prevState.concat(item);
     }
-
     this.setState({ searchResults: prevState });
   }
 
@@ -181,13 +191,10 @@ class App extends Component {
   componentDidMount() {
     this.handleSpinner()
     this.authUnRegFunc = firebase.auth().onAuthStateChanged((firebaseUser) => {
-      if(firebaseUser){
-        console.log('logged in')
-        console.log(firebaseUser)
+      if (firebaseUser) {
         this.setState({ user: firebaseUser, showSpinner: false });
       } else {
-        console.log('logged out')
-        this.setState({user: null});
+        this.setState({ user: null });
       }
     });
 
@@ -202,11 +209,11 @@ class App extends Component {
         this.handleSpinner()
       })
       .catch(function (err) {
-        //do something with the error
-        console.error(err);  //e.g., show in the console
+        console.error(err);
       });
   }
 
+  //add user to firebase when sign up with email, password, first and last name
   handleSignUp = (email, password, first, last) => {
     this.handleSpinner();
     this.setState({ errorMessage: null }); //clear any old errors
@@ -224,7 +231,7 @@ class App extends Component {
       });
   }
 
-  //A callback function for logging in existing users
+  //callback function for logging in existing users
   handleSignIn = (email, password) => {
     this.handleSpinner();
     this.setState({ errorMessage: null }); //clear any old errors
@@ -238,7 +245,7 @@ class App extends Component {
       });
   }
 
-  //A callback function for logging out the current user
+  //callback function for logging out the current user
   handleSignOut = () => {
     this.handleSpinner();
     this.setState({ errorMessage: null }); //clear any old errors
@@ -255,30 +262,30 @@ class App extends Component {
     if (this.state.showSpinner) {
       return (
         <div className="text-center">
-          <Loader 
-         type="Rings"
-         color="#D43F3F"
-         height="250"	
-         width="250"
-      /> 
+          <Loader
+            type="Rings"
+            color="#D43F3F"
+            height="250"
+            width="250"
+          />
         </div>)
     }
     if (!this.state.hasError) {
       return (
         <div>
-        <Router>
-          <Switch>
-            <Route exact path='/' render={(routeProps) => (
-              <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} />
-            )} />
-            <Route path='/home' render={(routeProps) => (
-              <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
-                addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.hasError} updateSearch={this.updateSearch}
-                addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} handleSignOut={this.handleSignOut} user={this.state.user} 
-                emptySearchResults={this.emptySearchResults} handleSpinner={this.handleSpinner} />
-            )} />
-            <Route path='/interacted' render={(routeProps) => (
-                <Content {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating}
+          <Router>
+            <Switch>
+              <Route exact path='/' render={(routeProps) => (
+                <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} />
+              )} />
+              <Route path='/home' render={(routeProps) => (
+                <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
+                  addContent={this.addContent} addRecs={this.addRecommendations} genres={this.state.genres} hasError={this.hasError} updateSearch={this.updateSearch}
+                  addSearchResults={this.addSearchResults} enterUpdate={this.enterUpdate} searchBoolean={this.state.entered} handleSignOut={this.handleSignOut} user={this.state.user}
+                  emptySearchResults={this.emptySearchResults} handleSpinner={this.handleSpinner} />
+              )} />
+              <Route path='/description' render={(routeProps) => (
+                <MovieDescription {...routeProps} getState={this.getState} item={this.state.item} rating={this.state.rating}
                   recs={this.state.recs} list={this.state.watchList} genreNames={this.state.genreNames}
                   updateSearch={this.updateSearch} addSearchResults={this.addSearchResults}
                   addToList={this.addToList} removeFromList={this.removeFromList} hasError={this.hasError}
@@ -314,6 +321,7 @@ class App extends Component {
   }
 }
 
+//my profile page
 class MyProfile extends Component {
   render() {
     return (
@@ -326,13 +334,14 @@ class MyProfile extends Component {
   }
 }
 
+//login page
 class LoginPage extends Component {
   render() {
     return (
       <div>
         <Route path="/" />
         <LoginNav getState={this.props.getState} signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
-        <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} handleSpinner={this.props.handleSpinner}/>
+        <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} handleSpinner={this.props.handleSpinner} />
         <Description />
         <Tools />
         <Footer />
@@ -341,12 +350,13 @@ class LoginPage extends Component {
   }
 }
 
+//home page
 class HomePage extends Component {
   render() {
     return (
       <div>
         <Route path="/home" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} handleSpinner={this.props.handleSpinner}/>
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} handleSpinner={this.props.handleSpinner} />
         <Header selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} handleSpinner={this.props.handleSpinner} />
         <Parallax />
@@ -358,11 +368,12 @@ class HomePage extends Component {
   }
 }
 
-class Content extends Component {
+//movie description page
+class MovieDescription extends Component {
   render() {
     return (
       <div>
-        <Route path="/interacted" />
+        <Route path="/description" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} recs={this.props.recs} addToList={this.props.addToList} emptySimilar={this.props.emptySimilar}
@@ -375,6 +386,7 @@ class Content extends Component {
   }
 }
 
+//search page
 class SearchPage extends Component {
   render() {
     return (
@@ -382,51 +394,29 @@ class SearchPage extends Component {
         <Route path="/search/" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
-          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSpinner={this.props.handleSpinner}/>
-        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList} 
-                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
+          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSpinner={this.props.handleSpinner} />
+        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList}
+          addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
       </div>
     );
   }
 }
 
+//search page with results
 class SearchResults extends Component {
   render() {
     return (
       <div>
         <Route path="/search/:movieName" />
-        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut}  />
+        <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
-          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSignOut={this.props.handleSignOut} 
-          handleSpinner={this.props.handleSpinner}/>
-        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList} 
-                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
+          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSignOut={this.props.handleSignOut}
+          handleSpinner={this.props.handleSpinner} />
+        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList}
+          addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
       </div>
     );
   }
 }
 
 export default App;
-
-const certs = [
-  {
-    "id": 1,
-    "name": "G"
-  },
-  {
-    "id": 2,
-    "name": "PG"
-  },
-  {
-    "id": 3,
-    "name": "PG-13"
-  },
-  {
-    "id": 4,
-    "name": "R"
-  },
-  {
-    "id": 5,
-    "name": "NC-17"
-  }
-]
