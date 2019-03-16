@@ -259,16 +259,16 @@ class App extends Component {
   }
 
   hasError = () => {
-    this.setState({ searchError: <p className="alert alert-danger mt-3 w-50">Sorry No Search Results!</p>})
-  }  
+    this.setState({ searchError: <p className="alert alert-danger mt-3 w-50">Sorry No Search Results!</p> })
+  }
 
   resetSearchError = () => {
-    this.setState({ searchError: ''})
+    this.setState({ searchError: '' })
   }
 
   render() {
     let showError = '';
-    if(this.state.errorMessage) {
+    if (this.state.errorMessage) {
       showError = <div>
         {this.state.errorMessage &&
           <p className="alert alert-danger">{this.state.errorMessage}</p>
@@ -292,7 +292,7 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path='/' render={(routeProps) => (
-                <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} showError={showError} handleSpinner={this.handleSpinner}/>
+                <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} showError={showError} handleSpinner={this.handleSpinner} />
               )} />
               <Route path='/home' render={(routeProps) => (
                 <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
@@ -309,12 +309,12 @@ class App extends Component {
               )} />
               <Route path='/search/' render={(routeProps) => (
                 <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-                  updateSearchPressed={this.updateSearchPressed}  emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
-                  item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations} handleSpinner={this.handleSpinner} hasError={this.hasError} resetSearchError={this.resetSearchError} searchError={this.state.searchError}/>
+                  updateSearchPressed={this.updateSearchPressed} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
+                  item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations} handleSpinner={this.handleSpinner} hasError={this.hasError} resetSearchError={this.resetSearchError} searchError={this.state.searchError} />
               )} />
               <Route path='/search/:movieName' render={(routeProps) => (
                 <SearchResults {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-                  updateSearchPressed={this.updateSearchPressed}  emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
+                  updateSearchPressed={this.updateSearchPressed} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
                   item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations} handleSpinner={this.handleSpinner} />
               )} />
               <Route path='/myprofile/:uid' render={(routeProps) => (
@@ -410,9 +410,9 @@ class SearchPage extends Component {
         <Route path="/search/" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
-        updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSpinner={this.props.handleSpinner} hasError={this.props.hasError} resetSearchError={this.props.resetSearchError} searchError={this.props.searchError}/>
-        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList} 
-                        addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
+          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} handleSpinner={this.props.handleSpinner} resetSearchError={this.props.resetSearchError} searchError={this.props.searchError} />
+        <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList}
+          addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
       </div>
     );
   }
