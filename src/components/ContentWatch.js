@@ -20,50 +20,51 @@ export class ContentWatch extends Component {
     }
 
     handleNewMovie = () => {
-        this.setState({clickedNewMovie: false});
+        this.setState({ clickedNewMovie: false });
     }
 
     handleNewMovieTwo = () => {
-        this.setState({clickedNewMovie: true});
+        this.setState({ clickedNewMovie: true });
     }
 
     render() {
         return (
             <div>
-             <ContentDesc item={this.props.item} addToList={this.props.addToList} revealUpdate={this.revealUpdate} clickedNewMovie={this.state.clickedNewMovie} handleNewMovie={this.handleNewMovie} handleSpinner={this.props.handleSpinner}/>
-            <WatchList list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate} newMovie={this.state.newMovie} addContent={this.props.addContent}></WatchList>
-            <ContentSim recs={this.props.recs} addToList={this.props.addToList} revealUpdate={this.revealUpdate} emptySimilar={this.props.emptySimilar}
-                selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
-                addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} handleNewMovieTwo={this.handleNewMovieTwo} />
+                <ContentDesc item={this.props.item} addToList={this.props.addToList} revealUpdate={this.revealUpdate} clickedNewMovie={this.state.clickedNewMovie} handleNewMovie={this.handleNewMovie} handleSpinner={this.props.handleSpinner} />
+                <WatchList list={this.props.list} removeFromList={this.props.removeFromList} movies={this.state.movies} revealUpdate={this.revealUpdate} newMovie={this.state.newMovie} addContent={this.props.addContent}></WatchList>
+                <ContentSim recs={this.props.recs} addToList={this.props.addToList} revealUpdate={this.revealUpdate} emptySimilar={this.props.emptySimilar}
+                    selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
+                    addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} handleNewMovieTwo={this.handleNewMovieTwo} />
             </div>
         );
     }
 
     componentDidMount() {
+
         console.log(this.props.getState().showSpinner)
         // if(this.props.getState().showSpinner === true){
         //     this.props.handleSpinner();
         // }
         firebase.auth().onAuthStateChanged((user) => {
-            if(user){
+            if (user) {
                 let movieArray = '';
                 let userID = firebase.auth().currentUser.uid;
                 firebase.database().ref(userID).once('value').then((snapshot) => {
-                let movieObject = snapshot.val();
-                if(movieObject === null) {
-                    movieArray =''
-                } else {
-                let movieKeys = Object.keys(movieObject);
-                    movieArray = movieKeys.map((key) => {
-                        let movie = movieObject[key];
-                        movie.key = key;
-                        return movie;
-                    });
-                }
-                this.setState({movies: movieArray})
-            })
+                    let movieObject = snapshot.val();
+                    if (movieObject === null) {
+                        movieArray = ''
+                    } else {
+                        let movieKeys = Object.keys(movieObject);
+                        movieArray = movieKeys.map((key) => {
+                            let movie = movieObject[key];
+                            movie.key = key;
+                            return movie;
+                        });
+                    }
+                    this.setState({ movies: movieArray })
+                })
             }
-        })
+        });
     }
 }
 
@@ -75,36 +76,36 @@ class WatchList extends Component {
 
     render() {
         let movies = this.props.movies;
-        if(Array.isArray(movies)) {
-        return (
-            <div>
-                <h2 id="generator-watch" className="text-center">Your Current Watch List</h2>
-                <hr className="dark"></hr>
-                <p className="text-center">Hover or click on the movie image to see more information!</p>
-                <div className="container container-fluid padding">
-                    <div className="row justify-content-around" id="watchList">
-                    {movies.map((item) => {
-                            return <Movie item={item}  key={item.title} removeFromList={this.props.removeFromList} revealUpdate={this.revealUpdate} addContent={this.props.addContent}/>
-                        })}
-                    </div>
-                </div>
-            </div>
-        )
-     } else {
-         return (
-                <div className="text-center bg-light">
+        if (Array.isArray(movies)) {
+            return (
                 <div>
                     <h2 id="generator-watch" className="text-center">Your Current Watch List</h2>
                     <hr className="dark"></hr>
-                    <p className="text-center">No Movies Here Yet :(</p>
+                    <p className="text-center">Hover or click on the movie image to see more information!</p>
                     <div className="container container-fluid padding">
                         <div className="row justify-content-around" id="watchList">
+                            {movies.map((item) => {
+                                return <Movie item={item} key={item.title} removeFromList={this.props.removeFromList} revealUpdate={this.revealUpdate} addContent={this.props.addContent} />
+                            })}
                         </div>
                     </div>
                 </div>
+            )
+        } else {
+            return (
+                <div className="text-center bg-light">
+                    <div>
+                        <h2 id="generator-watch" className="text-center">Your Current Watch List</h2>
+                        <hr className="dark"></hr>
+                        <p className="text-center">No Movies Here Yet :(</p>
+                        <div className="container container-fluid padding">
+                            <div className="row justify-content-around" id="watchList">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-         )
-     }
+            );
+        }
     }
 }
 
@@ -122,7 +123,7 @@ class Movie extends Component {
 
     render() {
         let overview = this.props.item.overview;
-        if(this.props.item.overview.length > 225){
+        if (this.props.item.overview.length > 225) {
             overview = this.props.item.overview.substring(0, 225) + "...";
         }
 
