@@ -167,7 +167,7 @@ export class LoginPar extends Component {
                                                 </div>
                                                 <div className="form-group">
                                                     <label htmlFor="exampleInputPassword1" className="title">Password</label>
-                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} />
+                                                    <input type="password" className="form-control" id="exampleInputPassword1" placeholder="Password" name="password" onChange={this.handleChange} onKeyPress={this.onEnterSignUp}/>
                                                 </div>
                                                 <div className="row justify-content-between px-3">
                                                     <Link to='/' className="btn btn-outline-success" id="sign-up-button" onClick={this.displaySignUp}>Back</Link>

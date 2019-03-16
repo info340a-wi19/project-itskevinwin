@@ -25,6 +25,7 @@ import { faFacebook } from '@fortawesome/free-brands-svg-icons'
 import { faTwitter } from '@fortawesome/free-brands-svg-icons'
 import { faInstagram } from '@fortawesome/free-brands-svg-icons'
 import { faImdb } from '@fortawesome/free-brands-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
 
 import { BrowserRouter as Router, Route, Link, Switch, Redirect } from 'react-router-dom';
 
@@ -37,6 +38,7 @@ library.add(faImdb);
 library.add(faFacebook);
 library.add(faTwitter);
 library.add(faInstagram);
+library.add(faSpinner);
 
 
 class App extends Component {
@@ -60,9 +62,8 @@ class App extends Component {
       search: '',
       searchResults: [],
       searchPressed: false,
-      loading: false
+      showSpinner: false
     }
-    
   }
 
   addToList = (item) => {
@@ -232,9 +233,12 @@ class App extends Component {
 
   //A callback function for logging in existing users
   handleSignIn = (email, password) => {
+    this.handleSpinner();
     this.setState({ errorMessage: null }); //clear any old errors
 
-    firebase.auth().signInWithEmailAndPassword(email, password)
+    firebase.auth().signInWithEmailAndPassword(email, password).then(() => {
+      this.handleSpinner();
+    })
       .catch((err) => {
         this.setState({ errorMessage: err })
       });
@@ -248,7 +252,17 @@ class App extends Component {
     firebase.auth().signOut();
   }
 
+  handleSpinner = () => {
+    this.setState({showSpinner : !this.state.showSpinner})
+  }
+
   render() {
+    if(this.state.showSpinner){
+      return(
+      <div className="text-center">
+        <FontAwesomeIcon icon='spinner' size='3x' />
+      </div>)
+    }
     if (!this.state.hasError) {
       return (
         <div>

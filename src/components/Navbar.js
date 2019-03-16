@@ -144,12 +144,6 @@ export class LoginNav extends Component {
             return(<Redirect push to='home' />);
         }
 
-        // if(this.props.getState().loading){
-        //     return (<div className="text-center">
-        //             <i className="fa fa-spinner fa-spin fa-3x" aria-label="Connecting..."></i>
-        //             </div>);
-        // }
-
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark" expand="md">
                 <NavbarBrand href="/">MoviePicks</NavbarBrand>
