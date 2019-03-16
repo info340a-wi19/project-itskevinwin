@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
-
 export class SearchCards extends Component {
     render() {
         return (
@@ -20,7 +19,6 @@ export class SearchCards extends Component {
 
 class SearchCard extends Component {
     onClick = (event) => {
-        // this.props.handleSpinner();
         this.props.addContent(this.props.item);
     }
 
@@ -28,7 +26,7 @@ class SearchCard extends Component {
         return (
            <div className="container">
             <div className="card flex-row col-12 search-card">
-                    <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} className="img-card" />
+                    <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} className="img-card" alt={this.item.title}/>
                     <div className="d-flex">
                         <div className="card-body">
                             <div className="flex-column">
@@ -38,7 +36,7 @@ class SearchCard extends Component {
                                 <p className="card-text wrapword text-left">{this.props.item.overview}</p>
                             </div>
                             <div className="search-btn">
-                            <Link to="/interacted" className="text-white btn-info btn mt-4" style={{ textDecoration: 'none' }} onClick={this.onClick}>See More</Link>
+                            <Link to="/description" className="text-white btn-info btn mt-4" style={{ textDecoration: 'none' }} onClick={this.onClick}>See More</Link>
                             </div>
                         </div>
                     </div>

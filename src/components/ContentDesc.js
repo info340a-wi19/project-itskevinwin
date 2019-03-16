@@ -10,7 +10,7 @@ export class ContentDesc extends Component {
 
     render() {
         let btn;
-        if(this.props.clickedNewMovie) {
+        if (this.props.clickedNewMovie) {
             btn = (<button ref="btn" id="myBtn" className="btn btn-outline-secondary btn-lg" onClick={this.updateList}>Add to 'Watch Later'</button>)
         } else {
             btn = (<button ref="btn" id="myBtn" className="btn btn-outline-secondary btn-lg" onClick={this.updateList} disabled>Add to 'Watch Later'</button>)

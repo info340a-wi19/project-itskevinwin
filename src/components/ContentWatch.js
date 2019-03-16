@@ -40,11 +40,6 @@ export class ContentWatch extends Component {
     }
 
     componentDidMount() {
-
-        console.log(this.props.getState().showSpinner)
-        // if(this.props.getState().showSpinner === true){
-        //     this.props.handleSpinner();
-        // }
         firebase.auth().onAuthStateChanged((user) => {
             if (user) {
                 let movieArray = '';
@@ -134,7 +129,7 @@ class Movie extends Component {
                         <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} className="watchImg" />
                         <div className="container">
                             <div className="img_description_layer md-change row mt-0">
-                                <Link to="/interacted" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
+                                <Link to="/description" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
                                     <p className="img_description col-sm-12 text-center">{overview}</p>
                                 </Link>
                                 <button type="submit" className="btn btn-danger col-sm-6 rmvBtn w-75"

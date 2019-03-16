@@ -90,7 +90,7 @@ export class Header extends Component {
                     <div className="header-content-inner">
                         <h1 className="text-center text-uppercase display-2">Can't Decide?</h1>
                         <h2 className="text-center text-uppercase display-2 d-none">We Got it.</h2>
-                        <div className="inputs">
+                        <div className="inputs" role="form">
                             <Filters options={this.props.genres} purpose="Genre" selections={this.props.selections} getState={this.props.getState} />
                             <Filters options={[{ name: "Film Rating" }, { name: "G" }, { name: "PG" }, { name: "PG-13" }, { name: "R" }, { name: "NC-17" }]} purpose="Film Rating" selections={this.props.selections} getState={this.props.getState} />
                             <Filters options={[{ name: "IMDB Score" }, { name: "1" }, { name: "2" }, { name: "3" }, { name: "4" }, { name: "5" }, { name: "6" },
@@ -98,12 +98,12 @@ export class Header extends Component {
                             <Filters options={[{ name: "Year" }, { name: "1920" }, { name: "1930" }, { name: "1940" }, { name: "1950" }, { name: "1960" }, { name: "1970" },
                             { name: "1980" }, { name: "1990" }, { name: "2000" }, { name: "2010" }]} purpose="Year" selections={this.props.selections} getState={this.props.getState} />
                             <div className="text-center">
-                                <Link to="./interacted" className="btn btn-secondary btn-lg" role="button" aria-pressed="true"
+                                <Link to="./description" className="btn btn-secondary btn-lg" role="button" aria-pressed="true"
                                     alt="" onClick={this.onClick}>GO</Link>
                             </div>
                         </div>
                         <hr />
-                        <p className="dark-head text-center">Leave your preferences blank if you want a random movie!</p>
+                        <p className="dark-head text-center">Leave preferences blank if you want a random movie!</p>
                     </div>
                 </div>
             </header>

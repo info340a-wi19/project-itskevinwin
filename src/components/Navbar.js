@@ -53,7 +53,7 @@ export class Nav extends Component {
 
         return (
             <Navbar color="dark" fixed='top' className="navbar-dark sticky-nav" expand="md">
-                <NavbarBrand><Link className="text-white" to="/home">MoviePicks</Link></NavbarBrand>
+                <Link className="text-white" to="/home">MoviePicks</Link>
                 <NavbarToggler onClick={this.toggle} />
                 <Collapse isOpen={this.state.isOpen} navbar>
                     <NavStrap className="ml-auto" navbar>
