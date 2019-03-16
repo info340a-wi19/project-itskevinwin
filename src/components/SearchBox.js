@@ -62,7 +62,7 @@ export class SearchBox extends Component {
             <div className="jumbotron search-jumbo ">
                 <div className="search-content pt-5" align="center">
                     <h1><span className="search-title"> Search For a Movie </span></h1>
-                    <input className="input-form form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
+                    <input className="input-form form-control mr-sm-2 mt-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
                     {this.props.searchError}
                 </div>
             </div>
