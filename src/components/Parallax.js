@@ -89,6 +89,7 @@ export class LoginPar extends Component {
                     <div className="container-fluid">
                         <div className="row jumbotron gradient">
                             <div className="col-12 col-sm-6 col-lg-8 my-auto">
+                                {this.props.showError}
                                 <h1 className='text-center text-dark'>Welcome to MoviePicks!</h1>
                                 <p className="text-center lead">Have you ever sat down with your friends, ready to watch a movie, but
                                     can't

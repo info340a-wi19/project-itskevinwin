@@ -216,6 +216,7 @@ class App extends Component {
         return updatePromise;
       })
       .catch((err) => {
+        this.handleSpinner();
         this.setState({ errorMessage: err.message })
       });
   }
@@ -229,7 +230,8 @@ class App extends Component {
       this.handleSpinner();
     })
       .catch((err) => {
-        this.setState({ errorMessage: err })
+        this.handleSpinner();
+        this.setState({ errorMessage: err.message })
       });
   }
 
@@ -246,7 +248,17 @@ class App extends Component {
     this.setState({ showSpinner: !this.state.showSpinner })
   }
 
+  
+
   render() {
+    let showError = '';
+    if(this.state.errorMessage) {
+      showError = <div>
+        {this.state.errorMessage &&
+          <p className="alert alert-danger">{this.state.errorMessage}</p>
+        }
+      </div>
+    }
     if (this.state.showSpinner) {
       return (
         <div className="text-center">
@@ -259,7 +271,7 @@ class App extends Component {
           <Router>
             <Switch>
               <Route exact path='/' render={(routeProps) => (
-                <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} />
+                <LoginPage {...routeProps} getState={this.getState} handleSignUp={this.handleSignUp} handleSignIn={this.handleSignIn} user={this.state.user} showError={showError} />
               )} />
               <Route path='/home' render={(routeProps) => (
                 <HomePage {...routeProps} getState={this.getState} selections={this.updateState} handleSearch={this.handleSearch} activateUpdate={this.activateUpdate}
@@ -276,12 +288,12 @@ class App extends Component {
               )} />
               <Route path='/search/' render={(routeProps) => (
                 <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-                  updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
-                  item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations} handleSpinner={this.handleSpinner} />
+                  updateSearchPressed={this.updateSearchPressed}  emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
+                  item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations} handleSpinner={this.handleSpinner}/>
               )} />
               <Route path='/search/:movieName' render={(routeProps) => (
                 <SearchResults {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-                  updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
+                  updateSearchPressed={this.updateSearchPressed}  emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
                   item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations} handleSpinner={this.handleSpinner} />
               )} />
               <Route path='/myprofile/:uid' render={(routeProps) => (
@@ -321,8 +333,8 @@ class LoginPage extends Component {
     return (
       <div>
         <Route path="/" />
-        <LoginNav getState={this.props.getState} signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
-        <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} />
+        <LoginNav getState={this.props.getState} signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn}/>
+        <LoginPar signUpCallback={this.props.handleSignUp} signInCallback={this.props.handleSignIn} showError={this.props.showError}/>
         <Description />
         <Tools />
         <Footer />
@@ -372,7 +384,7 @@ class SearchPage extends Component {
         <Route path="/search/" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} />
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
-          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults} />
+          updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults}/>
         <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList}
           addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} handleSpinner={this.props.handleSpinner} />
       </div>
