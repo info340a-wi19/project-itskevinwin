@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 export class SearchBox extends Component {
     constructor(props){
         super(props);
-        this.state = {redirect : false, id : undefined}
+        this.state = {redirect : false, id : undefined, searchTerm: ''}
     }
 
     handleChange = (event) => {
@@ -18,6 +18,7 @@ export class SearchBox extends Component {
         this.setState({redirect : false})
         this.props.emptySearchResults()
         let curValue = this.props.getState().search;
+        this.setState({searchTerm: curValue});
         curValue = curValue.split(' ').join('%20');
         let url = 'https://api.themoviedb.org/3/search/movie?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1&include_adult=false'
         let query = '&query=' + curValue;
@@ -58,8 +59,8 @@ export class SearchBox extends Component {
             return <Redirect push to={url} />
         }
         return(
-            <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
-
+            <input className="input-form form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
+          
         );
     };
 }

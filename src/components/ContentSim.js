@@ -3,12 +3,13 @@ import { Link } from 'react-router-dom';
 
 export class ContentSim extends Component {
     render() {
+        // console.log(this.props.revealUpdate());
         return (
             <div className="cushion" >
                 <h2 id="similarTitle" className="dark-head text-center">Similar Movies</h2>
                 <hr className="red" />
                 <div className="container wrapper text-center w-sim">
-                    <div id="slider" className="text-center pb-5">
+                    <div id="slider" className="text-center">
                         {this.props.recs.map((item) => {
                           return <Slide item={item} addToList={this.props.addToList} key={item.id}
                           hasError={this.props.hasError} addContent={this.props.addContent}
@@ -56,19 +57,19 @@ class Slide extends Component {
     genresComplete.push(genreNames[genreNames.length - 1]);
 
     let overview = this.props.item.overview;
-    if (this.props.item.overview.length > 630) {
-      overview = this.props.item.overview.substring(0, 630) + "...";
+    if (this.props.item.overview.length > 140) {
+      overview = this.props.item.overview.substring(0, 140) + "...";
     }
 
     return (
-      <div className="slide img_wrap">
-        <img className="d-block w-100 resize" src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} />
+      <div className="slide small_img_wrap">
+        <img className="d-block" src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} alt={this.props.item.title} />
         <div className="container">
-          <div className="img_description_layer row mt-0">
+          <div className="small_img_description_layer row mt-0">
             <Link to="./interacted" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
               <p className="img_description col-sm-12 wrapword">{overview}</p>
             </Link>
-            <button ref="btn" type="submit" className="btn btn-success col-sm-6 addBtn w-75" role="button" onClick={this.updateList}>Watch
+            <button ref="btn" type="submit" className="similar-btn btn btn-success col-sm-6" role="button" onClick={this.updateList}>Watch
                                                             Later</button>
           </div>
         </div>

@@ -1,4 +1,4 @@
-*{
+{
     box-sizing: border-box;
 }
 
@@ -219,7 +219,6 @@ header{
 .fa-film, .fa-calendar-alt, .fa-imdb{
     font-size: 4em;
     margin: 1;
-
 }
 
 #rated{
@@ -280,10 +279,28 @@ header{
     background-color: #D43F3F !important;
 }
 
+/* style for search page  */
+
+.img-card {
+    height: 250px;
+    width: 200px;
+    margin: 1.5em; 
+}
+
+.input-form.form-control {
+    border-color: #D43F3F;
+    border-width: .2em;
+}
+
+.search-btn {
+   text-align: center;
+}
+
 footer{
     background-color: #3f3f3f;
     color: #d5d5d5;
     padding-top: 2rem;
+
 }
 
 /* customized breaks in footer */
@@ -386,8 +403,14 @@ hr.dark{
     position: relative;
     width: 257px;
   }
+
+.small_img_wrap {
+    position: relative;
+    width: 185px;
+    height: 287px;
+}
   
-.img_description_layer{
+.img_description_layer {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -402,6 +425,28 @@ hr.dark{
     width: 257px;
     /* transition effect. not necessary */
     transition: opacity .2s, visibility .2s;
+}
+
+.small_img_description_layer{
+    position: absolute; 
+    top: 0;
+    bottom: 0;
+    background: rgba(36, 62, 206, 0.6);
+    color: #fff;
+    visibility: hidden;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 287px;
+    width: 185px;
+    /* transition effect. not necessary */
+    transition: opacity .2s, visibility .2s;
+}
+
+.d-block {
+    width: 185px;
+    height: 287px;
 }
 
 .container-fluid{
@@ -423,6 +468,12 @@ hr.dark{
     opacity: 1;
 }
 
+
+.small_img_wrap:hover .small_img_description_layer {
+    visibility: visible;
+    opacity: 1;
+}
+
 .img_description, .img_rating {
     transition: .2s;
     transform: translateY(1em);
@@ -432,6 +483,10 @@ hr.dark{
 .img_wrap:hover .img_rating{
     transform: translateY(0);
 }
+
+.similar-btn {
+    max-width: 100% !important;
+}  
 
 .mt-12{
     margin-top: 12rem;
@@ -450,20 +505,21 @@ hr.dark{
 /* slider attributes */
 .slide{
     background: #ccc;
-    height: 492px;
     display: inline-block;
-    width: 380px;
+    height: 287px;
+    width: 185px;
 }
 
 #slider .img_description_layer {
     position: absolute;
-    height: 492px;
-    width: 380px;
+    height: 287px;
+    width: 185px;
+    padding-bottom: -3 !important;
 }
 
 .resize{
-    height: 492px;
-    width: 380px;
+    height: 287px;
+    width: 185px;
 }
 
 /* Break the word in the hover element so that it doesn't go across the slide */
@@ -556,6 +612,7 @@ hr.dark{
     /* fancy cushion image background for bigger screens */
     .cushion{
         background-image: url("/img/fancy-cushion.png");
+        padding-bottom: 5rem;
     }
 
     header h1{

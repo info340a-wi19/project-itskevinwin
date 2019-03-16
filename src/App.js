@@ -60,6 +60,7 @@ class App extends Component {
       search: '',
       searchResults: [],
       searchPressed: false,
+      searchTerm: '',
     }
     
   }
@@ -270,12 +271,8 @@ class App extends Component {
               )} />
             <Route path='/search/' render={(routeProps) => (
               <SearchPage {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
-<<<<<<< HEAD
               updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user}
               item={this.state.item} addToList={this.addToList} addContent={this.addContent} emptySimilar={this.emptySimilar} addRecs={this.addRecommendations}/>
-=======
-              updateSearchPressed={this.updateSearchPressed} hasError={this.hasError} emptySearchResults={this.emptySearchResults} handleSignOut={this.handleSignOut} user={this.state.user} />
->>>>>>> f1eefc9a9420ef41d0c6ef97e66465e3524d3a2f
             )} />
             <Route path='/search/:movieName' render={(routeProps) => (
               <SearchResults {...routeProps} getState={this.getState} searchResults={this.state.searchResults} updateSearch={this.updateSearch} addSearchResults={this.addSearchResults} searchPressed={this.searchPressed}
@@ -309,6 +306,7 @@ class MyProfile extends Component {
       <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} handleSignOut={this.props.handleSignOut}  />
       <Route path="/myprofile" />
       <ProfileBody list={this.props.list} removeFromList={this.props.removeFromList} user={this.props.user}/>
+
       </div>
     );
   }
@@ -370,11 +368,11 @@ class SearchPage extends Component {
       <div>
         <Route path="/search/" />
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut}  />
+        {/* <h1>{this.props.getState().searchTerm}</h1> */}
         <SearchBox getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} searchPressed={this.props.searchPressed}
         updateSearchPressed={this.props.updateSearchPressed} hasError={this.props.hasError} emptySearchResults={this.props.emptySearchResults}/>
         <SearchCards searchResults={this.props.searchResults} getState={this.props.getState} item={this.props.item} addToList={this.props.addToList} 
                         addContent={this.props.addContent} emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs}/>
-
       </div>
     );
   }
