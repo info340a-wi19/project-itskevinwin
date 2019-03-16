@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 export class SearchBox extends Component {
     constructor(props){
         super(props);
-        this.state = {redirect : false, id : undefined, searchTerm: ''}
+        this.state = {id : undefined, searchTerm: ''}
     }
 
     componentDidMount() {
@@ -17,8 +17,6 @@ export class SearchBox extends Component {
     handleSearch = (event) => {
         if (event.charCode === 13) {
         event.preventDefault();
-        this.setState({redirect : true})
-        this.setState({redirect : false})
         this.props.emptySearchResults()
         let curValue = this.props.getState().search;
         this.setState({searchTerm: curValue});
@@ -27,12 +25,13 @@ export class SearchBox extends Component {
         let query = '&query=' + curValue;
         url = url + query;
 
-        console.log(url);
+        this.props.handleSpinner();
         fetch(url)
             .then((response) => {
                 let dataPromise = response.json();
                 return dataPromise;
             }).then((data) => {
+                this.props.handleSpinner();
                 if (data.results.length !== 0) {
                     this.props.addSearchResults(data.results[0]);
                     return fetch( 'https://api.themoviedb.org/3/movie/' + data.results[0]['id'] + '/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1')
@@ -48,19 +47,12 @@ export class SearchBox extends Component {
                 });
             })
             .catch((err) => {
-                //do something with the error
-                // this.props.hasError();
-                console.error(err);  //e.g., show in the console
+               //ERROR
             });
         }
     }
 
     render() {
-        let movie = this.props.getState().search; //shortcut
-        if(this.state.redirect){
-            let url = '/search/' + movie;
-            return <Redirect push to={url} />
-        }
         return(
             <div className="jumbotron search-jumbo ">
                <div className="search-content pt-5" align="center">
@@ -69,5 +61,5 @@ export class SearchBox extends Component {
                 </div>
             </div>
         );
-    };
+    }
 }
