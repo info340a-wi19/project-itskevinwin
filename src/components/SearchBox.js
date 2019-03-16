@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 export class SearchBox extends Component {
     constructor(props){
         super(props);
-        this.state = {redirect : false, id : undefined, searchTerm: '', searchError: ''}
+        this.state = { id : undefined, searchTerm: ''}
     }
 
     componentDidMount() {
@@ -14,16 +14,12 @@ export class SearchBox extends Component {
         this.props.updateSearch(event.target.value);
     }
 
-    hasError = () => {
-        this.setState({searchError: <p className="alert alert-danger">Sorry No Search Results!</p>})
-    }
+
 
     handleSearch = (event) => {
-        this.setState({searchError: ''});
+        this.props.resetSearchError();
         if (event.charCode === 13) {
         event.preventDefault();
-        this.setState({redirect : true})
-        this.setState({redirect : false})
         this.props.emptySearchResults()
         let curValue = this.props.getState().search;
         this.setState({searchTerm: curValue});
@@ -32,17 +28,19 @@ export class SearchBox extends Component {
         let query = '&query=' + curValue;
         url = url + query;
 
-        console.log(url);
+
+        this.props.handleSpinner();
         fetch(url)
             .then((response) => {
                 let dataPromise = response.json();
                 return dataPromise;
             }).then((data) => {
+                this.props.handleSpinner();
                 if (data.results.length !== 0) {
                     this.props.addSearchResults(data.results[0]);
                     return fetch( 'https://api.themoviedb.org/3/movie/' + data.results[0]['id'] + '/similar?api_key=b3ab669819d549e92879dc08d6af2a14&language=en-US&page=1')
                 } else {
-                    this.hasError();
+                    this.props.hasError();
                 }
             }).then((response) => {
                 let dataPromise = response.json();
@@ -53,25 +51,23 @@ export class SearchBox extends Component {
                 });
             })
             .catch((err) => {
-                //do something with the error
-                // this.props.hasError();
-                console.error(err);  //e.g., show in the console
+             
             });
         }
     }
 
     render() {
-        let movie = this.props.getState().search; //shortcut
-        if(this.state.redirect){
-            let url = '/search/' + movie;
-            return <Redirect push to={url} />
-        }
+        console.log("rendering")
         return(
-            <div>
-            <input className="input-form form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
-            {this.state.searchError}
+            <div className="text-center">
+            <div className="jumbotron search-jumbo ">
+               <div className="search-content pt-5" align="center">
+                    <h1><span className="search-title"> Search For a Movie </span></h1>
+                    <input className="input-form form-control mr-sm-2" type="search" placeholder="Search..." aria-label="Search" value={this.props.getState.search} onKeyPress={this.handleSearch} onChange={this.handleChange}/>
+                    {this.props.searchError}
+                </div>
             </div>
-          
+            </div>
         );
-    };
+    }
 }

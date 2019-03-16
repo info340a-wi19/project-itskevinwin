@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
 export class Tools extends Component {
+
     render() {
         return (
             <div className="bg-secondary">
@@ -12,10 +13,8 @@ export class Tools extends Component {
                         </div>
                         <hr />
                         <div className="col-12">
-                            <p className="lead text-white">MoviePicks is an easy-to-use tool that makes the movie selection process easy for you and your friends. 
-                                We find a movie that best
-                                fits your needs, based on four categories:
-                    </p>
+                            <p className="lead text-white">MoviePicks is an easy-to-use tool that makes the movie selection process easy for you and your friends.
+                                We find a movie that best fits your needs, based on four categories:</p>
                         </div>
                     </div>
                 </div>
@@ -43,8 +42,7 @@ export class Tools extends Component {
                         <div className="col-sm-6 col-md-3">
                             <FontAwesomeIcon icon={['fab', 'imdb']} />
                             <h3 className="dark-head">IMDB Rating</h3>
-                            <p className="text-white">Using IMDB ratings, you can display movies that are well rated by
-                        critics!</p>
+                            <p className="text-white">Using IMDB ratings, you can display movies that are well rated by critics!</p>
                         </div>
                     </div>
                     <hr className="my-4" />

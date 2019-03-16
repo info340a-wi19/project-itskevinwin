@@ -2,44 +2,40 @@ import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 
 export class ContentSim extends Component {
-    render() {
-        // console.log(this.props.revealUpdate());
-        return (
-            <div className="cushion" >
-                <h2 id="similarTitle" className="dark-head text-center">Similar Movies</h2>
-                <hr className="red" />
-                <div className="container wrapper text-center w-sim">
-                    <div id="slider" className="text-center">
-                        {this.props.recs.map((item) => {
-                          return <Slide item={item} addToList={this.props.addToList} key={item.id}
-                          hasError={this.props.hasError} addContent={this.props.addContent}
-                          emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} revealUpdate={this.props.revealUpdate} handleNewMovieTwo={this.props.handleNewMovieTwo}/>
-                        })}
-                    </div>
-                </div>
-            </div>
-        );
-    }
+
+  render() {
+    return (
+      <div className="cushion" >
+        <h2 id="similarTitle" className="dark-head text-center">Similar Movies</h2>
+        <hr className="red" />
+        <div className="container wrapper text-center w-sim">
+          <div id="slider" className="text-center">
+            {this.props.recs.map((item) => {
+              return <Slide item={item} addToList={this.props.addToList} key={item.id}
+                hasError={this.props.hasError} addContent={this.props.addContent}
+                emptySimilar={this.props.emptySimilar} addRecs={this.props.addRecs} revealUpdate={this.props.revealUpdate} handleNewMovieTwo={this.props.handleNewMovieTwo} />
+            })}
+          </div>
+        </div>
+      </div>
+    );
+  }
 }
 
 class Slide extends Component {
 
-    updateList = (event) => {
-        this.refs.btn.setAttribute("disabled", "disabled")
-        this.props.addToList(this.props.item);
-        this.props.revealUpdate();
-        
-    }
+  updateList = (event) => {
+    this.refs.btn.setAttribute("disabled", "disabled")
+    this.props.addToList(this.props.item);
+    this.props.revealUpdate();
+  }
 
-    onClick = (event) => {
-      event.preventDefault();
-      // this.props.emptySimilar();
-      this.props.addContent(this.props.item);
-      this.props.addRecs();
-      console.log(this.props.item);
-      this.props.handleNewMovieTwo();
-    }
-
+  onClick = (event) => {
+    event.preventDefault();
+    this.props.addContent(this.props.item);
+    this.props.addRecs();
+    this.props.handleNewMovieTwo();
+  }
 
   render() {
     let genreIds = this.props.item.genre_ids;
@@ -71,8 +67,7 @@ class Slide extends Component {
             <Link to="./interacted" className="text-white" style={{ textDecoration: 'none' }} onClick={this.onClick}>
               <p className="img_description col-sm-12 wrapword">{overview}</p>
             </Link>
-            <button ref="btn" type="submit" className="similar-btn btn btn-success col-sm-6" onClick={this.updateList}>Watch
-                                                            Later</button>
+            <button ref="btn" type="submit" className="similar-btn btn btn-success col-sm-6" onClick={this.updateList}>Watch Later</button>
           </div>
         </div>
       </div>
@@ -82,7 +77,6 @@ class Slide extends Component {
 
 const genres = [
   { "name": "Genres" },
-
   {
     "id": 28,
     "name": "Action"

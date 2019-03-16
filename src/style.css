@@ -62,7 +62,8 @@ border-color: transparent transparent transparent #505050;
     background-image: url("/img/movies.jpg");
   
     /* Set a specific height */
-    height: -webkit-fill-available; 
+    /* height: -webkit-fill-available;  */
+    height: 45em;
   
     /* Create the parallax scrolling effect */
     background-attachment: fixed;
@@ -283,18 +284,36 @@ header{
 
 .img-card {
     height: 250px;
-    width: 200px;
     margin: 1.5em; 
 }
 
 .input-form.form-control {
     border-color: #D43F3F;
     border-width: .2em;
+    width: 75%;
 }
 
 .search-btn {
-   text-align: center;
+   justify-content: center;
+   display: flex;
 }
+
+.search-jumbo { 
+    background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url("/img/movies.jpg");
+    height: 18em;
+}
+
+.search-title {
+    background-color: grey;
+    color: white;
+}
+
+.search-card { 
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
 
 footer{
     background-color: #3f3f3f;
@@ -575,6 +594,10 @@ hr.dark{
 
     .w-sim{
         width: 75% !important;
+    }
+
+    .search-card { 
+        flex-wrap: nowrap;
     }
 
 }

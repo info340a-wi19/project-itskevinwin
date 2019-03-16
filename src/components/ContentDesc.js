@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
 
 export class ContentDesc extends Component {
-  
 
     updateList = (event) => {
-        // this.refs.btn.setAttribute("disabled", "disabled")
         this.props.addToList(this.props.item);
         this.props.revealUpdate();
         this.props.handleNewMovie();
     }
 
     render() {
-        console.log(this.state);
         let btn;
         if(this.props.clickedNewMovie) {
             btn = (<button ref="btn" id="myBtn" className="btn btn-outline-secondary btn-lg" onClick={this.updateList}>Add to 'Watch Later'</button>)
@@ -31,7 +28,6 @@ export class ContentDesc extends Component {
                 </div>
             </div>
         );
-        
     }
 }
 
