@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch, Redirect } from 'react-router-d
 import firebase from 'firebase/app';
 import 'firebase/database';
 
+<<<<<<< HEAD
 import { Header } from './components/Header';
 import { Parallax, LoginPar } from './components/Parallax';
 import { Description } from './components/Description';
@@ -24,6 +25,27 @@ import { faTwitter } from '@fortawesome/free-brands-svg-icons';
 import { faInstagram } from '@fortawesome/free-brands-svg-icons';
 import { faImdb } from '@fortawesome/free-brands-svg-icons';
 import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+=======
+import { Header } from './components/Header'
+import { Parallax, LoginPar } from './components/Parallax'
+import { Description } from './components/Description'
+import { Tools } from './components/Tools'
+import { Footer } from './components/Footer'
+import { ContentTop } from './components/ContentTop'
+import { ContentWatch } from './components/ContentWatch'
+import { ProfileBody } from './components/ProfileBody'
+import { SearchCards } from './components/SearchCards'
+import { SearchBox } from './components/SearchBox'
+
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { faFilm } from '@fortawesome/free-solid-svg-icons'
+import { faCalendarAlt } from '@fortawesome/free-solid-svg-icons'
+import { faFacebook } from '@fortawesome/free-brands-svg-icons'
+import { faTwitter } from '@fortawesome/free-brands-svg-icons'
+import { faInstagram } from '@fortawesome/free-brands-svg-icons'
+import { faImdb } from '@fortawesome/free-brands-svg-icons'
+import { faSpinner } from '@fortawesome/free-solid-svg-icons'
+>>>>>>> f26653f528b7d42396b8a2ac1132cb04507eb3bc
 
 import Loader from 'react-loader-spinner'
 
@@ -377,7 +399,7 @@ class MovieDescription extends Component {
         <Nav getState={this.props.getState} updateSearch={this.props.updateSearch} addSearchResults={this.props.addSearchResults} hasError={this.props.hasError} handleSignOut={this.props.handleSignOut} emptySearchResults={this.emptySearchResults} />
         <ContentTop item={this.props.item} rating={this.props.rating} genreNames={this.props.genreNames} />
         <ContentWatch item={this.props.item} list={this.props.list} removeFromList={this.props.removeFromList} recs={this.props.recs} addToList={this.props.addToList} emptySimilar={this.props.emptySimilar}
-          recs={this.props.recs} addToList={this.props.addToList} selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
+          selections={this.props.selections} getState={this.props.getState} handleSearch={this.props.handleSearch} activateUpdate={this.props.activateUpdate}
           addContent={this.props.addContent} addRecs={this.props.addRecs} genres={this.props.genres} hasError={this.props.hasError} handleSpinner={this.props.handleSpinner}
         />
         <Footer />

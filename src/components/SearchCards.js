@@ -26,7 +26,7 @@ class SearchCard extends Component {
         return (
            <div className="container">
             <div className="card flex-row col-12 search-card">
-                    <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} className="img-card" />
+                    <img src={'http://image.tmdb.org/t/p/w185' + this.props.item.poster_path} className="img-card" alt={this.item.title}/>
                     <div className="d-flex">
                         <div className="card-body">
                             <div className="flex-column">
